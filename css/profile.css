@@ -31,13 +31,14 @@ body {
     justify-content: center;
     gap: 50px;
     margin-top: 150px;
+    margin-left: 150px;
   }
   
   .form-box {
     background-color: #111C44;
     padding: 20px;
     border-radius: 10px;
-    width: 300px;
+    width: 400px;
     color: white;
   }
   
@@ -57,4 +58,36 @@ body {
     color: white;
     margin-right: 10px; /* Espacio a la derecha */
   }
+  /* Button */
+/* Contenedor del botón */
+.edit-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Espacio entre los contenedores y el botón */
+    width: 100%; /* Asegura que ocupe toda la fila */
+}
+
+/* Botón con desplazamiento hacia la derecha */
+.edit-button {
+    background-color: #3182CE;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #FFFFFF;
+    height: 31px;
+    width: 102px;
+    font-weight: semi-bold;
+    cursor: pointer;
+    margin-left: 150px; /* Desplaza el botón hacia la derecha */
+}
+
+.edit-button:hover {
+    background-color: #256a96;
+    transition: background-color 0.3s ease;
+}
+
+
+
+
+
   
