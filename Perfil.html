@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil</title>
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <style>
+    
+  </style>
+</head>
+<body>
+    <div id="sidebar"></div> 
+
+    <div class="background"></div>
+    <div class="title-container">Perfil</div>
+
+    <div class="form-container">
+      <div class="form-box">
+        <label>Nombre(s)</label>
+        <input type="text" placeholder="Ingrese su nombre">
+        <label>Apellidos</label>
+        <input type="text" placeholder="Ingrese sus apellidos">
+        <label>Género</label>
+        <input type="text" placeholder="Ingrese su género">
+        <label>Universidad</label>
+        <input type="text" placeholder="Ingrese su universidad">
+      </div>
+      <div class="form-box">
+        <label>Estado</label>
+        <input type="text" placeholder="Ingrese su estado">
+        <label>País</label>
+        <input type="text" placeholder="Ingrese su país">
+        <label>Email</label>
+        <input type="email" placeholder="Ingrese su email">
+        <label>Contraseña</label>
+        <input type="password" placeholder="Ingrese su contraseña">
+      </div>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+          .then(res => res.text())
+          .then(html => {
+            document.getElementById('sidebar').innerHTML = html;
+            const path = window.location.pathname.split('/').pop();
+            const links = document.querySelectorAll('.sidebar-menu-item');
+            links.forEach(link => {
+              if (link.getAttribute('href') === path) {
+                link.classList.add('active');
+              }
+            });
+          });
+    </script>
+</body>
+</html>
