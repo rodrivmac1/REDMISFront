@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil</title>
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <style>
+    
+  </style>
+</head>
+<body>
+    <div id="sidebar"></div> 
+
+    <div class="background"></div>
+    <div class="title-container">Perfil</div>
+
+    <div class="form-container">
+      <div class="form-box" style="width: 700px;">
+        <label>ID de Membresia</label>
+        <input type="text" placeholder="Ingrese el ID de su Membresia">
+        <label>CV</label>
+        <input type="file" accept=".pdf">
+        <label>Telefono</label>
+        <input type="text" placeholder="Ingrese su telefono">
+      </div>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+          .then(res => res.text())
+          .then(html => {
+            document.getElementById('sidebar').innerHTML = html;
+            const path = window.location.pathname.split('/').pop();
+            const links = document.querySelectorAll('.sidebar-menu-item');
+            links.forEach(link => {
+              if (link.getAttribute('href') === path) {
+                link.classList.add('active');
+              }
+            });
+          });
+    </script>
+</body>
+</html>
