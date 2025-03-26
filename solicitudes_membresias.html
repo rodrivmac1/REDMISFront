@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitudes de membresía</title>
+  <link rel="stylesheet" href="css/membership_applications.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+</head>
+<body>
+    <div id="sidebar"></div> 
+
+    <div class="background"></div>
+    <div class="title-container">Solicitudes de membresia</div>
+
+    <div class="table-container">
+      <div class="table-box">
+        <h3>Lista de membresías solicitadas</h3>
+        <table id="membership_applications">
+          <thead>
+            <th>MIEMBRO</th>
+            <th>PERFIL</th>
+            <th>ESTADO</th>
+            <th>ACCIONES</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="member">
+                <label id="name">Alejandro Almonte</label>
+                <label id="email">alejandro.almonte@mail.com</label>
+              </td>
+              <td id="profile">
+                <label id="university">UNAM</label>
+                <label id="state">CDMX</label>
+              </td>
+              <td>
+                <label id="status">Pendiente</label>
+              </td>
+              <td>
+                <div class="actions">
+                  <button id="accept"></button>
+                  <button id="reject"></button>
+                  <button id="info"></button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td id="member">
+                <label id="name">Alejandro Almonte</label>
+                <label id="email">alejandro.almonte@mail.com</label>
+              </td>
+              <td id="profile">
+                <label id="university">UNAM</label>
+                <label id="state">CDMX</label>
+              </td>
+              <td>
+                <label id="status">Pendiente</label>
+              </td>
+              <td>
+                <div class="actions">
+                  <button id="accept"></button>
+                  <button id="reject"></button>
+                  <button id="info"></button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td id="member">
+                <label id="name">Alejandro Almonte</label>
+                <label id="email">alejandro.almonte@mail.com</label>
+              </td>
+              <td id="profile">
+                <label id="university">UNAM</label>
+                <label id="state">CDMX</label>
+              </td>
+              <td>
+                <label id="status">Pendiente</label>
+              </td>
+              <td>
+                <div class="actions">
+                  <button id="accept"></button>
+                  <button id="reject"></button>
+                  <button id="info"></button>
+                </div>
+              </td>
+            </tr> 
+          </tbody>
+        </table>
+      </div>
+    
+    </div>
+    <script>
+      
+  </script>
+    <script>
+      fetch('SidebarAdmin.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('sidebar').innerHTML = html;
+          const path = window.location.pathname.split('/').pop();
+          const links = document.querySelectorAll('.sidebar-menu-item');
+          links.forEach(link => {
+            if (link.getAttribute('href') === path) {
+              link.classList.add('active');
+            }
+          });
+        });
+  </script>
+</body>
+</html>
