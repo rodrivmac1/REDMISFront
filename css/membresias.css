@@ -1,0 +1,235 @@
+/* ======================
+   Estilos generales
+   ====================== */
+   body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: #162353;
+  }
+
+  .sidebar {
+    width: 250px;
+    height: calc(100vh - 20px);
+    background-color: #111C44;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+  
+  .sidebar-title {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+    height: 35px;
+    margin-top: 10px;
+  }
+  
+  .sidebar-title-bold {
+    font-weight: bold;
+  }
+  
+  .sidebar-title-normal {
+    font-weight: normal;
+    font-size: 16px;
+  }
+  
+  .sidebar-separator {
+    border: 0;
+    height: 1px;
+    background-color: white;
+    margin-bottom: 30px;
+  }
+  
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-weight: bold;
+  }
+  
+  .sidebar-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    padding: 8px;
+    border-radius: 8px;
+  }
+  
+  .sidebar-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .sidebar-icon-bg {
+    background-color: #1B254B;
+    padding: 6px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sidebar-icon-bg img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .sidebar-logout-button {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .sidebar-logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  /* Estilo para la opción activa en el sidebar */
+  .sidebar-menu-item.active {
+    background-color: #1B254B;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .sidebar-menu-item.active span {
+    color: white; /* Cambiar el color del texto también */
+  }
+
+  /* ======================
+     Estilos del Header
+     ====================== */
+  .top-bar {
+    background-color: #0d173a;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .top-bar .branding {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .top-bar .logout a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  /* ======================
+     Contenedor principal
+     ====================== */
+  .container {
+    display: flex;
+    min-height: calc(100vh - 50px); /* Ajusta según la altura del header */
+  }
+  
+  /* ======================
+     Estilos del Main Content
+     ====================== */
+  .main-content {
+    flex: 1;
+    background-color: #162353;
+    padding: 20px;
+    margin-left: 270px; /* Se deja espacio para la sidebar fija */
+  }
+  
+  /* Estilos de la barra de búsqueda */
+  .search-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  .search-bar button {
+    padding: 8px 12px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .search-bar button:hover {
+    background-color: #218838;
+  }
+  
+  /* Título y descripción de páginas */
+  .main-content h1 {
+    margin-top: 0;
+    font-size: 24px;
+  }
+  
+  .pages-info {
+    font-size: 14px;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  /* ======================
+     Estilos de la tabla
+     ====================== */
+  .membership-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .membership-table th,
+  .membership-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .membership-table th {
+    background-color: #162353;
+    font-weight: bold;
+  }
+  
+  /* ======================
+     Botón de Descargar Constancia
+     ====================== */
+  .download-certificate {
+    padding: 10px 20px;
+    background-color: #0d173a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .download-certificate:hover {
+    background-color: #1a2a63;
+  }  

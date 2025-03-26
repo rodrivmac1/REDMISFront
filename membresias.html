@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Membresías Aplicadas</title>
+  <!-- Enlace al archivo CSS -->
+  <link rel="stylesheet" href="css/membresias.css">
+  <!-- Enlace a la librería html2pdf.js para generar PDFs (opcional si se usa el botón de descarga) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <!-- Barra superior (header) -->
+  <header class="top-bar">
+    <div class="branding">REDMIS | Admin</div>
+    <div class="logout"><a href="#">Cerrar sesión</a></div>
+  </header>
+
+  <!-- Contenedor principal que agrupa la barra lateral y el contenido -->
+  <div class="container">
+    <!-- Barra lateral (sidebar) con el menú de navegación -->
+    <div class="sidebar">
+        <div>
+            <div class="sidebar-title">
+                <span class="sidebar-title-bold">REDMIS</span> <span class="sidebar-title-normal">| Admin</span>
+            </div>
+            <hr class="sidebar-separator">
+            <div class="sidebar-menu">
+                <a class="sidebar-menu-item active" href="perfil_admin.html">
+                    <div class="sidebar-icon-bg"><img src="img/PerfilAdministrador.svg" alt="Perfil Administrador"></div>
+                    <span>Perfil Administrador</span>
+                </a>
+                <a class="sidebar-menu-item" href="membresia.html">
+                    <div class="sidebar-icon-bg"><img src="img/Membresia.svg" alt="Membresía"></div>
+                    <span>Membresía</span>
+                </a>
+                <a class="sidebar-menu-item" href="solicitudes_membresias.html">
+                    <div class="sidebar-icon-bg"><img src="img/SolicitudesDeMembresia.svg" alt="Solicitudes de Membresías"></div>
+                    <span>Solicitudes de membresías</span>
+                </a>
+                <a class="sidebar-menu-item" href="cvs.html">
+                    <div class="sidebar-icon-bg"><img src="img/CVs.svg" alt="CVs"></div>
+                    <span>CV's</span>
+                </a>
+                <a class="sidebar-menu-item" href="alta_usuario.html">
+                    <div class="sidebar-icon-bg"><img src="img/AltaDeUsuario.svg" alt="Alta de Usuario"></div>
+                    <span>Alta de Usuario</span>
+                </a>
+                <a class="sidebar-menu-item" href="alta_admin.html">
+                    <div class="sidebar-icon-bg"><img src="img/AltaDeAdministrador.svg" alt="Alta de Administrador"></div>
+                    <span>Alta de Administrador</span>
+                </a>
+                <a class="sidebar-menu-item" href="estadisticas.html">
+                    <div class="sidebar-icon-bg"><img src="img/Estadisticas.svg" alt="Estadísticas"></div>
+                    <span>Estadísticas</span>
+                </a>
+                <a class="sidebar-menu-item" href="miembros.html">
+                    <div class="sidebar-icon-bg"><img src="img/Miembros.svg" alt="Miembros"></div>
+                    <span>Miembros</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área principal de contenido -->
+    <main class="main-content">
+      <!-- Barra de búsqueda y login (simulada) -->
+      <div class="search-bar">
+        <input type="text" placeholder="Type here...">
+        <button>Sign In</button>
+      </div>
+      <!-- Título de la sección -->
+      <h1>Membresías aplicadas</h1>
+      <!-- Información sobre la navegación de páginas -->
+      <div class="pages-info">Pages / Membresías aplicadas</div>
+
+      <!-- Tabla que muestra la información de las membresías -->
+      <table class="membership-table">
+        <thead>
+          <tr>
+            <th>Estado</th>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Descargar constancia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pendiente</td>
+            <td>mwsnlif638okrma89jvgd</td>
+            <td>Mark Wilson</td>
+            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
+          </tr>
+          <tr>
+            <td>Rechazado</td>
+            <td>nstwd737bckz9xmeohr</td>
+            <td>Daniel Thomas</td>
+            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
+          </tr>
+          <tr>
+            <td>Aceptado</td>
+            <td>hchgvwdc51293jdfv8je</td>
+            <td>Freduardo Hill</td>
+            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
+          </tr>
+          <tr>
+            <td>Aceptado</td>
+            <td>ydbtweo639sbfns014bd</td>
+            <td>Laurent Michael</td>
+            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
+          </tr>
+          <tr>
+            <td>Pendiente</td>
+            <td>nvey723vv9h3bf838bw</td>
+            <td>Alexa Liras</td>
+            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
+          </tr>
+          <tr>
+            <td>Aceptado</td>
+            <td>oxoiejf634r998ffh237gk</td>
+            <td>Esthera Jackson</td>
+            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <!-- Enlace al archivo JavaScript -->
+  <script src="js/membresias.js"></script>
+</body>
+</html>
