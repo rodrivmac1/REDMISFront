@@ -6,22 +6,41 @@
   <title>Perfil</title>
   <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/login.css">
   <style>
     
   </style>
 </head>
 <body>
+    <header class="navbar">
+        <div class="logo">REDMIS</div>
+        <nav>
+          <ul>
+            <li><a href="login.html">Iniciar Sesión</a></li>
+            <li><a href="crearCuenta.html">Regístrate</a></li> 
+          </ul>
+        </nav>
+    </header>
 
-    <div class="background"></div>
-    <div class="title-container">REDMIS</div>
+    <div class="backgroundLogin"></div>
 
     <div class="form-container">
       <div class="form-box">
+        <h2>Iniciar Sesión</h2>
+
         <label>Correo</label>
         <input type="text" placeholder="Ingrese el Correo">
         <label>Contraseña</label>
         <input type="text" placeholder="Ingrese la contraseña">
+        <button type="submit">Iniciar sesión</button>
+
+        <p>¿No tienes una cuenta? <a href="crearCuenta.html">Regístrate</a></p> 
       </div>
     </div>
+
+    <footer class="footer">
+        <p>© 2023, REDMIS</p>
+      </footer>
+
 </body>
 </html>
