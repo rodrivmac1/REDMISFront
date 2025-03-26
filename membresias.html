@@ -30,7 +30,7 @@
                     <span>Perfil Administrador</span>
                 </a>
                 <a class="sidebar-menu-item" href="membresia.html">
-                    <div class="sidebar-icon-bg"><img src="img/Membresia.svg" alt="Membresía"></div>
+                    <div class="sidebar-icon-bg"><img src="img/membresia.png" alt="Membresía"></div>
                     <span>Membresía</span>
                 </a>
                 <a class="sidebar-menu-item" href="solicitudes_membresias.html">
@@ -68,60 +68,57 @@
         <input type="text" placeholder="Type here...">
         <button>Sign In</button>
       </div>
-      <!-- Título de la sección -->
-      <h1>Membresías aplicadas</h1>
-      <!-- Información sobre la navegación de páginas -->
-      <div class="pages-info">Pages / Membresías aplicadas</div>
-
-      <!-- Tabla que muestra la información de las membresías -->
-      <table class="membership-table">
-        <thead>
-          <tr>
-            <th>Estado</th>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Descargar constancia</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Pendiente</td>
-            <td>mwsnlif638okrma89jvgd</td>
-            <td>Mark Wilson</td>
-            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
-          </tr>
-          <tr>
-            <td>Rechazado</td>
-            <td>nstwd737bckz9xmeohr</td>
-            <td>Daniel Thomas</td>
-            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
-          </tr>
-          <tr>
-            <td>Aceptado</td>
-            <td>hchgvwdc51293jdfv8je</td>
-            <td>Freduardo Hill</td>
-            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
-          </tr>
-          <tr>
-            <td>Aceptado</td>
-            <td>ydbtweo639sbfns014bd</td>
-            <td>Laurent Michael</td>
-            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
-          </tr>
-          <tr>
-            <td>Pendiente</td>
-            <td>nvey723vv9h3bf838bw</td>
-            <td>Alexa Liras</td>
-            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
-          </tr>
-          <tr>
-            <td>Aceptado</td>
-            <td>oxoiejf634r998ffh237gk</td>
-            <td>Esthera Jackson</td>
-            <td><button class="download-certificate" id="downloadPDF">DESCARGAR CONSTANCIA</button></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="contenedor-tabla">
+        <h1>Membresías aplicadas</h1>
+        <table class="membership-table">
+          <thead>
+            <tr>
+              <th>Titular</th>
+              <th>Membresía</th>
+              <th>Estado</th>
+              <th>Descargar constancia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mark Wilson</td>
+              <td>mwsnlif638okrma89jvgd</td>
+              <td><span class="pendiente">Pendiente</td>
+              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
+            </tr>
+            <tr>
+              <td>Daniel Thomas</td>
+              <td>nstwd737bckz9xmeohr</td>
+              <td><span class="rechazado">Rechazado</td>
+              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
+            </tr>
+            <tr>
+              <td>Freduardo Hill</td>
+              <td>hchgvwdc51293jdfv8je</td>
+              <td><span class="aceptado">Aceptado</td>
+              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
+            </tr>
+            <tr>
+              <td>Laurent Michael</td>
+              <td>ydbtweo639sbfns014bd</td>
+              <td><span class="aceptado">Aceptado</td>
+              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
+            </tr>
+            <tr>
+              <td>Alexa Liras</td>
+              <td>nvey723vv9h3bf838bw</td>
+              <td><span class="pendiente">Pendiente</td>
+              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
+            </tr>
+            <tr>
+              <td>Esthera Jackson</td>
+              <td>oxoiejf634r998ffh237gk</td>
+              <td><span class="aceptado">Aceptado</td>
+              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </main>
   </div>
 

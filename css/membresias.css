@@ -5,7 +5,8 @@
     margin: 0;
     font-family: Arial, sans-serif;
     color: white;
-    background-color: #162353;
+    /*background-color: #162353;*/
+    background: linear-gradient(to bottom, #0d173a 55vh, #162353 45vh);
   }
 
   .sidebar {
@@ -22,6 +23,7 @@
     padding: 20px;
     box-sizing: border-box;
     border-radius: 10px;
+    z-index: 1;
   }
   
   .sidebar-title {
@@ -151,7 +153,8 @@
      ====================== */
   .main-content {
     flex: 1;
-    background-color: #162353;
+    /*background-color: #162353;*/
+    background: linear-gradient(to bottom, #0d173a 50.7vh, #162353 45vh);
     padding: 20px;
     margin-left: 270px; /* Se deja espacio para la sidebar fija */
   }
@@ -161,6 +164,7 @@
     display: flex;
     justify-content: flex-end;
     margin-bottom: 20px;
+    z-index: 2;
   }
   
   .search-bar input[type="text"] {
@@ -169,6 +173,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 10px;
+    z-index: 2;
   }
   
   .search-bar button {
@@ -178,6 +183,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    z-index: 1;
   }
   
   .search-bar button:hover {
@@ -188,12 +194,14 @@
   .main-content h1 {
     margin-top: 0;
     font-size: 24px;
+    z-index: 1;
   }
-  
-  .pages-info {
-    font-size: 14px;
-    color: white;
-    margin-bottom: 20px;
+
+  .contenedor-tabla
+  {
+    background-color: #111C44;
+    padding: 30px;
+    border-radius: 15px;
   }
   
   /* ======================
@@ -203,31 +211,63 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    border-collapse: collapse; /* Combina los bordes */
   }
   
   .membership-table th,
-  .membership-table td {
-    border: 1px solid #ddd;
+  .membership-table td
+  {
+    /*border: 1px solid #ddd;*/
+    border-top: 1px solid gray;    /* Borde superior */
+    border-bottom: none; /* Borde inferior */
+    border-left: none;            /* Quita borde izquierdo */
+    border-right: none;           /* Quita borde derecho */
     padding: 10px;
-    text-align: left;
+    text-align: center;
   }
   
-  .membership-table th {
-    background-color: #162353;
+  .membership-table th
+  {
+    /*background-color: #162353;*/
     font-weight: bold;
+    text-align: center;
+    border: none;
+    color: rgb(207, 207, 207);
   }
+
+.aceptado, .pendiente, .rechazado
+{
+  background-color: green;  /* Color del fondo */
+  color: #fff;                /* Color del texto */
+  padding: 5px 10px;          /* Espaciado interno */
+  border-radius: 4px;         /* Bordes redondeados */
+  display: inline-block;      /* Para que el fondo se ajuste al contenido */
+  font-size: 14px;
+  text-decoration: none;      /* Opcional: quitar subrayado si es un enlace */
+}
+
+.pendiente
+{
+  background-color: #0d173a;
+}
+
+.rechazado
+{
+  background-color: red;
+}
   
   /* ======================
      Botón de Descargar Constancia
      ====================== */
-  .download-certificate {
+  .download-certificate
+  {
     padding: 10px 20px;
     background-color: #0d173a;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
   }
   
   .download-certificate:hover {
