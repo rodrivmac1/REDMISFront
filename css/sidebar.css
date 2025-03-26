@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  font-family: 'Instrument Sans', sans-serif;
+  background-color: #f4f4f4;
+}
+
+.sidebar {
+  width: 250px;
+  height: calc(100vh - 20px);
+  background-color: #111C44;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.sidebar-title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  height: 35px;
+  margin-top: 10px;
+}
+
+.sidebar-title-bold {
+  font-weight: bold;
+}
+
+.sidebar-title-normal {
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.sidebar-separator {
+  border: 0;
+  height: 1px;
+  background-color: white;
+  margin-bottom: 30px;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-weight: bold;
+}
+
+.sidebar-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.sidebar-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-icon-bg {
+  background-color: #1B254B;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-icon-bg img {
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar-logout-button {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sidebar-logout-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+/* Estilo para la opción activa en el sidebar */
+.sidebar-menu-item.active {
+  background-color: #1B254B;
+  color: white;
+  border-radius: 5px;
+}
+
+.sidebar-menu-item.active span {
+  color: white; /* Cambiar el color del texto también */
+}

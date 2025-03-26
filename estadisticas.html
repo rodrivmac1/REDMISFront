@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redmis-Estadísticas</title>
+    <link rel="stylesheet" href="css/estadisticas.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="sidebar"></div> 
+
+    <div class="background"></div>
+    
+    <div class="title-container">
+        <p>Estadisticas</p>
+    </div>
+        <!-- Main content -->
+        <div class="contenedor-main">
+            <div class="contenedor-header">
+                <div class="tarjeta-estadistica">
+                    <h3>Total de miembros</h3>
+                    <p class="valor-estadistica" id="total-miembros">Cargando...</p>
+                </div>
+                
+                <div class="tarjeta-estadistica">
+                    <h3>Solicitudes Pendientes</h3>
+                    <p class="valor-estadistica" id="solicitudes-pendientes">Cargando...</p>
+                </div>
+               
+            </div>
+            <div class="contenedor-graficos">
+                <div class="grafico-pais">
+                    <h2>Distribución de Miembros por País</h2>
+                    <div class="contenedor-canvas">
+                        <canvas id="grafica-pais"></canvas>
+                    </div>
+                </div>
+                <div class="grafico-universidad">
+                    <h2>Miembros por Universidad</h2>
+                    <div class="tabla-universidad">
+                        <div class="cabecera-tabla">
+                            <div class="columna-universidad">Universidad</div>
+                            <div class="columna-numero">Número de Miembros</div>
+                        </div>
+                        <div class="cuerpo-tabla" id="tabla-universidades">
+                            <!-- Los datos de la tabla se cargarán con JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <script>
+        fetch('sidebar.html')
+          .then(res => res.text())
+          .then(html => {
+            document.getElementById('sidebar').innerHTML = html;
+            const path = window.location.pathname.split('/').pop();
+            const links = document.querySelectorAll('.sidebar-menu-item');
+            links.forEach(link => {
+              if (link.getAttribute('href') === path) {
+                link.classList.add('active');
+              }
+            });
+          });
+    </script>
+    <script defer src="js/dashboard_estadisticas.js"></script>
+</body>
+</html>
