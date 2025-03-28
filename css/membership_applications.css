@@ -84,7 +84,11 @@ body {
     display: block;
   }
 
-  .table-box label#status {
+  .table-box label#membership{
+    font-weight: 700;
+  }
+
+  .table-box label#status{
     background-color: #1B254B;
     color: white;
     padding: 5px 10px;
@@ -92,21 +96,32 @@ body {
     font-weight: bold;
   }
 
-  .table-box table .actions button{
+  .table-box table button#evaluate{
     background-color: #1B254B;
     color: white;
     padding: 5px 10px;
     border-radius: 15px;
     font-weight: bold;
-    width: 50px;
     transition: 0.1s;
+    border: none;
+    font-size: 16px;
 
   }
 
-  .table-box table .actions button:hover{
+  .table-box table button#evaluate:hover{
     background-color: #10152c;
     transform: scale(1.1);
     transition: 0.1s;
+  }
+
+  .table-box table button#evaluate a{
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .table-box table button#evaluate a:visited{
+    text-decoration: none;
+    color: #fff;
   }
 
 
