@@ -68,27 +68,37 @@ body {
     text-align: left;
   }
 
+  #membership_applications tbody tr {
+    height: 70px; 
+  }
+
+  #membership_applications th,
+  #membership_applications td {
+      padding: 15px; 
+      vertical-align: middle; 
+  }
+
+  #membership_applications td {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  }
   
   .table-box label {
     font-size: 14px;
     margin-bottom: 5px;
   }
   
-  .table-box label#name{
+  .table-box label.name{
     font-weight: bold;
-    display: block;
   }
 
-  .table-box label#university{
-    font-weight: bold;
-    display: block;
-  }
 
-  .table-box label#membership{
+  .table-box label.membership{
     font-weight: 700;
   }
 
-  .table-box label#status{
+  .table-box label.status{
     background-color: #1B254B;
     color: white;
     padding: 5px 10px;
@@ -96,7 +106,7 @@ body {
     font-weight: bold;
   }
 
-  .table-box table button#evaluate{
+  .table-box table button.evaluate{
     background-color: #1B254B;
     color: white;
     padding: 5px 10px;
@@ -104,22 +114,28 @@ body {
     font-weight: bold;
     transition: 0.1s;
     border: none;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
     font-size: 16px;
-
+    display: flex;
+    flex-direction: row;
   }
 
-  .table-box table button#evaluate:hover{
+  .table-box table button.evaluate:hover{
     background-color: #10152c;
     transform: scale(1.1);
     transition: 0.1s;
   }
 
-  .table-box table button#evaluate a{
+  .table-box table button.evaluate a{
     text-decoration: none;
     color: #fff;
   }
 
-  .table-box table button#evaluate a:visited{
+  .table-box table button.evaluate i{
+    padding: 2px 8px 2px 0;
+  }
+
+  .table-box table button.evaluate a:visited{
     text-decoration: none;
     color: #fff;
   }

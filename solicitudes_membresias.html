@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="css/membership_applications.css">
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 </head>
 <body>
     <div id="sidebar"></div> 
@@ -17,47 +20,152 @@
     <div class="table-container">
       <div class="table-box">
         <h3>Lista de membresías solicitadas</h3>
-        <table id="membership_applications">
+        <table id="membership_applications" class="display">
           <thead>
-            <th>MIEMBRO</th>
-            <th>MEMBRESIA SOLICITADA</th>
-            <th>ESTADO</th>
-            <th>FECHA DE SOLICITUD</th>
-            <th>ACCIONES</th>
+            <tr>
+              <th>MIEMBRO</th>
+              <th>MEMBRESIA SOLICITADA</th>
+              <th>ESTADO</th>
+              <th>FECHA DE SOLICITUD</th>
+              <th>ACCIONES</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
-              <td id="member">
-                <label id="name">Alejandro Almonte</label>
-                <label id="email">alejandro.almonte@mail.com</label>
-              </td>
+              <td><label class="name">Alejandro Almonte</label><br><label class="email">alejandro.almonte@mail.com</label></td>
+              <td><label class="membership">Membresía Básica</label></td>
+              <td><label class="status">Pendiente</label></td>
+              <td><label>26/03/2025</label></td>
               <td>
-                <label id="membership">Membresía Básica</label>
-              </td>
-              <td>
-                <label id="status">Pendiente</label>
-              </td>
-              <td>
-                <label id="application_date">
-                  26/03/2025
-                </label>
-              </td>
-              <td>
-                <button id="evaluate">
-                  <a href="cvs/#">Evaluar</a>
-                </button>
+                <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="cvs/#">Evaluar</a></button>
               </td>
             </tr>
-
+            <tr>
+              <td><label class="name">Ana Gómez</label><br><label class="email">ana.gomez@mail.com</label></td>
+              <td><label class="membership">Membresía Premium</label></td>
+              <td><label class="status">Pendiente</label></td>
+              <td><label>20/03/2025</label></td>
+              <td>
+                <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="cvs/#">Evaluar</a></button>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="name">Carlos Mendoza</label><br><label class="email">carlos.mendoza@mail.com</label></td>
+              <td><label class="membership">Membresía Oro</label></td>
+              <td><label class="status">Pendiente</label></td>
+              <td><label>15/03/2025</label></td>
+              <td>
+                <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="cvs/#">Evaluar</a></button>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="name">Daniela Torres</label><br><label class="email">daniela.torres@mail.com</label></td>
+              <td><label class="membership">Membresía Platino</label></td>
+              <td><label class="status">Pendiente</label></td>
+              <td><label>10/03/2025</label></td>
+              <td>
+                <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="cvs/#">Evaluar</a></button>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="name">Fernando López</label><br><label class="email">fernando.lopez@mail.com</label></td>
+              <td><label class="membership">Membresía Básica</label></td>
+              <td><label class="status">Pendiente</label></td>
+              <td><label>05/03/2025</label></td>
+              <td>
+                <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="cvs/#">Evaluar</a></button>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="name">Gabriela Ruiz</label><br><label class="email">gabriela.ruiz@mail.com</label></td>
+              <td><label class="membership">Membresía Premium</label></td>
+              <td><label class="status">Pendiente</label></td>
+              <td><label>28/02/2025</label></td>
+              <td>
+                <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="cvs/#">Evaluar</a></button>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="name">Hugo Sánchez</label><br><label class="email">hugo.sanchez@mail.com</label></td>
+              <td><label class="membership">Membresía Oro</label></td>
+              <td><label class="status">Pendiente</label></td>
+              <td><label>25/02/2025</label></td>
+              <td>
+                <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="cvs/#">Evaluar</a></button>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="name">Isabel Fernández</label><br><label class="email">isabel.fernandez@mail.com</label></td>
+              <td><label class="membership">Membresía Platino</label></td>
+              <td><label class="status">Pendiente</label></td>
+              <td><label>22/02/2025</label></td>
+              <td>
+                <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="cvs/#">Evaluar</a></button>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="name">Javier Castillo</label><br><label class="email">javier.castillo@mail.com</label></td>
+              <td><label class="membership">Membresía Básica</label></td>
+              <td><label class="status">Pendiente</label></td>
+              <td><label>18/02/2025</label></td>
+              <td>
+                <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="cvs/#">Evaluar</a></button>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="name">Karen Ortega</label><br><label class="email">karen.ortega@mail.com</label></td>
+              <td><label class="membership">Membresía Premium</label></td>
+              <td><label class="status">Pendiente</label></td>
+              <td><label>12/02/2025</label></td>
+              <td>
+                <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="cvs/#">Evaluar</a></button>
+              </td>
+            </tr>
+            <tr>
+              <td><label class="name">Karen Ortega</label><br><label class="email">karen.ortega@mail.com</label></td>
+              <td><label class="membership">Membresía Premium</label></td>
+              <td><label class="status">Pendiente</label></td>
+              <td><label>12/02/2025</label></td>
+              <td>
+                <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="cvs/#">Evaluar</a></button>
+              </td>
+            </tr>
             
-          </tbody>
+          </tbody> 
         </table>
       </div>
-    
     </div>
+
+    <!-- jQuery y DataTables -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+
     <script>
-      
-  </script>
+      $(document).ready(function() {
+          $('#membership_applications').DataTable({
+              paging: true,       
+              searching: true,    
+              ordering: true,
+              pageLength: 3,      
+              lengthMenu: [3, 5, 7, 10],   
+              language: {
+                  lengthMenu: "Mostrar _MENU_ registros por página",
+                  zeroRecords: "No se encontraron resultados",
+                  info: "Mostrando página _PAGE_ de _PAGES_",
+                  infoEmpty: "No hay registros disponibles",
+                  infoFiltered: "(filtrado de _MAX_ registros en total)",
+                  search: "Buscar:",
+                  paginate: {
+                      first: "Primero",
+                      last: "Último",
+                      next: "Siguiente",
+                      previous: "Anterior"
+                  }
+              }
+          });
+      });
+    </script>
+
     <script>
       fetch('SidebarAdmin.html')
         .then(res => res.text())
@@ -71,6 +179,6 @@
             }
           });
         });
-  </script>
+    </script>
 </body>
 </html>
