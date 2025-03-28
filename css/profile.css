@@ -1,5 +1,5 @@
 body {
-    background-color: #1B254B !important;
+    background-color: #F8F9FA;
     margin: 0;
     padding: 0;
     display: flex;
@@ -7,20 +7,11 @@ body {
     align-items: center;
   }
   
-  .background {
-    width: 100%;
-    height: 327px;
-    background-color: #0B1437;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
   
   .title-container {
     font-size: 36px;
     font-weight: bold;
-    color: white;
+    color: #2D3748;
     position: absolute;
     top: 40px;
     left: 300px;
@@ -32,14 +23,19 @@ body {
     gap: 50px;
     margin-top: 150px;
     margin-left: 150px;
+
   }
   
   .form-box {
-    background-color: #111C44;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
     width: 400px;
-    color: white;
+    color: #2D3748;
+    
+    font-weight: 550;
+    
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   }
   
   .form-box label {
@@ -54,8 +50,8 @@ body {
     margin-bottom: 15px;
     border: none;
     border-radius: 5px;
-    background-color: #1B254B;
-    color: white;
+    background-color: #F8F9FA;
+    color: #2D3748;
     margin-right: 10px; /* Espacio a la derecha */
   }
   /* Button */
@@ -69,16 +65,19 @@ body {
 
 /* Botón con desplazamiento hacia la derecha */
 .edit-button {
-    background-color: #3182CE;
+    background-color: #4FD1C5;
     border: none;
     border-radius: 8px;
     font-size: 15px;
-    color: #FFFFFF;
-    height: 31px;
+    color: #ffffff;
+    height: 36px;
     width: 102px;
-    font-weight: semi-bold;
+    font-weight: 500;
     cursor: pointer;
     margin-left: 150px; /* Desplaza el botón hacia la derecha */
+    
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+
 }
 
 .edit-button:hover {
