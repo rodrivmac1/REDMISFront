@@ -2,121 +2,121 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Membresías Aplicadas</title>
-  <!-- Enlace al archivo CSS -->
+  <title>Dashboard de Membresías</title>
+  <!-- Se enlaza el archivo de estilos CSS -->
   <link rel="stylesheet" href="css/membresias.css">
-  <!-- Enlace a la librería html2pdf.js para generar PDFs (opcional si se usa el botón de descarga) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-  <!-- Barra superior (header) -->
-  <header class="top-bar">
-    <div class="branding">REDMIS | Admin</div>
-  </header>
-
-  <!-- Contenedor principal que agrupa la barra lateral y el contenido -->
-  <div class="container">
-    <!-- Barra lateral (sidebar) con el menú de navegación -->
-    <div class="sidebar">
-        <div>
-            <div class="sidebar-title">
-                <span class="sidebar-title-bold">REDMIS</span> <span class="sidebar-title-normal">| Admin</span>
-            </div>
-            <hr class="sidebar-separator">
-            <div class="sidebar-menu">
-                <a class="sidebar-menu-item active" href="perfil_admin.html">
-                    <div class="sidebar-icon-bg"><img src="img/PerfilAdministrador.svg" alt="Perfil Administrador"></div>
-                    <span>Perfil Administrador</span>
-                </a>
-                <a class="sidebar-menu-item" href="membresia.html">
-                    <div class="sidebar-icon-bg"><img src="img/membresia.png" alt="Membresía"></div>
-                    <span>Membresía</span>
-                </a>
-                <a class="sidebar-menu-item" href="solicitudes_membresias.html">
-                    <div class="sidebar-icon-bg"><img src="img/SolicitudesDeMembresia.svg" alt="Solicitudes de Membresías"></div>
-                    <span>Solicitudes de membresías</span>
-                </a>
-                <a class="sidebar-menu-item" href="cvs.html">
-                    <div class="sidebar-icon-bg"><img src="img/CVs.svg" alt="CVs"></div>
-                    <span>CV's</span>
-                </a>
-                <a class="sidebar-menu-item" href="alta_usuario.html">
-                    <div class="sidebar-icon-bg"><img src="img/AltaDeUsuario.svg" alt="Alta de Usuario"></div>
-                    <span>Alta de Usuario</span>
-                </a>
-                <a class="sidebar-menu-item" href="alta_admin.html">
-                    <div class="sidebar-icon-bg"><img src="img/AltaDeAdministrador.svg" alt="Alta de Administrador"></div>
-                    <span>Alta de Administrador</span>
-                </a>
-                <a class="sidebar-menu-item" href="estadisticas.html">
-                    <div class="sidebar-icon-bg"><img src="img/Estadisticas.svg" alt="Estadísticas"></div>
-                    <span>Estadísticas</span>
-                </a>
-                <a class="sidebar-menu-item" href="miembros.html">
-                    <div class="sidebar-icon-bg"><img src="img/Miembros.svg" alt="Miembros"></div>
-                    <span>Miembros</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Área principal de contenido -->
-    <main class="main-content">
-      <div class="contenedor-tabla">
-        <h1>Membresías aplicadas</h1>
-        <table class="membership-table">
-          <thead>
-            <tr>
-              <th>Titular</th>
-              <th>Membresía</th>
-              <th>Estado</th>
-              <th>Descargar constancia</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Mark Wilson</td>
-              <td>mwsnlif638okrma89jvgd</td>
-              <td><span class="pendiente">Pendiente</td>
-              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
-            </tr>
-            <tr>
-              <td>Daniel Thomas</td>
-              <td>nstwd737bckz9xmeohr</td>
-              <td><span class="rechazado">Rechazado</td>
-              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
-            </tr>
-            <tr>
-              <td>Freduardo Hill</td>
-              <td>hchgvwdc51293jdfv8je</td>
-              <td><span class="aceptado">Aceptado</td>
-              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
-            </tr>
-            <tr>
-              <td>Laurent Michael</td>
-              <td>ydbtweo639sbfns014bd</td>
-              <td><span class="aceptado">Aceptado</td>
-              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
-            </tr>
-            <tr>
-              <td>Alexa Liras</td>
-              <td>nvey723vv9h3bf838bw</td>
-              <td><span class="pendiente">Pendiente</td>
-              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
-            </tr>
-            <tr>
-              <td>Esthera Jackson</td>
-              <td>oxoiejf634r998ffh237gk</td>
-              <td><span class="aceptado">Aceptado</td>
-              <td><button class="download-certificate" id="downloadPDF">Descargar</button></td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- Menú lateral o sidebar -->
+  <div class="sidebar">
+    <div>
+      <div class="sidebar-title">
+        <span class="sidebar-title-bold">REDMIS</span> <span class="sidebar-title-normal">/ Usuario</span>
       </div>
-    </main>
+      <hr class="sidebar-separator">
+      <div class="sidebar-menu">
+        <a class="sidebar-menu-item" href="Perfil.html">
+          <div class="sidebar-icon-bg"><img src="img/usuario.png" alt="Perfil"></div>
+          <span>Perfil</span>
+        </a>
+        <a class="sidebar-menu-item" href="membership.html">
+          <div class="sidebar-icon-bg"><img src="img/membresia.png" alt="Membresía"></div>
+          <span>Membresía</span>
+        </a>
+        <a class="sidebar-menu-item" href="application_membership.html">
+          <div class="sidebar-icon-bg"><img src="img/solicitud.png" alt="Solicitud Membresía"></div>
+          <span>Solicitud Membresía</span>
+        </a>
+      </div>
+    </div>
+  
+    <button class="sidebar-logout-button">
+      <div class="sidebar-icon-bg"><img src="img/salida.png" alt="Cerrar sesión"></div>
+      <span>Cerrar sesión</span>
+    </button>
   </div>
 
-  <!-- Enlace al archivo JavaScript -->
+  <!-- Contenido principal -->
+  <main class="content">
+    <!-- Encabezado del contenido -->
+    <header>
+    </header>
+
+    <!-- Tabla que muestra las solicitudes de membresía -->
+    <section class="membership-table">
+      <h1>Membresías</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Código de membresía</th>
+            <th>Miembro desde</th>
+            <th>Válido hasta</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+            <th>Descargar membresía</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Cada fila representa una solicitud de membresía -->
+          <tr>
+            <td>X9L8M5Q7T4Z3A1B6R2C</td>
+            <td>11/08/24</td>
+            <td>11/08/29</td>
+            <td>Oro</td>
+            <td><span class="aceptada">Aceptada</span></td>
+            <td><button class="download-btn">Descargar</button></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Plata</td>
+            <td><span class="pendiente">Pendiente</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Z3R8C5A1B7M6X4T9P2K</td>
+            <td>08/02/24</td>
+            <td>08/02/28</td>
+            <td>Plata</td>
+            <td><span class="aceptada">Aceptada</span></td>
+            <td><button class="download-btn">Descargar</button></td>
+          </tr>
+          <tr>
+            <td>A1M3R5X9P7C4L8W2J6Z</td>
+            <td>02/03/23</td>
+            <td>02/03/26</td>
+            <td>Bronce</td>
+            <td><span class="aceptada">Aceptada</span></td>
+            <td><button class="download-btn">Descargar</button></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Oro</td>
+            <td><span class="rechazada">Rechazada</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Bronce</td>
+            <td><span class="pendiente">Pendiente</span></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <!-- Sección para botones de descarga -->
+    <section class="download-section">
+      <!-- Botón para descargar la constancia -->
+      <button id="downloadConstancia">Descargar Constancia</button>
+    </section>
+  </main>
+  <!-- Se enlaza el archivo JavaScript -->
   <script src="js/membresias.js"></script>
 </body>
 </html>
