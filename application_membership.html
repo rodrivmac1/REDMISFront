@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/application_membership.css">
   <style>
     
   </style>
@@ -19,12 +20,14 @@
 
     <div class="form-container">
       <div class="form-box" style="width: 700px;">
-        <label>ID de Membresia</label>
-        <input type="text" placeholder="Ingrese el ID de su Membresia">
+        <label>Tipo de Membresia</label>
+        <select id="tipo-membresia" class="custom-select">
+          <option value="bronce">Bronce</option>
+          <option value="plata">Plata</option>
+          <option value="oro">Oro</option>
+        </select>
         <label>CV</label>
         <input type="file" accept=".pdf">
-        <label>Telefono</label>
-        <input type="text" placeholder="Ingrese su telefono">
         <button class="custom-button" type="submit">Solicitar membresia</button>
       </div>
     </div>

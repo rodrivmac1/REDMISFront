@@ -1,0 +1,23 @@
+.custom-select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #E2E8F0; 
+    color: #2D3748;
+    font-size: 14px;
+    cursor: pointer;
+    appearance: none; 
+  }
+  
+  
+  .custom-select::after {
+    content: "▼";
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
+  }
+  
+  .custom-select:hover {
+    background-color: #4FD1C5; 
+  }
