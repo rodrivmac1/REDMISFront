@@ -6,7 +6,7 @@ body {
 .sidebar {
   width: 250px;
   height: calc(100vh - 20px);
-  background-color: #F8F9FA;
+  background-color: #F8FAFC;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -25,7 +25,7 @@ body {
   margin-bottom: 10px;
   height: 35px;
   margin-top: 10px;
-  
+  color:#1D4ED8;
 }
 
 .sidebar-title-bold {
@@ -67,12 +67,12 @@ body {
 
 .sidebar-menu-item:hover {
   
-  background-color: rgb(255, 255, 255);
+  background-color: #F1F5F9;
   transform: scale(1.01);
 }
 
 .sidebar-icon-bg {
-  background-color: #FFFFFF;
+  background-color: #F1F5F9;
   padding: 6px;
   border-radius: 8px;
   display: flex;
@@ -108,8 +108,7 @@ body {
 }
 /* Estilo para la opción activa en el sidebar */
 .sidebar-menu-item.active {
-  background-color: #ffffff;
-  color: white;
+  background-color: #F1F5F9;
   border-radius: 5px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 }

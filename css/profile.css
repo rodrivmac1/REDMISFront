@@ -1,5 +1,5 @@
 body {
-    background-color: #F8F9FA;
+    background-color: #F8FAFC;
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,7 +11,7 @@ body {
   .title-container {
     font-size: 36px;
     font-weight: bold;
-    color: #2D3748;
+    color: #1D4ED8;
     position: absolute;
     top: 40px;
     left: 300px;
@@ -27,16 +27,17 @@ body {
   }
   
   .form-box {
-    background-color: #ffffff;
+    background-color: #F0F4F9;
     padding: 20px;
     border-radius: 10px;
     width: 400px;
     color: #2D3748;
     
-    font-weight: 550;
+    font-weight: 530;
     
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-  }
+  border: 2px solid #0202021c; /* Contorno azul */
+}
   
   .form-box label {
     display: block;
@@ -50,8 +51,8 @@ body {
     margin-bottom: 15px;
     border: none;
     border-radius: 5px;
-    background-color: #F8F9FA;
-    color: #2D3748;
+    background-color: #E2E8F0;
+    color: #475569;
     margin-right: 10px; /* Espacio a la derecha */
   }
   /* Button */
@@ -65,7 +66,7 @@ body {
 
 /* Botón con desplazamiento hacia la derecha */
 .edit-button {
-    background-color: #4FD1C5;
+    background-color: #1D4ED8;
     border: none;
     border-radius: 8px;
     font-size: 15px;
@@ -81,7 +82,7 @@ body {
 }
 
 .edit-button:hover {
-    background-color: #256a96;
+    background-color: #2563EB;
     transition: background-color 0.3s ease;
 }
 
