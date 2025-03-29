@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 50px;
-    background-color: #4FD1C5; 
+    background-color: #1D4ED8; 
     position: absolute;
     top: 0;
     width: 100%;
@@ -13,7 +13,7 @@
   .logo {
     font-size: 24px;
     font-weight: bold;
-    color: #2D3748;
+    color: #1E293B;
   }
   
   .navbar ul {
@@ -30,21 +30,21 @@
   
   .navbar ul li a {
     text-decoration: none;
-    color: #2D3748;
+    color: #1E293B;
     font-size: 16px;
     transition: color 0.3s;
   }
   
   .navbar ul li a:hover {
-    color: #4FD1C5; 
+    color: #1E293B; 
   }
   
 
   .footer {
     text-align: center;
     padding: 15px;
-    background-color: #4FD1C5; 
-    color: #2D3748;
+    background-color: #1D4ED8; 
+    color: #1E293B;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -61,7 +61,7 @@
   }
 
   .custom-button {
-    background-color: #4FAAD1; 
+    background-color: #1D4ED8; 
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -76,12 +76,12 @@
   }
   
   .custom-button:hover {
-    background-color: #4893b3; 
+    background-color: #2152d8; 
     transform: scale(1.05); 
   }
   
   .custom-button:active {
-    background-color: #2A4A8A; 
+    background-color: #1940ac; 
     transform: scale(0.98); 
   }
 

@@ -22,15 +22,67 @@
       <div class="form-box" style="width: 700px;">
         <label>Tipo de Membresia</label>
         <select id="tipo-membresia" class="custom-select">
-          <option value="bronce">Bronce</option>
-          <option value="plata">Plata</option>
-          <option value="oro">Oro</option>
         </select>
         <label>CV</label>
         <input type="file" accept=".pdf">
         <button class="custom-button" type="submit">Solicitar membresia</button>
       </div>
     </div>
+
+
+    <script type="module">
+      import membershipsService from './js/memberships.js';
+      import membershipApplicationService from './js/membershipApplication.js';
+
+      // Function to load membership types
+      async function loadMemberships() {
+          try {
+              const memberships = await membershipsService.get();
+              const select = document.getElementById('tipo-membresia');
+              select.innerHTML = ''; // Clear previous options
+
+              memberships.forEach(membership => {
+                  const option = document.createElement('option');
+                  option.value = membership.id; // Use ID for backend submission
+                  option.textContent = membership.nombre; // Display name in UI
+                  select.appendChild(option);
+              });
+
+          } catch (error) {
+              console.error('Error loading memberships:', error);
+              alert('Error cargando los tipos de membresía');
+          }
+      }
+
+      // Function to handle membership submission
+      async function submitMembership() {
+          const membershipId = document.getElementById('tipo-membresia').value;
+          const cvFile = document.getElementById('cv-file').files[0];
+
+          if (!cvFile) {
+              alert('Por favor, sube tu CV en formato PDF.');
+              return;
+          }
+
+          const formData = new FormData();
+          formData.append('membership_id', membershipId);
+          formData.append('cv', cvFile);
+
+          try {
+              const response = await membershipApplicationService.solicitar(formData);
+              alert('Solicitud enviada con éxito.');
+          } catch (error) {
+              console.error('Error al solicitar membresía:', error);
+              alert('Error al enviar la solicitud.');
+          }
+      }
+
+      // Load memberships on page load
+      loadMemberships();
+
+      // Attach event listener to the button
+      document.getElementById('submit-membership').addEventListener('click', submitMembership);
+  </script>
 
     <script>
         fetch('sidebar.html')
