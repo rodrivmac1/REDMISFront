@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #1B254B !important;
+    background-color: #F8FAFC !important;
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,7 +16,7 @@ body {
   .background {
     width: 100%;
     height: 327px;
-    background-color: #0B1437;
+    background-color: #E2E8F0;
     position: absolute;
     top: 0;
     left: 0;
@@ -26,7 +26,7 @@ body {
   .title-container {
     font-size: 36px;
     font-weight: bold;
-    color: white;
+    color: #1D4ED8;
     position: absolute;
     top: 40px;
     left: 300px;
@@ -38,16 +38,21 @@ body {
     gap: 50px;
     margin-top: 150px;
     margin-left: 150px;
-    width: 60%;
+    padding-left: 5%;
+    width: 70%;
   }
   
   .table-box {
-    background-color: #111C44;
+    background-color: #F1F5F9;
     padding: 5px 20px ;
     border-radius: 10px;
     width: 100%;
-    color: white;
+    color: #0F172A;
     letter-spacing: 1px;
+  }
+
+  .table-box h3{
+    color: #1D4ED8;
   }
 
   .table-box table{
@@ -63,9 +68,13 @@ body {
 
   .table-box th{
     font-weight: 600;
-    color: #A0AEC0;
+    color: #0F172A;
     font-size: 14px;
     text-align: left;
+  }
+
+  .table-box tbody{
+    color: #334155
   }
 
   #membership_applications tbody tr {
@@ -99,15 +108,15 @@ body {
   }
 
   .table-box label.status{
-    background-color: #1B254B;
-    color: white;
+    background-color: #E2E8F0;
+    color: #334155;
     padding: 5px 10px;
     border-radius: 15px;
     font-weight: bold;
   }
 
   .table-box table button.evaluate{
-    background-color: #1B254B;
+    background-color: #334155;
     color: white;
     padding: 5px 10px;
     border-radius: 15px;
@@ -139,6 +148,10 @@ body {
     text-decoration: none;
     color: #fff;
   }
+
+
+
+
 
 
 
