@@ -1,0 +1,80 @@
+/* Estilos generales */
+body {
+    background: #f0ebeb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    background: #1D4ED8;
+    padding: 30px;
+    border-radius: 15px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgb(255, 255, 255);
+}
+
+/* Título y subtítulo */
+.title {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Estilos de los inputs */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    color: black;
+    font-size: 14px;
+}
+
+/* Mensajes de error */
+.error-message {
+    color: rgb(249, 108, 108);
+    font-size: 12px;
+    display: none;
+    margin-bottom: 10px;
+}
+
+/* Botón */
+.button {
+    width: 50%;
+    padding: 10px;
+    background: #5a8cb8;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background: #71abcc;
+}
+
+/* Enlace para iniciar sesión */
+.login-link {
+    margin-top: 15px;
+    color: white;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: white;
+    text-decoration: none;
+}
