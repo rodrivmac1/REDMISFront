@@ -86,6 +86,25 @@ body {
     transition: background-color 0.3s ease;
 }
 
+.cancel-Btn {
+  background-color: #b72222;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #ffffff;
+  height: 36px;
+  width: 102px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 150px; /* Desplaza el botón hacia la derecha */
+  
+box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+.cancel-Btn:hover {
+  background-color: #df1111;
+  transition: background-color 0.3s ease;
+}
 
 
 
