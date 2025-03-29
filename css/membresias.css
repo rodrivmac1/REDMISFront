@@ -2,20 +2,20 @@
 body
 {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Instrument Sans', sans-serif;
   display: flex;
-  background-color: #F8F9FA;
+  background-color: #f8fafc;
 }
 
 h1
 {
-  color: #2D3748;
+  color: #1d4ed8;
 }
 
 .sidebar {
   width: 250px;
   height: calc(100vh - 20px);
-  background-color: #F8F9FA;
+  background-color: #F8FAFC;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -34,7 +34,7 @@ h1
   margin-bottom: 10px;
   height: 35px;
   margin-top: 10px;
-  
+  color:#1D4ED8;
 }
 
 .sidebar-title-bold {
@@ -76,17 +76,18 @@ h1
 
 .sidebar-menu-item:hover {
   
-  background-color: rgb(255, 255, 255);
+  background-color: #F1F5F9;
   transform: scale(1.01);
 }
 
 .sidebar-icon-bg {
-  background-color: #FFFFFF;
+  background-color: #F1F5F9;
   padding: 6px;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -116,8 +117,7 @@ h1
 }
 /* Estilo para la opción activa en el sidebar */
 .sidebar-menu-item.active {
-  background-color: #ffffff;
-  color: white;
+  background-color: #F1F5F9;
   border-radius: 5px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -131,10 +131,11 @@ h1
 {
   flex: 1;
   padding: 20px;
-  margin-left: 270px;
-  background-color: #ffffff;
-  border-radius: 15px;
   margin-top: 100px;
+  margin-left: 270px;
+  margin-right: 10px;
+  background-color: #f1f5f9;
+  border-radius: 15px;
 }
 
 /* Encabezado del contenido */
@@ -159,14 +160,15 @@ h1
   margin-right: 10px;
   padding: 10px 15px;
   border: none;
-  background-color: #4FD1C5;
+  background-color: #2563eb;
   color: #fff;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
-.download-section button:hover {
-  background-color: #3bbbae;
+.download-section button:hover
+{
+  background-color: #1d4ed8;
 }
 
 /* Estilos para la tabla de membresías */
@@ -185,22 +187,22 @@ h1
   border-left: none;            /* Quita borde izquierdo */
   border-right: none;           /* Quita borde derecho */
   padding: 10px;
-  color: #2D3748;
+  color: #0f172a;
 }
 
 .membership-table th
 {
   font-weight: bold;
   border: none;
-  color: #A0AEC0;
+  color: #475569;
 }
 
 .aceptada, .pendiente, .rechazada
 {
-  background-color: #48BB78;  /* Color del fondo */
+  background-color:  #10b981;  /* Color del fondo */
   color: #fff;                /* Color del texto */
   padding: 5px 10px;          /* Espaciado interno */
-  border-radius: 4px;         /* Bordes redondeados */
+  border-radius: 5px;         /* Bordes redondeados */
   display: inline-block;      /* Para que el fondo se ajuste al contenido */
   font-size: 14px;
   text-decoration: none;      /* Opcional: quitar subrayado si es un enlace */
@@ -208,12 +210,12 @@ h1
 
 .pendiente
 {
-  background-color: #4FD1C5;
+  background-color: #f59e0b;
 }
 
 .rechazada
 {
-  background-color: #E53E3E;
+  background-color:  #ef4444;
 }
 
 /* Estilos para el botón de descarga en la tabla */
@@ -221,13 +223,13 @@ h1
 {
   padding: 5px 10px;
   border: none;
-  background-color: #4FD1C5;
+  background-color:  #475569;
   color: #fff;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 .download-btn:hover
 {
-  background-color: #3bbbae;
+  background-color: #293546;
 }
