@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Miembros</title>
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/estilos-miembros.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar dinámico -->
+    <div id="sidebar"></div>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+      <h1 class="titulo">Lista de Miembros</h1>
+
+      <!-- Sección de solicitudes aceptadas -->
+      <section class="seccion">
+        <h2 class="seccion-titulo aceptadas">Solicitudes Aceptadas</h2>
+        <div class="tabla">
+          <div class="tabla-header">
+            <span>Nombre</span>
+            <span>Tipo de Membresía</span>
+            <span>Fecha Aceptada</span>
+            <span></span>
+          </div>
+          <div class="fila">
+            <span>Esthera Jackson</span>
+            <span>Plata</span>
+            <span>14/06/21</span>
+            <button class="btn-editar">Editar</button>
+          </div>
+          <div class="fila">
+            <span>Alexa Liras</span>
+            <span>Bronze</span>
+            <span>14/06/21</span>
+            <button class="btn-editar">Editar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección de solicitudes rechazadas -->
+      <section class="seccion">
+        <h2 class="seccion-titulo rechazadas">Solicitudes Rechazadas</h2>
+        <div class="tabla">
+          <div class="tabla-header">
+            <span>Nombre</span>
+            <span>Tipo de Membresía</span>
+            <span>Fecha Solicitada</span>
+            <span></span>
+          </div>
+          <div class="fila">
+            <span>Esthera Jackson</span>
+            <span>Plata</span>
+            <span>14/06/21</span>
+            <button class="btn-editar">Editar</button>
+          </div>
+          <div class="fila">
+            <span>Alexa Liras</span>
+            <span>Bronze</span>
+            <span>14/06/21</span>
+            <button class="btn-editar">Editar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección de solicitudes pendientes -->
+      <section class="seccion">
+        <h2 class="seccion-titulo pendientes">Solicitudes Pendientes</h2>
+        <div class="tabla">
+          <div class="tabla-header">
+            <span>Nombre</span>
+            <span>Tipo de Membresía</span>
+            <span>Fecha Solicitada</span>
+            <span></span>
+          </div>
+          <div class="fila">
+            <span>Esthera Jackson</span>
+            <span>Plata</span>
+            <span>14/06/21</span>
+            <button class="btn-editar">Editar</button>
+          </div>
+          <div class="fila">
+            <span>Alexa Liras</span>
+            <span>Bronze</span>
+            <span>14/06/21</span>
+            <button class="btn-editar">Editar</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    fetch('sidebarAdmin.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar').innerHTML = html;
+      });
+  </script>
+</body>
+</html>
