@@ -93,6 +93,25 @@
     </main>
   </div>
 
+  <!-- Evento de redireccionamiento del boton de editar miembros -->
+  <script>
+  // Espera a que el DOM esté completamente cargado
+  document.addEventListener('DOMContentLoaded', function () {
+    // Selecciona el botón por su clase
+    const btnEditar = document.querySelector('.btn-editar');
+
+    // Verifica que el botón exista antes de asignar el evento
+    if (btnEditar) {
+      btnEditar.addEventListener('click', function () {
+        // Redirige a la página deseada
+        window.location.href = 'VisualizacionDeMiembros.html';
+      });
+    }
+  });
+</script>
+
+
+  <!-- Insertamos el sidebar -->
   <script>
     fetch('sidebarAdmin.html')
       .then(res => res.text())
