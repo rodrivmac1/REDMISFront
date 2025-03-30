@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+* {
+  font-family: "Instrument Sans", sans-serif;
+}
+
+body {
+    background-color: #F8FAFC !important;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .background {
+    width: 100%;
+    height: 327px;
+    background-color: #E2E8F0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  
+  .title-container {
+    font-size: 36px;
+    font-weight: bold;
+    color: #1D4ED8;
+    position: absolute;
+    top: 40px;
+    left: 300px;
+  }
+  
+  .table-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 150px;
+    margin-left: 150px;
+    padding-left: 5%;
+    width: 70%;
+  }
+  
+  .table-box {
+    background-color: #F1F5F9;
+    padding: 5px 20px ;
+    border-radius: 10px;
+    width: 100%;
+    color: #0F172A;
+    letter-spacing: 1px;
+  }
+
+  .table-box h3{
+    color: #1D4ED8;
+  }
+
+  .table-box table{
+      width: 100%;
+      border-collapse: collapse;
+  }
+
+  .table-box td,th{
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .table-box th{
+    font-weight: 600;
+    color: #0F172A;
+    font-size: 14px;
+    text-align: left;
+    white-space: normal; /* Permite saltos de línea */
+  word-wrap: break-word; /* Rompe palabras largas si es necesario */
+  }
+
+  .table-box tbody{
+    color: #334155
+  }
+
+  #membership_applications tbody tr {
+    height: 70px; 
+  }
+
+  #membership_applications th,
+  #membership_applications td {
+      padding: 15px; 
+      vertical-align: middle; 
+  }
+
+  #membership_applications td {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  }
+  
+  .table-box label {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .table-box label.name{
+    font-weight: bold;
+  }
+
+
+  .table-box label.membership{
+    font-weight: 700;
+  }
+
+  .table-box label.status{
+    background-color: #E2E8F0;
+    color: #334155;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+  }
+
+  .table-box table button.evaluate{
+    background-color: #334155;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    transition: 0.1s;
+    border: none;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .table-box table button.evaluate:hover{
+    background-color: #10152c;
+    transform: scale(1.1);
+    transition: 0.1s;
+  }
+
+  .table-box table button.evaluate a{
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .table-box table button.evaluate i{
+    padding: 2px 8px 2px 0;
+  }
+
+  .table-box table button.evaluate a:visited{
+    text-decoration: none;
+    color: #fff;
+  }
+
+
+
+
+
+
+
+
+
+
+  
