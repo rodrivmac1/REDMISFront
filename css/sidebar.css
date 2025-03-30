@@ -1,13 +1,13 @@
 body {
   margin: 0;
   font-family: 'Instrument Sans', sans-serif;
-  background-color: #F8F9FA;
+  background-color: #f4f4f4;
 }
 
 .sidebar {
   width: 250px;
-  height: 100vh;
-  background-color: #F8F9FA;
+  height: calc(100vh - 20px);
+  background-color: #111C44;
   color: white;
   display: flex;
   flex-direction: column;
@@ -17,12 +17,18 @@ body {
   top: 0;
   padding: 20px;
   box-sizing: border-box;
-  border-radius: 0;
+  border-radius: 10px;
 }
 
 .sidebar-title {
-  text-align: left;
-  font-size: 18px;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  height: 35px;
+  margin-top: 10px;
+}
+
+.sidebar-title-bold {
   font-weight: bold;
   color: #1B254B;
   margin-bottom: 20px;
@@ -31,14 +37,14 @@ body {
 .sidebar-separator {
   border: 0;
   height: 1px;
-  background-color: #E2E8F0;
-  margin: 20px 0;
+  background-color: white;
+  margin-bottom: 30px;
 }
 
 .sidebar-menu {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   font-weight: bold;
 }
 
@@ -47,8 +53,8 @@ body {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: #1B254B;
-  font-size: 14px;
+  color: white;
+  font-size: 12px;
   cursor: pointer;
   transition: background 0.3s ease;
   padding: 12px;
@@ -56,16 +62,18 @@ body {
 }
 
 .sidebar-menu-item:hover {
-  background-color: rgba(79, 209, 197, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-icon-bg {
-  background-color: #4FD1C5;
-  padding: 8px;
-  border-radius: 10px;
+  background-color: #1B254B;
+  padding: 6px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-icon-bg img {
@@ -80,25 +88,25 @@ body {
   background-color: transparent;
   border: none;
   outline: none;
-  color: #1B254B;
-  padding: 12px;
-  border-radius: 12px;
-  font-size: 14px;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .sidebar-logout-button:hover {
-  background-color: rgba(79, 209, 197, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Estilo para la opción activa en el sidebar */
 .sidebar-menu-item.active {
-  background-color: #4FD1C5;
+  background-color: #1B254B;
   color: white;
-  border-radius: 12px;
+  border-radius: 5px;
 }
 
 .sidebar-menu-item.active span {
-  color: white;
+  color: white; /* Cambiar el color del texto también */
 }
