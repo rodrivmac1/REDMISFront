@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar CV</title>
+    <link rel="stylesheet" href="css/visualizaCV.css">
+</head>
+<body>
+    <header>Revisión de CV Solicitud</header>
+    
+    <div class="container">
+        <div class="main-content">
+            <h2>Información del Candidato</h2>
+            <div class="user-info">
+                <div class="real-name">Daniel Thomas</div>
+                <div class="username">Danielthomas@gmail.com</div>
+            </div>
+            <p><strong>CV Estatus:</strong> <span class="status pending">  Pendiente  </span></p>
+            
+            <h3>Curriculum Vitae</h3>
+            <iframe src="/ruta/al/cv.pdf" width="100%" height="500px"></iframe>
+            <p>
+                <a href="/ruta/al/cv.pdf" download>Descargar CV</a>
+            </p>
+        </div>
+        
+        <div class="main-content">
+            <h2>Tomar Decisión</h2>
+            <form id="decisionForm">
+                <div class="entries">
+                    <label class="entry">
+                        <input type="radio" name="decision" value="approve" required> 
+                        Aprobar membresía
+                    </label>
+                    <label class="entry">
+                        <input type="radio" name="decision" value="reject" required> 
+                        Rechazar membresía
+                    </label>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <label for="comments">Comentarios:</label><br>
+                    <textarea id="comments" rows="4" style="width: 100%;"></textarea>
+                </div>
+                
+                <div style="margin-top: 15px; text-align: center;">
+                    <button type="button" class="status accepted" onclick="submitDecision('approve')">Aprobar</button>
+                    <button type="button" class="status rejected" onclick="submitDecision('reject')">Rechazar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">&copy; 2025 Evaluación de Solicitudes</footer>
+    
+    <script>
+        function submitDecision(decision) {
+            const comments = document.getElementById('comments').value;
+            if (!confirm(`¿Está seguro que desea ${decision === 'approve' ? 'aprobar' : 'rechazar'} esta solicitud?`)) {
+                return;
+            }
+        }
+    </script>
+</body>
+</html>
