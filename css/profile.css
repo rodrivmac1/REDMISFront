@@ -1,0 +1,112 @@
+body {
+    background-color: #F8FAFC;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  
+  .title-container {
+    font-size: 36px;
+    font-weight: bold;
+    color: #1D4ED8;
+    position: absolute;
+    top: 40px;
+    left: 300px;
+  }
+  
+  .form-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 150px;
+    margin-left: 150px;
+
+  }
+  
+  .form-box {
+    background-color: #F0F4F9;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    color: #2D3748;
+    
+    font-weight: 530;
+    
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #0202021c; /* Contorno azul */
+}
+  
+  .form-box label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .form-box input {
+    width: calc(100% - 20px); /* Agrega espacio a la derecha */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #E2E8F0;
+    color: #475569;
+    margin-right: 10px; /* Espacio a la derecha */
+  }
+  /* Button */
+/* Contenedor del botón */
+.edit-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Espacio entre los contenedores y el botón */
+    width: 100%; /* Asegura que ocupe toda la fila */
+}
+
+/* Botón con desplazamiento hacia la derecha */
+.edit-button {
+    background-color: #1D4ED8;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #ffffff;
+    height: 36px;
+    width: 102px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 150px; /* Desplaza el botón hacia la derecha */
+    
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.edit-button:hover {
+    background-color: #2563EB;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-Btn {
+  background-color: #b72222;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #ffffff;
+  height: 36px;
+  width: 102px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 150px; /* Desplaza el botón hacia la derecha */
+  
+box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+.cancel-Btn:hover {
+  background-color: #df1111;
+  transition: background-color 0.3s ease;
+}
+
+
+
+
+  
