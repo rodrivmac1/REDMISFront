@@ -6,6 +6,8 @@ const statisticsService = (() => {
     // Variables privadas
     let graficoPaises = null;
     let graficoEstados = null;
+    let resizeTimeout = null;
+
     const domElements = {
         totalMiembros: null,
         solicitudesPendientes: null,
@@ -361,21 +363,40 @@ const statisticsService = (() => {
                 `)
                 .join('');
         },
+        handleWindowResize() {
+            // Clear any existing timeout to prevent multiple rapid calls
+            if (resizeTimeout) clearTimeout(resizeTimeout);
+            
+            // Set a timeout to only resize after the user has finished resizing
+            resizeTimeout = setTimeout(() => {
+                if (graficoPaises) {
+                    graficoPaises.resize();
+                    graficoPaises.update();
+                }
+                
+                if (graficoEstados) {
+                    graficoEstados.resize();
+                    graficoEstados.update();
+                }
+            }, 250); // Small delay to improve performance
+        },
+        
 
         cambiarVista(tipo) {
             // Definir elementos para cada vista
             const elementos = {
+                membresias: [
+                    '.tarjeta-estadistica:nth-child(5)',
+                    '.tarjeta-estadistica:nth-child(6)',
+                    '.grafico-universidad'
+                ],
                 geograficas: ['.grafico-pais', '.grafico-estado', '.grafico-universidad'],
                 solicitudes: [
                     '.tarjeta-estadistica:nth-child(2)',
                     '.tarjeta-estadistica:nth-child(3)',
                     '.tarjeta-estadistica:nth-child(4)'
-                ],
-                membresias: [
-                    '.tarjeta-estadistica:nth-child(5)',
-                    '.tarjeta-estadistica:nth-child(6)',
-                    '.grafico-universidad'
                 ]
+          
             };
 
             // Ocultar todos los elementos
@@ -392,9 +413,10 @@ const statisticsService = (() => {
             const titulo = document.querySelector('.title-container p');
             if (titulo) {
                 const textos = {
+                    membresias: 'Estadísticas de Membresías',
                     geograficas: 'Estadísticas Geográficas',
-                    solicitudes: 'Estadísticas de Solicitudes',
-                    membresias: 'Estadísticas de Membresías'
+                    solicitudes: 'Estadísticas de Solicitudes'
+                    
                 };
                 titulo.textContent = textos[tipo] || 'Estadísticas';
             }
@@ -416,6 +438,8 @@ const statisticsService = (() => {
                 domElements.selectorEstadisticas.addEventListener('change', (e) => {
                     this.cambiarVista(e.target.value);
                 });
+                window.addEventListener('resize', () => this.handleWindowResize());
+        
 
                 // Mostrar estados de carga
                 if (domElements.totalMiembros) domElements.totalMiembros.textContent = "Cargando...";
@@ -440,7 +464,7 @@ const statisticsService = (() => {
                 this.mostrarGraficoPaises(data.countries);
                 this.mostrarTablaUniversidades(data.universities);
                 this.mostrarGraficoEstados(data.states);
-                this.cambiarVista('geograficas');
+                this.cambiarVista('membresias');
 
             } catch (error) {
                 console.error('Error inicializando dashboard:', error);

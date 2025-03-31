@@ -1,5 +1,5 @@
 const API_Config = {
-    baseURL: 'http://localhost/membresiasREDMIS/backend/public/',
+    baseURL: 'http://localhost/MembresiasREDMIS/backend/public/',
     timeout: 30000,
     headers: {
         'Content-Type': 'application/json',
@@ -10,18 +10,20 @@ const API_Config = {
 class ApiClient {
     constructor(config = {}){
         this.config = {...API_Config, ...config};
-        this.authToken = null;
+       // this.authToken = null;
     }
-
+    /*
     setAuthToken(token){
         this.authToken = token;
     }
+    */
 
     getHeaders(){
         const headers = { ...this.config.headers };
-        if (this.authToken) {
+        /*if (this.authToken) {
           headers['Authorization'] = `Bearer ${this.authToken}`;
         }
+          */
         return headers;
     }
 
