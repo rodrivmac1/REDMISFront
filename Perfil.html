@@ -38,26 +38,14 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
-  <script src="API/services/members.js" type="module"></script>
-
-  <script>
-    // Configuración de prueba: ID y token de autenticación
-const testUserId = "1"; // Cambia "123" por el ID que desees probar
-const testAuthToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOjEsImV4cCI6MTc0MzAzNjk0OX0.j1L6fD9JVsiFy9WMgPnX15JTIF8jrUYYTMOgKLeNldI";
-
-// Almacenar el ID y el token en localStorage
-localStorage.setItem('userId', testUserId);
-localStorage.setItem('authToken', testAuthToken);
-
-// Opcional: Mostrar mensaje en la consola para confirmar
-console.log('ID y token configurados para pruebas:');
-console.log('ID:', testUserId);
-console.log('Token:', testAuthToken);
-</script>
   <script type="module">
     import membersService from './API/services/members.js';
+    import loginService from './API/services/login.js';
 
-    const userId = localStorage.getItem('userId');
+    // Get user data from loginService instead of localStorage directly
+    const userData = loginService.getUserData();
+    const userId = userData?.userId;
+    const token = loginService.getToken();
 
     const fields = ['nombre', 'genero', 'universidad', 'estado', 'pais', 'email', 'password'];
 
@@ -73,16 +61,16 @@ console.log('Token:', testAuthToken);
       document.getElementById('cancelBtn').style.display = editing ? 'inline-block' : 'none';
     };
 
-    if (userId) {
+    if (userId && token) {
       membersService.getbyID(userId)
         .then(user => {
-          document.getElementById('nombre').value = user.nombre_completo;
-          document.getElementById('genero').value = user.genero;
-          document.getElementById('universidad').value = user.universidad;
-          document.getElementById('estado').value = user.estado;
-          document.getElementById('pais').value = user.pais;
-          document.getElementById('email').value = user.email;
-          document.getElementById('password').value = user.password;
+          document.getElementById('nombre').value = user.nombre_completo || '';
+          document.getElementById('genero').value = user.genero || '';
+          document.getElementById('universidad').value = user.universidad || '';
+          document.getElementById('estado').value = user.estado || '';
+          document.getElementById('pais').value = user.pais || '';
+          document.getElementById('email').value = user.email || '';
+          document.getElementById('password').value = '********'; // Don't show real password
         })
         .catch(error => {
           console.error('Error al cargar el perfil:', error);
@@ -90,18 +78,20 @@ console.log('Token:', testAuthToken);
         });
     } else {
       alert('Usuario no autenticado.');
+      // Optional: redirect to login page
+      // window.location.href = 'login.html';
     }
 
     document.getElementById('editBtn').addEventListener('click', () => {
       enableFields(true);
       toggleButtons(true);
+      // Clear password field when editing
+      document.getElementById('password').value = '';
     });
 
     document.getElementById('acceptBtn').addEventListener('click', () => {
       let passwordInput = document.getElementById('password').value;
       let hashedPassword = passwordInput ? CryptoJS.MD5(passwordInput).toString() : "";
-      
-      
       
       const updatedUser = {
         nombre_completo: document.getElementById('nombre').value,
@@ -110,15 +100,21 @@ console.log('Token:', testAuthToken);
         estado: document.getElementById('estado').value,
         pais: document.getElementById('pais').value,
         email: document.getElementById('email').value,
-        password:hashedPassword
-        // Nota: La contraseña no se actualiza aquí directamente por seguridad
+        password: hashedPassword
       };
+
+      // Only include password if it was changed
+      if (passwordInput === '') {
+        delete updatedUser.password;
+      }
 
       membersService.updateMember(userId, updatedUser)
         .then(() => {
           alert('Perfil actualizado correctamente.');
           enableFields(false);
           toggleButtons(false);
+          // Reset password display
+          document.getElementById('password').value = '********';
         })
         .catch(error => {
           console.error('Error al actualizar el perfil:', error);
@@ -127,9 +123,9 @@ console.log('Token:', testAuthToken);
     });
 
     document.getElementById('cancelBtn').addEventListener('click', () => {
-      location.reload(); // Recargar la página para restablecer los valores originales
+      location.reload();
     });
-  </script>
+</script>
 
 <script>
   fetch('sidebar.html')
