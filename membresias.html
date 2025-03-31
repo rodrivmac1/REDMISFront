@@ -3,96 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Membresías</title>
-  <!-- Se enlaza el archivo de estilos CSS -->
   <link rel="stylesheet" href="css/membresias.css">
+  <!-- Asegurarnos de que jsPDF está cargado correctamente -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  
   <link rel="stylesheet" href="css/sidebar.css">
 </head>
 <body>
   <div id="sidebar"></div> 
 
-  <!-- Contenido principal -->
   <main class="content">
-    <!-- Encabezado del contenido -->
     <header>
+      <!-- Espacio para header si es necesario -->
     </header>
 
-    <!-- Tabla que muestra las solicitudes de membresía -->
     <section class="membership-table">
       <h1>Membresías</h1>
       <table>
         <thead>
-          <tr>
-            <th>Código de membresía</th>
-            <th>Miembro desde</th>
-            <th>Válido hasta</th>
-            <th>Tipo</th>
-            <th>Estado</th>
-            <th>Descargar membresía</th>
-          </tr>
+            <tr>
+                <th>Código de membresía</th>
+                <th>Miembro desde</th>
+                <th>Válido hasta</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Acción</th> <!-- Cambiado a "Acción" para ser más genérico -->
+            </tr>
         </thead>
         <tbody>
-          <!-- Cada fila representa una solicitud de membresía -->
-          <tr>
-            <td>X9L8M5Q7T4Z3A1B6R2C</td>
-            <td>11/08/24</td>
-            <td>11/08/29</td>
-            <td>Oro</td>
-            <td><span class="aceptada">Aceptada</span></td>
-            <td><button class="download-btn">Descargar</button></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Plata</td>
-            <td><span class="pendiente">Pendiente</span></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Z3R8C5A1B7M6X4T9P2K</td>
-            <td>08/02/24</td>
-            <td>08/02/28</td>
-            <td>Plata</td>
-            <td><span class="aceptada">Aceptada</span></td>
-            <td><button class="download-btn">Descargar</button></td>
-          </tr>
-          <tr>
-            <td>A1M3R5X9P7C4L8W2J6Z</td>
-            <td>02/03/23</td>
-            <td>02/03/26</td>
-            <td>Bronce</td>
-            <td><span class="aceptada">Aceptada</span></td>
-            <td><button class="download-btn">Descargar</button></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Oro</td>
-            <td><span class="rechazada">Rechazada</span></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Bronce</td>
-            <td><span class="pendiente">Pendiente</span></td>
-            <td></td>
-          </tr>
+            <!-- Las filas se generarán dinámicamente con JavaScript -->
         </tbody>
       </table>
     </section>
-    <!-- Sección para botones de descarga -->
-    <section class="download-section">
-      <!-- Botón para descargar la constancia -->
-      <button id="downloadConstancia">Descargar Constancia</button>
-    </section>
   </main>
-  <!-- Se enlaza el archivo JavaScript -->
-  <script src="js/membresias.js"></script>
+
+  <script type="module" src="API/js/membresias.js"></script>
   
   <script>
     fetch('sidebar.html')

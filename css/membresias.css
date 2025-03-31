@@ -136,6 +136,8 @@ h1
   margin-right: 10px;
   background-color: #f1f5f9;
   border-radius: 15px;
+  
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Encabezado del contenido */
