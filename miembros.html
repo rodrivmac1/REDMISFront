@@ -19,105 +19,132 @@
       <!-- Sección de solicitudes aceptadas -->
       <section class="seccion">
         <h2 class="seccion-titulo aceptadas">Solicitudes Aceptadas</h2>
-        <div class="tabla">
+        <div class="tabla" id="tabla-miembros-aceptados">
           <div class="tabla-header">
             <span>Nombre</span>
             <span>Tipo de Membresía</span>
             <span>Fecha Aceptada</span>
             <span></span>
           </div>
-          <div class="fila">
-            <span>Esthera Jackson</span>
-            <span>Plata</span>
-            <span>14/06/21</span>
-            <button class="btn-editar">Editar</button>
-          </div>
-          <div class="fila">
-            <span>Alexa Liras</span>
-            <span>Bronze</span>
-            <span>14/06/21</span>
-            <button class="btn-editar">Editar</button>
-          </div>
+          <div class="tabla-body"></div>
+          
         </div>
       </section>
 
       <!-- Sección de solicitudes rechazadas -->
       <section class="seccion">
         <h2 class="seccion-titulo rechazadas">Solicitudes Rechazadas</h2>
-        <div class="tabla">
+        <div class="tabla" id="tabla-miembros-rechazados">
           <div class="tabla-header">
             <span>Nombre</span>
             <span>Tipo de Membresía</span>
             <span>Fecha Solicitada</span>
             <span></span>
           </div>
-          <div class="fila">
-            <span>Esthera Jackson</span>
-            <span>Plata</span>
-            <span>14/06/21</span>
-            <button class="btn-editar">Editar</button>
+          <div class="tabla-body">
+            
           </div>
-          <div class="fila">
-            <span>Alexa Liras</span>
-            <span>Bronze</span>
-            <span>14/06/21</span>
-            <button class="btn-editar">Editar</button>
-          </div>
+          
         </div>
       </section>
 
       <!-- Sección de solicitudes pendientes -->
       <section class="seccion">
         <h2 class="seccion-titulo pendientes">Solicitudes Pendientes</h2>
-        <div class="tabla">
+        <div class="tabla" id="tabla-miembros-pendientes">
           <div class="tabla-header">
             <span>Nombre</span>
             <span>Tipo de Membresía</span>
             <span>Fecha Solicitada</span>
             <span></span>
           </div>
-          <div class="fila">
-            <span>Esthera Jackson</span>
-            <span>Plata</span>
-            <span>14/06/21</span>
-            <button class="btn-editar">Editar</button>
+          <div class="tabla-body">
+
           </div>
-          <div class="fila">
-            <span>Alexa Liras</span>
-            <span>Bronze</span>
-            <span>14/06/21</span>
-            <button class="btn-editar">Editar</button>
-          </div>
+
         </div>
       </section>
     </main>
   </div>
+</body>
 
-  <!-- Evento de redireccionamiento del boton de editar miembros -->
-  <script>
-  // Espera a que el DOM esté completamente cargado
-  document.addEventListener('DOMContentLoaded', function () {
-    // Selecciona el botón por su clase
-    const btnEditar = document.querySelector('.btn-editar');
 
-    // Verifica que el botón exista antes de asignar el evento
-    if (btnEditar) {
-      btnEditar.addEventListener('click', function () {
-        // Redirige a la página deseada
-        window.location.href = 'VisualizacionDeMiembros.html';
-      });
-    }
+
+
+<script type="module">
+  
+  import membersService from './API/services/members.js';
+  import loginService from './API/services/login.js';
+
+  const members = await membersService.get();
+  console.log(members);
+  
+
+  const acceptedMembers = members.filter(member => member.estado === 'APROBADA');
+  const rejectedMembers = members.filter(member => member.estado === 'RECHAZADA');
+  const pendingMembers = members.filter(member => member.estado === 'PENDIENTE');
+
+  const acceptedTable = document.getElementById('tabla-miembros-aceptados').getElementsByClassName('tabla-body')[0];
+  const rejectedTable = document.getElementById('tabla-miembros-rechazados').getElementsByClassName('tabla-body')[0];
+  const pendingTable = document.getElementById('tabla-miembros-pendientes').getElementsByClassName('tabla-body')[0];
+
+  acceptedMembers.forEach(member => {
+    const row = document.createElement('div');
+    row.className = 'fila';
+    row.innerHTML = `
+      <span>${member.nombre_completo}</span>
+      <span>${member.membresia}</span>
+      <span>${new Date(member.fecha_solicitud).toLocaleDateString()}</span>
+      <button class="btn-editar">Editar</button>
+    `;
+    acceptedTable.appendChild(row);
   });
+
+  rejectedMembers.forEach(member => {
+    const row = document.createElement('div');
+    row.className = 'fila';
+    row.innerHTML = `
+      <span>${member.nombre_completo}</span>
+      <span>${member.membresia}</span>
+      <span>${new Date(member.fecha_solicitud).toLocaleDateString()}</span>
+      <button class="btn-editar">Editar</button>
+    `;
+    rejectedTable.appendChild(row);
+  });
+
+  pendingMembers.forEach(member => {
+    const row = document.createElement('div');
+    row.className = 'fila';
+    row.innerHTML = `
+      <span>${member.nombre_completo}</span>
+      <span>${member.membresia}</span>
+      <span>${new Date(member.fecha_solicitud).toLocaleDateString()}</span>
+      <button class="btn-editar">Editar</button>
+    `;
+    pendingTable.appendChild(row);
+  });
+
+  
+  
+
+
+// // Espera a que el DOM esté completamente cargado
+// document.addEventListener('DOMContentLoaded', function () {
+//   // Selecciona el botón por su clase
+//   const btnEditar = document.querySelector('.btn-editar');
+
+//   // Verifica que el botón exista antes de asignar el evento
+//   if (btnEditar) {
+//     btnEditar.addEventListener('click', function () {
+//       // Redirige a la página deseada
+//       window.location.href = 'VisualizacionDeMiembros.html';
+//     });
+//   }
+
+// });
 </script>
 
+<script type="module" src="js/verification.js"></script>
+<script type="module" src="js/sidebar.js"></script>
 
-  <!-- Insertamos el sidebar -->
-  <script>
-    fetch('sidebarAdmin.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('sidebar').innerHTML = html;
-      });
-  </script>
-</body>
 </html>

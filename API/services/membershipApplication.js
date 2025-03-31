@@ -4,6 +4,7 @@ const ENDPOINT = {
     solicitar: 'api/solicitarMembresia',
     aceptar: 'api/aceptarMembresia',
     rechazar: 'api/rechazarMembresia',
+    obtener: 'api/solicitudesMembresias',
 }
 
 const membershipApplicationService = {
@@ -17,6 +18,9 @@ const membershipApplicationService = {
 
     rechazar: (id, reason) => {
         return apiClient.post(`${ENDPOINT.rechazar}/${id}`, reason);
+    },
+    obtener : () => {
+        return apiClient.get(ENDPOINT.obtener);
     }
 };
 
