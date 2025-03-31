@@ -43,6 +43,7 @@
 
     <script type="module">
       import membershipApplicationService from './API/services/membershipApplication.js';
+      import loginService from './API/services/login.js';
 
       const applications = await membershipApplicationService.obtener();
       const pendingApplications = applications.filter(application => application.estado === 'PENDIENTE');

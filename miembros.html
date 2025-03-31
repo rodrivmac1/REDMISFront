@@ -77,7 +77,6 @@
   import loginService from './API/services/login.js';
 
   const members = await membersService.get();
-  console.log(members);
   
 
   const acceptedMembers = members.filter(member => member.estado === 'APROBADA');
