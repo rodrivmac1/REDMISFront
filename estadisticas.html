@@ -87,21 +87,8 @@
                 </div>
             </div>
         </div>
-    <script defer type="module"  src="API/services/statistics.js"></script>
-    <script>
-        fetch('SidebarAdmin.html')
-          .then(res => res.text())
-          .then(html => {
-            document.getElementById('sidebar').innerHTML = html;
-            const path = window.location.pathname.split('/').pop();
-            const links = document.querySelectorAll('.sidebar-menu-item');
-            links.forEach(link => {
-              if (link.getAttribute('href') === path) {
-                link.classList.add('active');
-              }
-            });
-          });
-    </script>
-   
+    <script defer type="module" src="API/services/statistics.js"></script>   
 </body>
+<script type="module" src="js/verification.js"></script>
+<script type="module" src="js/sidebar.js"></script>
 </html>
