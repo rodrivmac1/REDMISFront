@@ -48,41 +48,53 @@
 
     <script type="module">
       import loginService from './API/services/login.js';
+    
       document.getElementById('login-form').addEventListener('submit', async (event) => {
           event.preventDefault(); // Prevent form from reloading the page
-
+    
           const email = document.getElementById('email').value;
           const password = document.getElementById('password').value;
-
+    
           const credentials = { username: email, password };
-
+    
           console.log('Datos enviados:', credentials);
-
+    
           try {
-              const response = await loginService.login({ username: email, password });
-
+              const response = await loginService.login(credentials);
+    
               console.log('Respuesta del servidor:', response);
-
+    
               if (response && response.token) {
                   alert('Inicio de sesión exitoso');
-
+    
                   // Get user data to determine the role
                   const userData = loginService.getUserData();
-                  
-                  // Redirect based on role (assuming backend returns it)
-                  if (userData && userData.role === 'admin') {
-                      window.location.href = 'adminDashboard.html';
+    
+                  // Redirect based on role
+                  if (userData && userData.role) {
+                      switch (userData.role) {
+                          case 1: // Admin role
+                              window.location.href = 'estadisticas.html';
+                              break;
+                          case 2: // General user role
+                              window.location.href = 'Perfil.html';
+                              break;
+                          default:
+                              alert('Role desconocido, no se puede redirigir');
+                              break;
+                      }
                   } else {
-                      window.location.href = 'Perfil.html';
+                      alert('No se encontró información de rol en el usuario.');
                   }
               } else {
                   alert('Error en inicio de sesión: Verifique sus credenciales');
               }
           } catch (error) {
-              console.error('Login failed:', error);
+              console.error('Error en inicio de sesión:', error);
               alert('Error en inicio de sesión');
           }
       });
-  </script>
+    </script>
+    
 </body>
 </html>

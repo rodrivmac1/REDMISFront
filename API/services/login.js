@@ -21,9 +21,10 @@ const loginService = {
         if (response && response.token) {
             // Save token to localStorage
             localStorage.setItem(TOKEN_STORAGE_KEY, response.token);
-            // Save user data
+            // Save user data including role
             localStorage.setItem(USER_DATA_KEY, JSON.stringify({
-                userId: response.user_id || response.id || response.user?.id
+                userId: response.user_id || response.id || response.user?.id,
+                role: response.role // Agregamos el campo role aquí
             }));
             // Set token in apiClient for subsequent requests
             apiClient.setAuthToken(response.token);
@@ -53,10 +54,16 @@ const loginService = {
         return localStorage.getItem(TOKEN_STORAGE_KEY);
     },
     
-    // Get user data
+    // Get user data including role
     getUserData: () => {
         const data = localStorage.getItem(USER_DATA_KEY);
         return data ? JSON.parse(data) : null;
+    },
+    
+    // Get user role specifically
+    getUserRole: () => {
+        const userData = loginService.getUserData();
+        return userData ? userData.role : null;
     },
     
     // Initialize auth state on page load
