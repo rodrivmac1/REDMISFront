@@ -1,6 +1,7 @@
 import apiClient from '../apiClient.js';
 import loginService from '../services/login.js';
 import membresiaUsuarioService from '../services/membresiaUsuario.js';
+import membersService from '../services/members.js';
 
 const { jsPDF } = window.jspdf;
 
@@ -70,34 +71,103 @@ function renderMembresias(membresiasData) {
     });
 }
 
-function generateMembershipPDF(membresia) {  
+async function generateMembershipPDF(membresia) {
     try {
+        // Obtener datos del usuario
+        const userData = loginService.getUserData();
+        const userId = userData?.userId;
+        
+        if (!userId) {
+            throw new Error('No se pudo obtener el ID del usuario');
+        }
+
+        // Obtener información completa del miembro
+        const memberResponse = await membersService.getbyID(userId);
+        if (!memberResponse || !memberResponse.nombre_completo) {
+            throw new Error('No se pudo obtener la información del perfil');
+        }
+
+        // Crear documento PDF
         const doc = new jsPDF();
         const pageWidth = doc.internal.pageSize.getWidth();
         const margin = 20;
         
-        // Encabezado
+        // Título
         doc.setFontSize(20);
         doc.setTextColor(40, 40, 40);
         doc.text('CERTIFICADO DE MEMBRESÍA', pageWidth / 2, 30, { align: 'center' });
         
-        // Contenido
+        // Línea decorativa
+        doc.setDrawColor(0, 100, 180);
+        doc.setLineWidth(0.8);
+        doc.line(margin, 40, pageWidth - margin, 40);
+        
+        // Información del miembro
         doc.setFontSize(12);
-        let y = 50;
+        let yPosition = 60;
         
-        doc.text(`Código: ${membresia.id || 'N/A'}`, margin, y);
-        y += 10;
-        doc.text(`Tipo: ${membresia.membresia_nombre || 'N/A'}`, margin, y);
-        y += 10;
-        doc.text(`Fecha inicio: ${formatDate(membresia.fecha_inicio)}`, margin, y);
-        y += 10;
-        doc.text(`Fecha fin: ${formatDate(membresia.fecha_fin)}`, margin, y);
-        y += 20;
+        // Nombre del miembro (obtenido del servicio de miembros)
+        doc.setFont(undefined, 'bold');
+        doc.text('Miembro:', margin, yPosition);
+        doc.setFont(undefined, 'normal');
+        doc.text(memberResponse.nombre_completo || memberResponse.nombre || 'Nombre no disponible', margin + 20, yPosition);
+        yPosition += 10;
         
-        doc.save(`membresia_${membresia.id || new Date().getTime()}.pdf`);
+        // Separador
+        yPosition += 5;
+        doc.setDrawColor(200, 200, 200);
+        doc.setLineWidth(0.3);
+        doc.line(margin, yPosition, pageWidth - margin, yPosition);
+        yPosition += 10;
+        
+        // Detalles de la membresía
+        doc.setFont(undefined, 'bold');
+        doc.text('Detalles de la Membresía:', margin, yPosition);
+        doc.setFont(undefined, 'normal');
+        yPosition += 10;
+        
+        // Formatear fechas
+        const fechaInicio = formatDate(membresia.fecha_inicio);
+        const fechaFin = formatDate(membresia.fecha_fin);
+        
+        // Datos de la membresía
+        doc.text(`• Código: ${membresia.id || 'N/A'}`, margin, yPosition);
+        yPosition += 8;
+        doc.text(`• Tipo: ${membresia.membresia_nombre || 'N/A'}`, margin, yPosition);
+        yPosition += 8;
+        doc.text(`• Fecha de inicio: ${fechaInicio}`, margin, yPosition);
+        yPosition += 8;
+        doc.text(`• Fecha de vencimiento: ${fechaFin}`, margin, yPosition);
+        yPosition += 8;
+        doc.text(`• Estado: ${membresia.estado || 'N/A'}`, margin, yPosition);
+        yPosition += 20;
+        
+        // Mensaje de validez
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text('Este documento certifica que el titular posee una membresía válida', pageWidth / 2, yPosition, { align: 'center' });
+        yPosition += 6;
+        doc.text('en nuestro sistema durante el período indicado.', pageWidth / 2, yPosition, { align: 'center' });
+        yPosition += 20;
+        
+        // Fecha de emisión
+        const today = new Date();
+        doc.text(`Emitido el: ${today.toLocaleDateString('es-ES')}`, margin, yPosition);
+        yPosition += 15;
+        
+        // Firma (opcional)
+        doc.setFontSize(10);
+        doc.text('_________________________', pageWidth - margin - 50, yPosition);
+        yPosition += 5;
+        doc.text('Firma autorizada', pageWidth - margin - 50, yPosition);
+        
+        // Guardar el PDF
+        const nombreArchivo = `Membresía_${memberResponse.nombre_completo || memberResponse.nombre || 'usuario'}_${membresia.id || ''}.pdf`;
+        doc.save(nombreArchivo);
+        
     } catch (error) {
         console.error('Error generando PDF:', error);
-        alert('Error al generar el PDF');
+        alert('Error al generar el certificado: ' + error.message);
     }
 }
 
