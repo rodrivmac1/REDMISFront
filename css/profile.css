@@ -40,11 +40,11 @@ body {
   }
   
   .form-box {
-    background-color: #F0F4F9;
+    background-color: #2684FF;
     padding: 20px;
     border-radius: 10px;
     width: 300px;
-    color: #1E293B;
+    color: #ffffff;
   }
   
   .form-box label {
@@ -59,8 +59,8 @@ body {
     margin-bottom: 15px;
     border: none;
     border-radius: 5px;
-    background-color: #E2E8F0;
-    color: #CBD5E1;
+    background-color: #ffffff;
+    color: #1E293B;
     margin-right: 10px; /* Espacio a la derecha */
   }
   
