@@ -3,89 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfil</title>
+  <title>Solicitud de Membresía</title>
   <link rel="stylesheet" href="css/profile.css">
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/application_membership.css">
-  <style>
-    
-  </style>
 </head>
 <body>
     <div id="sidebar"></div> 
 
     <div class="background"></div>
-    <div class="title-container">Solicitud de Membresia</div>
+    <div class="title-container">Solicitud de Membresía</div>
 
     <div class="form-container">
       <div class="form-box" style="width: 700px;">
-        <label>Tipo de Membresia</label>
-        <select id="tipo-membresia" class="custom-select">
+        <label>Tipo de Membresía</label>
+        <select id="tipo-membresia" class="custom-select" required>
+          <option value="" disabled selected>Selecciona una membresía</option>
         </select>
-        <label>CV</label>
-        <input type="file" accept=".pdf">
-        <button class="custom-button" type="submit">Solicitar membresia</button>
+
+        <label>Teléfono</label>
+        <input type="tel" id="telefono" class="custom-input" required>
+
+        <label>Comentarios</label>
+        <textarea id="comentarios" class="custom-textarea"></textarea>
+
+        <label>Credencial</label>
+        <input type="text" id="credencial" class="custom-input" required>
+
+        <label>CV (PDF)</label>
+        <input type="file" id="cv-file" accept=".pdf" required>
+
+        <button id="submit-membership" class="custom-button" type="button">Solicitar membresía</button>
       </div>
     </div>
 
-
     <script type="module">
-      import membershipsService from './js/memberships.js';
-      import membershipApplicationService from './js/membershipApplication.js';
+      import membershipsService from './API/services/memberships.js';
+      import membershipApplicationService from './API/services/membershipApplication.js';
 
-      // Function to load membership types
+      // Cargar tipos de membresía
       async function loadMemberships() {
           try {
-              const memberships = await membershipsService.get();
-              const select = document.getElementById('tipo-membresia');
-              select.innerHTML = ''; // Clear previous options
+              const response = await membershipsService.get();
+              console.log('Respuesta del servicio:', response); // Para depuración
+              
+              // Manejar diferentes formatos de respuesta
+              const memberships = Array.isArray(response) ? response : 
+                                 (response.data ? response.data : []);
+              
+              if (!memberships.length) {
+                  console.warn('No se recibieron membresías');
+                  return;
+              }
 
+              const select = document.getElementById('tipo-membresia');
+              
+              // Limpiar opciones excepto la primera
+              while(select.options.length > 1) {
+                  select.remove(1);
+              }
+
+              // Agregar opciones de membresía
               memberships.forEach(membership => {
                   const option = document.createElement('option');
-                  option.value = membership.id; // Use ID for backend submission
-                  option.textContent = membership.nombre; // Display name in UI
+                  option.value = membership.id;
+                  option.textContent = membership.nombre;
                   select.appendChild(option);
               });
 
           } catch (error) {
-              console.error('Error loading memberships:', error);
-              alert('Error cargando los tipos de membresía');
+              console.error('Error al cargar membresías:', error);
+              alert('No se pudieron cargar los tipos de membresía');
           }
       }
 
-      // Function to handle membership submission
+      // Enviar solicitud con el formato requerido
       async function submitMembership() {
-          const membershipId = document.getElementById('tipo-membresia').value;
-          const cvFile = document.getElementById('cv-file').files[0];
+    const membershipId = document.getElementById('tipo-membresia').value;
+    const telefono = document.getElementById('telefono').value;
+    const comentarios = document.getElementById('comentarios').value;
+    const credencial = document.getElementById('credencial').value;
+    const cvFile = document.getElementById('cv-file').files[0];
 
-          if (!cvFile) {
-              alert('Por favor, sube tu CV en formato PDF.');
-              return;
-          }
+    // Validaciones adicionales
+    if (!/^\d+$/.test(telefono)) {
+        alert('El teléfono debe contener solo números');
+        return;
+    }
 
-          const formData = new FormData();
-          formData.append('membership_id', membershipId);
-          formData.append('cv', cvFile);
+    const formData = new FormData();
+    formData.append('MR_Membresias_id', membershipId);
+    formData.append('telefono', telefono);
+    formData.append('comentarios', comentarios || '');
+    formData.append('credencial', credencial);
+    formData.append('cv', cvFile);
 
-          try {
-              const response = await membershipApplicationService.solicitar(formData);
-              alert('Solicitud enviada con éxito.');
-          } catch (error) {
-              console.error('Error al solicitar membresía:', error);
-              alert('Error al enviar la solicitud.');
-          }
-      }
+    console.log('Datos a enviar:', {
+        MR_Membresias_id: membershipId,
+        telefono: telefono,
+        comentarios: comentarios,
+        credencial: credencial,
+        cv: cvFile.name
+    });
 
-      // Load memberships on page load
-      loadMemberships();
+    try {
+        const response = await membershipApplicationService.solicitar(formData);
+        
+        if (response.data.success) {
+            alert('Solicitud enviada con éxito! ID: ' + response.data.id);
+            // Resetear formulario
+            document.querySelector('form').reset();
+        } else {
+            throw new Error(response.data.message || 'Error desconocido');
+        }
+    } catch (error) {
+        console.error('Error completo:', error);
+        let errorMessage = 'Error al enviar la solicitud';
+        
+        if (error.data) {
+            // Mensajes específicos del backend
+            if (error.data.errors) {
+                errorMessage = Object.values(error.data.errors).join('\n');
+            } else if (error.data.message) {
+                errorMessage = error.data.message;
+            }
+        }
+        
+        alert(errorMessage);
+    }
+}
 
-      // Attach event listener to the button
-      document.getElementById('submit-membership').addEventListener('click', submitMembership);
-  </script>
+      // Cargar membresías al iniciar la página
+      document.addEventListener('DOMContentLoaded', () => {
+          loadMemberships();
+          document.getElementById('submit-membership').addEventListener('click', submitMembership);
+      });
+    </script>
+
+    <script type="module" src="js/verification.js"></script>
+    <script type="module" src="js/sidebar.js"></script>
 </body>
-
-<script type="module" src="js/verification.js"></script>
-<script type="module" src="js/sidebar.js"></script>
-
 </html>
