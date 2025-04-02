@@ -13,46 +13,6 @@
             background-color: #F4F7FC;
             display: flex;
         }
-        .sidebar {
-            width: 250px;
-            height: 100vh;
-            background-color: #1D4ED8;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: fixed;
-            left: 0;
-            top: 0;
-            padding: 20px;
-            box-sizing: border-box;
-            z-index: 1000;
-        }
-
-        .sidebar-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .sidebar-menu {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar-menu-item {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            margin-bottom: 5px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .sidebar-menu-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
         .container {
             margin-left: 270px;
             padding: 20px;
@@ -124,69 +84,116 @@
 <body>
 
    
-    <div class="sidebar">
-        <div>
-            <div class="sidebar-title">REDMIS | Admin</div>
-            <div class="sidebar-menu">
-                <a class="sidebar-menu-item active" href="#">Perfil Administrador</a>
-                <a class="sidebar-menu-item" href="#">Membresía</a>
-                <a class="sidebar-menu-item" href="#">Solicitudes de membresía</a>
-                <a class="sidebar-menu-item" href="#">Alta de Administrador</a>
-                <a class="sidebar-menu-item" href="#">Estadísticas</a>
-                <a class="sidebar-menu-item" href="#">Miembros</a>
-            </div>
-        </div>
-    </div>
-
+    <div id="sidebar"></div>
 
     <div class="container">
-        <a id="back-button" href="#" onclick="history.back();">&#8592; Regresar</a>
+        <button id="back-button" onclick="history.back();">&#8592; Regresar</button>
         <div class="header">Revisión de CV</div>
 
         <div class="card">
             <h2>Información del Candidato</h2>
-            <p><strong>Nombre:</strong> Daniel Thomas</p>
-            <p><strong>Email:</strong> Danielthomas@gmail.com</p>
-            <p><strong>Estatus del CV:</strong> <span style="color: orange; font-weight: bold;">Pendiente</span></p>
+            <p><strong>Nombre:</strong> <span id="applicator_name"></span> </p>
+            <p><strong>Email:</strong> <span id="applicator_email"></span> </p>
+            <p><strong>Estatus de la solicitud:</strong> <span id="application_status"> </span></p>
         </div>
 
         <div class="card cv-viewer">
             <h2>Curriculum Vitae</h2>
-            <iframe src="/ruta/al/cv.pdf"></iframe>
-            <p><a href="/ruta/al/cv.pdf" download>Descargar CV</a></p>
+            <iframe src=""></iframe>
+            <p><a href="" download>Descargar CV</a></p>
         </div>
 
         <div class="card">
             <h2>Solicitud</h2>
             <div class="buttons">
-                <button class="button approve" onclick="confirmAction('aprobar')">Aprobar</button>
-                <button class="button reject" onclick="showCommentBox()">Rechazar</button>
+                <button id="accept-application" type="button" class="button approve">Aprobar</button>
+                <button id="show-comment-box-btn" type="button" class="button reject">Rechazar</button>
             </div>
             <div id="comment-box">
                 <textarea id="rejection-reason" rows="3" placeholder="Motivo de rechazo..."></textarea>
-                <button class="button reject" onclick="confirmAction('rechazar')">Confirmar Rechazo</button>
+                <button id="reject-application" type="button" class="button reject">Confirmar Rechazo</button>
             </div>
         </div>
     </div>
 
-    <script>
-        function showCommentBox() {
+    <script type="module">
+        import membershipApplicationService from './API/services/membershipApplication.js';
+        import loginService from './API/services/login.js';
+
+        // Obtener el ID de la solicitud de membresía desde la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const applicationId = urlParams.get('application_id');
+        if (!applicationId) {
+            alert('No se ha proporcionado un ID de solicitud de membresía.');
+            window.location.href = 'solicitudes_membresias.html'; // Redirigir a la página de solicitudes si no hay ID
+        }
+
+        const application = await membershipApplicationService.obtenerPorID(applicationId);
+        
+
+        const applicatorName = document.getElementById('applicator_name');
+        const applicatorEmail = document.getElementById('applicator_email');
+        const applicationStatus = document.getElementById('application_status');
+
+        const cvIframe = document.querySelector('.cv-viewer iframe');
+        const downloadLink = document.querySelector('.cv-viewer a');
+
+        applicatorName.innerHTML = `${application.nombre}`;
+        applicatorEmail.innerHTML = `${application.email}`;
+        applicationStatus.innerHTML = `${application.estado}`;
+
+        cvIframe.src = application.cv; // URL del CV
+        downloadLink.href = application.cv; // URL del CV para descargar
+
+        const showCommentBox = () => {
             document.getElementById('comment-box').style.display = 'block';
         }
 
-        function confirmAction(action) {
-            if (action === 'rechazar') {
-                let reason = document.getElementById('rejection-reason').value.trim();
-                if (reason === '') {
-                    alert('Debes escribir el motivo de rechazo de la solicitud.');
-                    return;
-                }
-            }
+        const confirmAction = async (action) => {
             let confirmation = confirm(`¿Estás seguro de que deseas ${action} esta solicitud?`);
-            if (confirmation) {
-                alert(`Solicitud ${action} completada`);
+            if (!confirmation) return;
+        };
+
+        const acceptButton = document.getElementById('accept-application');
+        const rejectButton = document.getElementById('reject-application');
+        const showCommentBoxButton = document.getElementById('show-comment-box-btn');
+
+        acceptButton.addEventListener('click', async() => {
+            try {
+                const response = await membershipApplicationService.aceptar(applicationId);
+                if (response) {
+                    alert("Solicitud aceptada correctamente.");
+                    window.location.href = 'solicitudes_membresias.html'; 
+                } else {
+                    alert("Error al aceptar la solicitud. Inténtalo de nuevo.");
+                }
+            } catch (error) {
+                console.error('Error al aprobar la solicitud:', error);
+                alert('Error al aprobar la solicitud. Inténtalo de nuevo.');
+                
             }
-        }
+        });
+        rejectButton.addEventListener('click', async() => {
+            try {
+                const reason = document.getElementById('rejection-reason').value.trim();
+                    if (!reason) {
+                        alert('Debes escribir el motivo de rechazo de la solicitud.');
+                        return;
+                    }
+                    const response = await membershipApplicationService.rechazar(applicationId, {reason});
+                    if (response) {
+                        alert("Solicitud rechazada correctamente.");
+                        window.location.href = 'solicitudes_membresias.html'; 
+                    } else {
+                        alert("Error al rechazar la solicitud. Inténtalo de nuevo.");
+                    }
+                
+            } catch (error) {
+                console.error('Error al rechazar la solicitud:', error);
+                alert('Error al rechazar la solicitud. Inténtalo de nuevo.');
+            }
+        });
+        showCommentBoxButton.addEventListener('click', () => showCommentBox());
     </script>
 
 </body>

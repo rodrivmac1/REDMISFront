@@ -19,8 +19,13 @@ const membershipApplicationService = {
     rechazar: (id, reason) => {
         return apiClient.post(`${ENDPOINT.rechazar}/${id}`, reason);
     },
+
     obtener : () => {
         return apiClient.get(ENDPOINT.obtener);
+    },
+    
+    obtenerPorID : (id) => {
+        return apiClient.get(`${ENDPOINT.obtener}/${id}`);
     }
 };
 

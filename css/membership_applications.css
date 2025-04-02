@@ -118,7 +118,7 @@ body {
   }
 
   .table-box table button.evaluate{
-    background-color: #334155;
+    background-color: #1D4ED8;
     color: white;
     padding: 5px 10px;
     border-radius: 15px;
@@ -132,7 +132,7 @@ body {
   }
 
   .table-box table button.evaluate:hover{
-    background-color: #10152c;
+    background-color: #334155;
     transform: scale(1.1);
     transition: 0.1s;
   }

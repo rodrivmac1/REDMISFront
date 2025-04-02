@@ -80,7 +80,7 @@
   
 
   const acceptedMembers = members.filter(member => member.estado === 'APROBADA');
-  const rejectedMembers = members.filter(member => member.estado === 'RECHAZADA');
+  const rejectedMembers = members.filter(member => member.estado === 'RECHAZADA'); 
   const pendingMembers = members.filter(member => member.estado === 'PENDIENTE');
 
   const acceptedTable = document.getElementById('tabla-miembros-aceptados').getElementsByClassName('tabla-body')[0];
