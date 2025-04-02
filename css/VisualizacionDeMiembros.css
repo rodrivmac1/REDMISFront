@@ -31,6 +31,10 @@ body {
     margin-bottom: 20px;
 }
 
+.user-header span {
+    padding-left: 10px;
+}
+
 .user-details {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -61,20 +65,40 @@ body {
 }
 
 .btn {
-    padding: 10px;
+    padding: 7px 10px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     display: flex;
     align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+    border-radius: 15px;
+    font-weight: bold;
+    transition: 0.1s;
+    font-size: 16px;
 }
 
 .btn i {
     margin-right: 5px;
 }
 
+.btn a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn a:visited {
+    text-decoration: none;
+    color: #fff;
+}
+
 .btn-primary { background: #F59E0B; color: white; }
 .btn-secondary { background: #10B981; color: white; }
 .btn-warning { background: #EF4444; color: white; }
 .btn-danger { background: #EF4444; color: white; }
+
+.btn:hover {
+    opacity: 0.9;
+    color: white;
+    transform: scale(1.05);
+}
