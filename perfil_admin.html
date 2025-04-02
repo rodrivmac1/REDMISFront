@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil</title>
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+</head>
+<body>
+  <div id="sidebar"></div> 
+  <div class="title-container">Perfil</div>
+
+  <div class="form-container">
+    <div class="form-box">
+      <label>Nombre completo</label>
+      <input id="nombre" type="text" placeholder="Nombre" disabled>
+      <label>Género</label>
+      <input id="genero" type="text" placeholder="Género" disabled>
+      <label>Universidad</label>
+      <input id="universidad" type="text" placeholder="Universidad" disabled>
+      <label>Estado</label>
+      <input id="estado" type="text" placeholder="Estado" disabled>
+    </div>
+    <div class="form-box">
+      <label>País</label>
+      <input id="pais" type="text" placeholder="País" disabled>
+      <label>Email</label>
+      <input id="email" type="email" placeholder="Email" disabled>
+      <label>Contraseña</label>
+      <input id="password" type="password" placeholder="Contraseña" disabled>
+    </div>
+  </div>
+  <div class="edit-button-container">
+    <button class="edit-button" id="editBtn">Editar</button>
+    <button class="edit-button" id="acceptBtn" style="display: none;">Aceptar</button>
+    <button class="cancel-Btn" id="cancelBtn" style="display: none;">Cancelar</button>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+  <script type="module">
+    import membersService from './API/services/members.js';
+    import loginService from './API/services/login.js';
+
+    // Get user data from loginService instead of localStorage directly
+    const userData = loginService.getUserData();
+    const userId = userData?.userId;
+    const token = loginService.getToken();
+
+    const fields = ['nombre', 'genero', 'universidad', 'estado', 'pais', 'email', 'password'];
+
+    const enableFields = (enabled) => {
+      fields.forEach(fieldId => {
+        document.getElementById(fieldId).disabled = !enabled;
+      });
+    };
+
+    const toggleButtons = (editing) => {
+      document.getElementById('editBtn').style.display = editing ? 'none' : 'inline-block';
+      document.getElementById('acceptBtn').style.display = editing ? 'inline-block' : 'none';
+      document.getElementById('cancelBtn').style.display = editing ? 'inline-block' : 'none';
+    };
+
+    if (userId && token) {
+      membersService.getbyID(userId)
+        .then(user => {
+          document.getElementById('nombre').value = user.nombre_completo || '';
+          document.getElementById('genero').value = user.genero || '';
+          document.getElementById('universidad').value = user.universidad || '';
+          document.getElementById('estado').value = user.estado || '';
+          document.getElementById('pais').value = user.pais || '';
+          document.getElementById('email').value = user.email || '';
+          document.getElementById('password').value = '********'; // Don't show real password
+        })
+        .catch(error => {
+          console.error('Error al cargar el perfil:', error);
+          alert('No se pudo cargar la información del usuario.');
+        });
+    } else {
+      alert('Usuario no autenticado.');
+      // Optional: redirect to login page
+      // window.location.href = 'login.html';
+    }
+
+    document.getElementById('editBtn').addEventListener('click', () => {
+      enableFields(true);
+      toggleButtons(true);
+      // Clear password field when editing
+      document.getElementById('password').value = '';
+    });
+
+    document.getElementById('acceptBtn').addEventListener('click', () => {
+      let passwordInput = document.getElementById('password').value;
+      let hashedPassword = passwordInput ? CryptoJS.MD5(passwordInput).toString() : "";
+      
+      const updatedUser = {
+        nombre_completo: document.getElementById('nombre').value,
+        genero: document.getElementById('genero').value,
+        universidad: document.getElementById('universidad').value,
+        estado: document.getElementById('estado').value,
+        pais: document.getElementById('pais').value,
+        email: document.getElementById('email').value,
+        password: hashedPassword
+      };
+
+      // Only include password if it was changed
+      if (passwordInput === '') {
+        delete updatedUser.password;
+      }
+
+      membersService.updateMember(userId, updatedUser)
+        .then(() => {
+          alert('Perfil actualizado correctamente.');
+          enableFields(false);
+          toggleButtons(false);
+          // Reset password display
+          document.getElementById('password').value = '********';
+        })
+        .catch(error => {
+          console.error('Error al actualizar el perfil:', error);
+          alert('No se pudo actualizar el perfil.');
+        });
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', () => {
+      location.reload();
+    });
+</script>
+
+</body>
+<script type="module" src="js/verification.js"></script>
+<script type="module" src="js/sidebar.js"></script>
+</html>
