@@ -6,6 +6,7 @@
     <title>Visualizar CV</title>
     <link rel="stylesheet" href="css/visualizaCV.css">
     <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
         body {
             margin: 0;
@@ -100,7 +101,7 @@
         <div class="card cv-viewer">
             <h2>Curriculum Vitae</h2>
             <iframe src=""></iframe>
-            <p><a href="" download>Descargar CV</a></p>
+            <button class="btn btn-primary"> <i class="fas fa-download"></i><a id="download-cv" href="" download>Descargar CV</a></button>
         </div>
 
         <div class="card">
@@ -136,14 +137,14 @@
         const applicationStatus = document.getElementById('application_status');
 
         const cvIframe = document.querySelector('.cv-viewer iframe');
-        const downloadLink = document.querySelector('.cv-viewer a');
+        const downloadLink = document.getElementById('download-cv');
 
         applicatorName.innerHTML = `${application.nombre}`;
         applicatorEmail.innerHTML = `${application.email}`;
         applicationStatus.innerHTML = `${application.estado}`;
 
-        cvIframe.src = application.cv; // URL del CV
-        downloadLink.href = application.cv; // URL del CV para descargar
+        cvIframe.src = "./pdfs/" + application.cv; // URL del CV
+        downloadLink.href = "./pdfs/" + application.cv; // URL del CV para descargar
 
         const showCommentBox = () => {
             document.getElementById('comment-box').style.display = 'block';

@@ -6,6 +6,7 @@
   <title>Lista de Miembros</title>
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/estilos-miembros.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body>
   <div class="container">
@@ -94,7 +95,7 @@
       <span>${member.nombre_completo}</span>
       <span>${member.membresia}</span>
       <span>${new Date(member.fecha_solicitud).toLocaleDateString()}</span>
-      <button class="btn-editar">Editar</button>
+      <button class="btn-editar"><i class="fas fa-edit"></i><a href="visualizarMiembro.html?memberID=${member.usuario_id}">Editar</a></button>
     `;
     acceptedTable.appendChild(row);
   });
@@ -106,7 +107,7 @@
       <span>${member.nombre_completo}</span>
       <span>${member.membresia}</span>
       <span>${new Date(member.fecha_solicitud).toLocaleDateString()}</span>
-      <button class="btn-editar">Editar</button>
+      <button class="btn-editar"><i class="fas fa-edit"></i><a href="visualizarMiembro.html?memberID=${member.usuario_id}">Editar</a></button>
     `;
     rejectedTable.appendChild(row);
   });
@@ -118,7 +119,7 @@
       <span>${member.nombre_completo}</span>
       <span>${member.membresia}</span>
       <span>${new Date(member.fecha_solicitud).toLocaleDateString()}</span>
-      <button class="btn-editar">Editar</button>
+      <button class="btn-editar"><i class="fas fa-edit"></i><a href="visualizarMiembro.html?memberID=${member.usuario_id}">Editar</a></button>
     `;
     pendingTable.appendChild(row);
   });

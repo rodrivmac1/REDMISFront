@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+* {
+  font-family: "Instrument Sans", sans-serif;
+}
+
 /* Reset general y fondo base */
 html, body {
   margin: 0;
@@ -92,12 +98,31 @@ html, body {
   background-color: #2c55e4;
   color: white;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
   font-size: 0.85rem;
   transition: background-color 0.3s ease;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: 0.1s;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
 }
 
 .btn-editar:hover {
   background-color: #2045c4;
+  transition: 0.1s;
+  transform: scale(1.1);
+}
+
+.btn-editar a {
+  color: white;
+  text-decoration: none;
+  padding-left: 7px;
+}
+
+
+.btn-editar a:visited {
+  color: white;
 }
