@@ -12,7 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
         'miembros.html',
         'visualizarCV.html',
         'visualizarMiembro.html',
-        'alta_admin.html'
+        'alta_admin.html',
+        'AgregarEstado.html',
+        'AgregarPais.html',
+        'AgregarUniversidad.html'
     ];
 
     const userRoutes = [

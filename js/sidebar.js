@@ -15,34 +15,47 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 const loadSidebar = (sidebarPath) => {
-    fetch(sidebarPath)
-        .then(res => res.text())
-        .then(html => {
+  fetch(sidebarPath)
+      .then(res => res.text())
+      .then(html => {
           document.getElementById('sidebar').innerHTML = html;
           const path = window.location.pathname.split('/').pop();
           const links = document.querySelectorAll('.sidebar-menu-item');
+          
+          // Marcar enlaces normales como activos
           links.forEach(link => {
-            if (link.getAttribute('href') === path) {
-              link.classList.add('active');
-            }
-          });
-
-          // Bloque de cierre de sesión
-          const logout_btn = document.getElementById("logout-button");
-          logout_btn.addEventListener('click', async () => {
-              try {
-                  
-                const confirmation = confirm("¿Estás seguro de que deseas cerrar sesión?");
-                if (!confirmation) {
-                    return; 
-                }
-                await loginService.logout();   
-                window.location.href = 'login.html';
-
-              } catch (error) {
-                  console.error('Error al cerrar sesión:', error);
+              if (link.getAttribute('href') === path) {
+                  link.classList.add('active');
               }
           });
 
-        });
+          // Verificar si estamos en una página del submenú Agregar
+          const agregarPages = ['AgregarPais.html', 'AgregarEstado.html', 'AgregarUniversidad.html'];
+          if (agregarPages.includes(path)) {
+              const agregarMenu = document.querySelector('.sidebar-menu-with-submenu');
+              if (agregarMenu) {
+                  agregarMenu.classList.add('active');
+              }
+          }
+
+          // Bloque de cierre de sesión
+          const logout_btn = document.getElementById("logout-button");
+          if (logout_btn) {
+              logout_btn.addEventListener('click', async () => {
+                  try {
+                      const confirmation = confirm("¿Estás seguro de que deseas cerrar sesión?");
+                      if (!confirmation) {
+                          return; 
+                      }
+                      await loginService.logout();   
+                      window.location.href = 'login.html';
+                  } catch (error) {
+                      console.error('Error al cerrar sesión:', error);
+                  }
+              });
+          }
+      })
+      .catch(error => {
+          console.error('Error loading sidebar:', error);
+      });
 }
