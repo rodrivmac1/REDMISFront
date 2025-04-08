@@ -56,6 +56,17 @@
           const email = document.getElementById('email').value;
           const password = document.getElementById('password').value;
     
+
+          if (!email || !password) {
+            alert("Por favor, complete todos los campos.");
+            return;
+          }
+
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailPattern.test(email)) {
+              alert("Por favor, ingrese un correo válido.");
+              return;
+          }
           const credentials = { username: email, password };
     
           console.log('Datos enviados:', credentials);
