@@ -3,10 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfil</title>
-  <style>
-    
-  </style>
+  <title>Agregar País</title>
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/addCountry.css">
 </head>
@@ -26,7 +23,42 @@
         <button id="acceptBtn" class="acceptBtn">Aceptar</button>
       </div>
     </div>
+
+    <!-- Contenedor para alertas -->
+    <div id="alert-container" style="position: fixed; top: 20px; right: 20px;"></div>
+
+    <script type="module">
+      import apiClient from "./API/apiClient.js";
+      
+      document.addEventListener('DOMContentLoaded', () => {
+          const acceptBtn = document.getElementById('acceptBtn');
+          
+          acceptBtn.addEventListener('click', async () => {
+              const paisInput = document.getElementById('pais');
+              const paisNombre = paisInput.value.trim();
+              
+              if (!paisNombre) {
+                  alert('Por favor ingrese un nombre de país');
+                  return;
+              }
+              
+              try {
+                  const response = await apiClient.post("api/paises", { nombre: paisNombre });
+                  if (response) {
+                      alert('País agregado correctamente');
+                      paisInput.value = '';
+                  } else {
+                      alert('Error al agregar el país');
+                  }
+              } catch (error) {
+                  console.error('Error:', error);
+                  alert('Error al agregar el país: ' + (error.message || 'Error desconocido'));
+              }
+          });
+      });
+  </script>
+
+    <script type="module" src="js/verification.js"></script>
+    <script type="module" src="js/sidebar.js"></script>
 </body>
-<script type="module" src="js/verification.js"></script>
-<script type="module" src="js/sidebar.js"></script>
 </html>
