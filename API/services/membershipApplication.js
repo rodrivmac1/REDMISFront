@@ -12,8 +12,8 @@ const membershipApplicationService = {
         return apiClient.post(ENDPOINT.solicitar, membershipApplication);
     },
 
-    aceptar: (id) => {
-        return apiClient.post(`${ENDPOINT.aceptar}/${id}`);
+    aceptar: (id, reason) => {
+        return apiClient.post(`${ENDPOINT.aceptar}/${id}`, reason);
     },
 
     rechazar: (id, reason) => {
