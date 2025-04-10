@@ -1,56 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Visualizar CV</title>
-    <link rel="stylesheet" href="css/visualizaCV.css">
-    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="visualizarCV.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <style>
         body {
             margin: 0;
             font-family: 'Instrument Sans', sans-serif;
             background-color: #F4F7FC;
             display: flex;
-        }
-        .sidebar {
-            width: 250px;
-            height: 100vh;
-            background-color: #1D4ED8;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: fixed;
-            left: 0;
-            top: 0;
-            padding: 20px;
-            box-sizing: border-box;
-            z-index: 1000;
-        }
-
-        .sidebar-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .sidebar-menu {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar-menu-item {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            margin-bottom: 5px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .sidebar-menu-item:hover {
-            background: rgba(255, 255, 255, 0.2);
         }
 
         .container {
@@ -80,7 +42,6 @@
             border-radius: 5px;
         }
 
-        /* BOTONES */
         .buttons {
             display: flex;
             gap: 10px;
@@ -104,9 +65,19 @@
             color: white;
         }
 
-        #comment-box {
+        #comment-box,
+        #approval-comment-box {
             display: none;
             margin-top: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            resize: vertical;
         }
 
         #back-button {
@@ -122,72 +93,104 @@
     </style>
 </head>
 <body>
-
-   
-    <div class="sidebar">
-        <div>
-            <div class="sidebar-title">REDMIS | Admin</div>
-            <div class="sidebar-menu">
-                <a class="sidebar-menu-item active" href="#">Perfil Administrador</a>
-                <a class="sidebar-menu-item" href="#">Membresía</a>
-                <a class="sidebar-menu-item" href="#">Solicitudes de membresía</a>
-                <a class="sidebar-menu-item" href="#">Alta de Administrador</a>
-                <a class="sidebar-menu-item" href="#">Estadísticas</a>
-                <a class="sidebar-menu-item" href="#">Miembros</a>
-            </div>
-        </div>
-    </div>
-
+    <div id="sidebar"></div>
 
     <div class="container">
-        <a id="back-button" href="#" onclick="history.back();">&#8592; Regresar</a>
+        <button id="back-button" onclick="history.back();">&#8592; Regresar</button>
         <div class="header">Revisión de CV</div>
 
         <div class="card">
             <h2>Información del Candidato</h2>
-            <p><strong>Nombre:</strong> Daniel Thomas</p>
-            <p><strong>Email:</strong> Danielthomas@gmail.com</p>
-            <p><strong>Estatus del CV:</strong> <span style="color: orange; font-weight: bold;">Pendiente</span></p>
+            <p><strong>Nombre:</strong> <span id="applicator_name"></span></p>
+            <p><strong>Email:</strong> <span id="applicator_email"></span></p>
+            <p><strong>Estatus de la solicitud:</strong> <span id="application_status"> </span></p>
         </div>
 
         <div class="card cv-viewer">
             <h2>Curriculum Vitae</h2>
-            <iframe src="/ruta/al/cv.pdf"></iframe>
-            <p><a href="/ruta/al/cv.pdf" download>Descargar CV</a></p>
+            <iframe src="" id="cv-iframe"></iframe>
+            <button class="btn btn-primary">
+                <i class="fas fa-download"></i>
+                <a id="download-cv" href="" download>Descargar CV</a>
+            </button>
         </div>
 
         <div class="card">
             <h2>Solicitud</h2>
             <div class="buttons">
-                <button class="button approve" onclick="confirmAction('aprobar')">Aprobar</button>
-                <button class="button reject" onclick="showCommentBox()">Rechazar</button>
+                <button id="show-approval-box-btn" type="button" class="button approve">Aprobar</button>
+                <button id="show-comment-box-btn" type="button" class="button reject">Rechazar</button>
             </div>
+
+            <!-- Comentario para aprobación -->
+            <div id="approval-comment-box">
+                <textarea id="approval-reason" rows="3" placeholder="Motivo de aprobación..."></textarea>
+                <button id="accept-application" type="button" class="button approve">Confirmar Aprobación</button>
+            </div>
+
+            <!-- Comentario para rechazo -->
             <div id="comment-box">
                 <textarea id="rejection-reason" rows="3" placeholder="Motivo de rechazo..."></textarea>
-                <button class="button reject" onclick="confirmAction('rechazar')">Confirmar Rechazo</button>
+                <button id="reject-application" type="button" class="button reject">Confirmar Rechazo</button>
             </div>
         </div>
     </div>
 
     <script>
-        function showCommentBox() {
+        // Simulando datos de la solicitud
+        const application = {
+            nombre: "      ",
+            email: "        ",
+            estado: "       ",
+            cv:     "       "
+        };
+
+ 
+        const applicatorName = document.getElementById('applicator_name');
+        const applicatorEmail = document.getElementById('applicator_email');
+        const applicationStatus = document.getElementById('application_status');
+        const cvIframe = document.getElementById('cv-iframe');
+        const downloadLink = document.getElementById('download-cv');
+
+
+        applicatorName.textContent = application.nombre;
+        applicatorEmail.textContent = application.email;
+        applicationStatus.textContent = application.estado;
+        cvIframe.src = "./pdfs/" + application.cv;
+        downloadLink.href = "./pdfs/" + application.cv;
+
+        // Funciones para mostrar los comentarios
+        const showCommentBox = () => {
             document.getElementById('comment-box').style.display = 'block';
-        }
+            document.getElementById('approval-comment-box').style.display = 'none';
+        };
 
-        function confirmAction(action) {
-            if (action === 'rechazar') {
-                let reason = document.getElementById('rejection-reason').value.trim();
-                if (reason === '') {
-                    alert('Debes escribir el motivo de rechazo de la solicitud.');
-                    return;
-                }
+        const showApprovalBox = () => {
+            document.getElementById('approval-comment-box').style.display = 'block';
+            document.getElementById('comment-box').style.display = 'none';
+        };
+
+        // Funciones de los botones de aprobar y rechazar
+        document.getElementById('show-comment-box-btn').addEventListener('click', showCommentBox);
+        document.getElementById('show-approval-box-btn').addEventListener('click', showApprovalBox);
+
+        document.getElementById('accept-application').addEventListener('click', () => {
+            const reason = document.getElementById('approval-reason').value.trim();
+            if (!reason) {
+                alert('Debes escribir el motivo de aprobación.');
+                return;
             }
-            let confirmation = confirm(`¿Estás seguro de que deseas ${action} esta solicitud?`);
-            if (confirmation) {
-                alert(`Solicitud ${action} completada`);
+            alert("Solicitud aprobada " );
+        });
+
+        document.getElementById('reject-application').addEventListener('click', () => {
+            const reason = document.getElementById('rejection-reason').value.trim();
+            if (!reason) {
+                alert('Debes escribir el motivo de rechazo.');
+                return;
             }
-        }
+            alert("Solicitud rechazada ");
+        });
     </script>
-
 </body>
 </html>
