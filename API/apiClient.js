@@ -12,16 +12,18 @@ class ApiClient {
         this.config = {...API_Config, ...config};
         this.authToken = null;
     }
-
+    
     setAuthToken(token){
         this.authToken = token;
     }
-
+    
     getHeaders(){
         const headers = { ...this.config.headers };
+        
         if (this.authToken) {
           headers['Authorization'] = `Bearer ${this.authToken}`;
         }
+          
         return headers;
     }
 
@@ -40,17 +42,37 @@ class ApiClient {
 
         try {
             const response = await fetch(url, config);
+            const responseBody = await response.text(); // Read the response body once
+
             if (!response.ok){
-                const errorData = await response.json().catch(() => ({}));
-                throw {
-                    status: response.status,
-                    statusText: response.statusText,
-                    data: errorData
-                };
+                try {
+                    const errorData = JSON.parse(responseBody);
+                    throw {
+                        status: response.status,
+                        statusText: response.statusText,
+                        data: errorData
+                    };
+                } catch (jsonError) {
+                    throw {
+                        status: response.status,
+                        statusText: response.statusText,
+                        data: { message: 'Invalid JSON response' },
+                        rawResponse: responseBody
+                    };
+                }
             }
+            
             if (response.status === 204) return;
 
-            return await response.json();
+            try {
+                return JSON.parse(responseBody);
+            } catch (jsonError) {
+                throw {
+                    message: 'Failed to parse JSON response',
+                    error: jsonError,
+                    rawResponse: responseBody
+                };
+            }
         } catch (error) {
             this._handleError(error);
             throw error;
@@ -71,8 +93,8 @@ class ApiClient {
         return this.request(endpoint, 'PATCH', data, config);
     }
 
-    async patch(endpoint, data, config = {}) {
-        return this.request(endpoint, 'PATCH', data, config);
+    async put(endpoint, data, config = {}) {
+        return this.request(endpoint, 'PUT', data, config);
     }
 
     async delete(endpoint, config = {}) {
@@ -81,6 +103,14 @@ class ApiClient {
 
     _handleError(error) {
         console.error('API Error:', error);
+        
+        if (error instanceof SyntaxError && error.message.includes('Unexpected token')) {
+            console.error('Response might not be JSON. Check the server response.');
+        }
+        
+        if (error.rawResponse) {
+            console.error('Raw server response:', error.rawResponse);
+        }
         
         const event = new CustomEvent('api:error', { detail: error });
         document.dispatchEvent(event);
