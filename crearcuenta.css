@@ -1,11 +1,11 @@
 /* Estilos generales */
 body {
-    background: #ffff;
+    background: #f0ebeb;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Instrument Sans', sans-serif;
 }
 
 /* Contenedor del formulario */
@@ -13,8 +13,8 @@ body {
     background: #1D4ED8;
     padding: 30px;
     border-radius: 15px;
-    width: 350px;
-    text-align: center; 
+    width: 50%;
+    text-align: center;
     box-shadow: 0px 0px 10px rgb(255, 255, 255);
 }
 
@@ -22,49 +22,84 @@ body {
 .title {
     color: white;
     margin-bottom: 5px;
-    text-align: center; 
+    text-align: center;
+    font-size: 24px;
 }
 
 .subtitle {
     color: white;
     font-size: 14px;
     margin-bottom: 20px;
-    text-align: center; 
+    text-align: center;
 }
 
-/* Estilos de los inputs */
-.input-field {
+/* Estructura del formulario */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+    row-gap: 15px;
+    text-align: left;
+}
+
+.form-grid div {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+/* Estilos de las etiquetas */
+#register-form label {
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+/* Estilos uniformes para inputs y selects */
+.input-field,
+select {
     width: 100%;
+    height: 40px;
     padding: 10px;
-    margin: 5px 0 15px;
+    margin-bottom: 10px;
     border: none;
     border-radius: 8px;
     background: white;
-    color: black; 
+    color: black;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 /* Mensajes de error */
 .error-message {
-    color: #ef4444;
+    color: rgb(249, 108, 108);
     font-size: 12px;
     display: none;
     margin-bottom: 10px;
 }
 
 /* Botón */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
 .button {
-    width: 60%; 
+    width: 50%;
     padding: 10px;
-    background: #475569;
+    background: #5a8cb8;
     border: none;
     border-radius: 8px;
     color: white;
     font-size: 14px;
     cursor: pointer;
     transition: 0.3s;
-    display: block;
-    margin: 0 auto;
 }
 
 .button:hover {
@@ -76,19 +111,9 @@ body {
     margin-top: 15px;
     color: white;
     font-size: 14px;
-    text-align: center; 
+    text-align: center;
 }
 
-.login-link a {
+.login-link a:visited {
     color: white;
-    text-decoration: none;
-}
-
-/* Estilo para las etiquetas (labels) */
-label {
-    color: white;
-    text-align: left;
-    font-size: 14px;
-    margin-bottom: 5px;
-    display: block; 
 }
