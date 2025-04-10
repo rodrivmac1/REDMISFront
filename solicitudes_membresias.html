@@ -51,12 +51,12 @@
       pendingApplications.forEach(application =>{
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td><label class="name">${application.usuario.nombre}</label><br><label class="email">${application.usuario.email}</label></td>
+          <td><label class="name">${application.nombre_usuario}</label><br><label class="email">${application.email_usuario}</label></td>
           <td><label class="membership">${application.membresia}</label></td>
           <td><label class="status">${application.estado}</label></td>
           <td><label>${new Date(application.fecha_solicitud).toLocaleDateString()}</label></td>
           <td>
-            <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="visualizarCV.html?application_id=${application.id}">Evaluar</a></button>
+            <button class="evaluate"><i class="fa-solid fa-file-fragment"></i><a href="VisualizarCV.html?application_id=${application.id}">Evaluar</a></button>
           </td>`;
         ma_table.appendChild(tr);
       }); 

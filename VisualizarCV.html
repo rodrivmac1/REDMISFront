@@ -107,14 +107,36 @@
         <div class="card">
             <h2>Solicitud</h2>
             <div class="buttons">
-                <button id="accept-application" type="button" class="button approve">Aprobar</button>
-                <button id="show-comment-box-btn" type="button" class="button reject">Rechazar</button>
-            </div>
-            <div id="comment-box">
-                <textarea id="rejection-reason" rows="3" placeholder="Motivo de rechazo..."></textarea>
-                <button id="reject-application" type="button" class="button reject">Confirmar Rechazo</button>
+                <button id="show-accept-modal" type="button" class="button approve">Aprobar</button>
+                <button id="show-reject-modal" type="button" class="button reject">Rechazar</button>
             </div>
         </div>
+
+        <div id="modal-reject" class="modal">
+            <div id="modal-reject-content" class="modal-content">
+                <span id="close-reject-modal" class="close-modal">&times;</span>
+                <h3>Rechazar solicitud de membresía:</h3>
+                <label for="name">Escriba el motivo del rechazo:</label>
+                <textarea id="rejection-reason" rows="5" placeholder="Motivo de rechazo..."></textarea>
+                <div class="modal-action-btn">
+                    <button id="reject-application" type="button" class="button reject">Confirmar Rechazo</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-accept" class="modal">
+            <div id="modal-accept-content" class="modal-content">
+                <span id="close-accept-modal" class="close-modal">&times;</span>
+                <h3>Aceptar solicitud de membresía:</h3>
+                <label for="name">Escriba comentarios para el solicitante (Opcional):</label>
+                <textarea id="acceptation-comments" rows="5" placeholder="Comentarios..."></textarea>
+                <div class="modal-action-btn">
+                    <button id="accept-application" type="button" class="button approve">Aprobar solicitud</button>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
     <script type="module">
@@ -146,9 +168,6 @@
         cvIframe.src = "./pdfs/" + application.cv; // URL del CV
         downloadLink.href = "./pdfs/" + application.cv; // URL del CV para descargar
 
-        const showCommentBox = () => {
-            document.getElementById('comment-box').style.display = 'block';
-        }
 
         const confirmAction = async (action) => {
             let confirmation = confirm(`¿Estás seguro de que deseas ${action} esta solicitud?`);
@@ -157,11 +176,22 @@
 
         const acceptButton = document.getElementById('accept-application');
         const rejectButton = document.getElementById('reject-application');
-        const showCommentBoxButton = document.getElementById('show-comment-box-btn');
+
+        const showRejectModal = document.getElementById('show-reject-modal');
+        const rejectModal = document.getElementById('modal-reject');
+        const closeRejectModal = document.getElementById('close-reject-modal');
+
+        const showAcceptModal = document.getElementById('show-accept-modal');
+        const acceptModal = document.getElementById('modal-accept');
+        const closeAcceptModal = document.getElementById('close-accept-modal');
+
 
         acceptButton.addEventListener('click', async() => {
             try {
-                const response = await membershipApplicationService.aceptar(applicationId);
+                const reason = document.getElementById('acceptation-comments').value.trim();
+                console.log(reason);
+
+                const response = await membershipApplicationService.aceptar(applicationId, {reason});
                 if (response) {
                     alert("Solicitud aceptada correctamente.");
                     window.location.href = 'solicitudes_membresias.html'; 
@@ -194,7 +224,12 @@
                 alert('Error al rechazar la solicitud. Inténtalo de nuevo.');
             }
         });
-        showCommentBoxButton.addEventListener('click', () => showCommentBox());
+        showRejectModal.addEventListener('click', () => rejectModal.style.display = 'block');
+        closeRejectModal.addEventListener('click', () => rejectModal.style.display = 'none');
+
+        showAcceptModal.addEventListener('click', () => acceptModal.style.display = 'block');
+        closeAcceptModal.addEventListener('click', () => acceptModal.style.display = 'none');
+        
     </script>
 
 </body>
