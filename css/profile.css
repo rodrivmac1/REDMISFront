@@ -5,123 +5,123 @@
 }
 
 body {
-  background-color: #F8FAFC;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    background-color: #F8FAFC;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-/* Posición del título en escritorios grandes */
+  
 .title-container {
-  font-size: 36px;
-  font-weight: bold;
-  color: #1D4ED8;
-  position: absolute;
-  top: 40px;
-  left: 300px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #1D4ED8;
+    position: absolute;
+    top: 40px;
+    left: 300px;
 }
-
-/* Container del formulario */
+  
 .form-container {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 150px;
+    /*margin-left: 150px;*/
 }
 
-/* Caja de cada formulario */
 .form-box {
-  background-color: #F0F4F9;
-  padding: 20px;
-  border-radius: 10px;
-  width: 700px;
-  color: #2D3748;
-  font-weight: 530;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-  border: 2px solid #0202021c;
+    background-color: #F0F4F9;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    color: #2D3748;
+    font-weight: 530;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #0202021c;
 }
-
+  
 .form-box label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 5px;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
 }
-
+  
 .form-box input,
-.form-box select {
-  width: calc(100% - 20px);
-  padding: 10px;
-  margin-bottom: 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #E2E8F0;
-  color: #475569;
-  margin-right: 10px;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.form-box select { /* Aplicamos los mismos estilos a inputs y selects */
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #E2E8F0;
+    color: #475569;
+    margin-right: 10px;
+    appearance: none; /* Elimina el estilo por defecto del navegador */
+    -webkit-appearance: none; /* Para compatibilidad con Safari */
+    -moz-appearance: none; /* Para compatibilidad con Firefox */
 }
 
+/* Estilo para el ícono de flecha del select */
 .form-box select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
-  padding-right: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px; /* Espacio para la flecha */
 }
 
+/* Estilo cuando el select está deshabilitado */
 .form-box select:disabled {
-  background-color: #E2E8F0;
-  color: #475569;
-  opacity: 1;
+    background-color: #E2E8F0;
+    color: #475569;
+    opacity: 1; /* Mantiene la opacidad completa aunque esté deshabilitado */
 }
 
-/* Botones de edición */
+/* Button */
 .edit-button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .edit-button {
-  background-color: #1D4ED8;
-  border: none;
-  border-radius: 8px;
-  font-size: 15px;
-  color: #ffffff;
-  height: 36px;
-  width: 102px;
-  font-weight: 500;
-  cursor: pointer;
-  margin-left: 150px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #1D4ED8;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #ffffff;
+    height: 36px;
+    width: 102px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 150px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .edit-button:hover {
-  background-color: #2563EB;
-  transition: background-color 0.3s ease;
+    background-color: #2563EB;
+    transition: background-color 0.3s ease;
 }
 
 .cancel-Btn {
-  background-color: #b72222;
-  border: none;
-  border-radius: 8px;
-  font-size: 15px;
-  color: #ffffff;
-  height: 36px;
-  width: 102px;
-  font-weight: 500;
-  cursor: pointer;
-  margin-left: 150px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #b72222;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #ffffff;
+    height: 36px;
+    width: 102px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 150px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .cancel-Btn:hover {
-  background-color: #df1111;
-  transition: background-color 0.3s ease;
+    background-color: #df1111;
+    transition: background-color 0.3s ease;
 }
 
 /* ============================= */
@@ -176,7 +176,7 @@ body {
   }
 
   .form-box {
-    width: 100%;
+    width: 90%;
     max-width: 300px;
     margin: 0 auto;
   }

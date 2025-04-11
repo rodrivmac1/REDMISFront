@@ -28,12 +28,6 @@ body {
     align-items: center;
 }
 
-/* Si la sidebar no es indispensable en móviles, se puede ocultar o colapsar */
-#sidebar {
-    width: 250px;
-}
-
-/* Fondo y título principal */
 .background {
     width: 100%;
     color: var(--textcolor);
@@ -41,106 +35,131 @@ body {
     top: 0;
     left: 0;
     z-index: -1;
-}
-
-.title-container {
-    font-size: 2.5rem; /* Ajustado para adaptarse a tamaños menores */
+  }
+  
+  .title-container {
+    font-size: 36px;
     font-weight: bold;
     color: var(--textcolor);
-    position: relative; /* Cambiado de absolute para facilitar la disposición en móviles */
-    width: 90%;
-    max-width: 1200px;
+    position: absolute;
+    height: 20%;
+    width: 70%;
     padding: 20px;
-    margin: 30px auto 60px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.filtro-estadisticas {
-    width: 100%;
-    margin-top: 15px;
+    padding-left: 100px;
+ 
+    margin: 30px 0px 60px 0px;
+  }
+  .filtro-estadisticas {
+ 
+    width: 70%;
 }
 
 .selector-estadisticas {
     padding: 10px 15px;
     border-radius: 15px;
+   margin-bottom: 20px;
     background-color: var(--secondary);
     color: var(--gaphscolor);
     font-size: 16px;
     cursor: pointer;
-    width: 100%;
-    max-width: 300px;
+    width: 300px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .selector-estadisticas:focus {
     outline: none;
+   
 }
 
-/* Contenedor principal */
+
+
 .contenedor-main {
-    width: 90%;
-    max-width: 1200px;
+    flex-grow: 1;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 50px;
+    padding-left: 100px;
 }
 
-/* Tarjetas de estadísticas superiores */
+h2 {
+    color: var(#0F172A);
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+h3 {
+    color: var(--subtextcolor);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Estadísticas superiores */
 .contenedor-header {
     display: flex;
-    flex-wrap: wrap;
     gap: 20px;
-    margin: 40px 0 20px 0;
-    width: 100%;
-    justify-content: space-between;
+    margin: 100px 0px 20px 0px;
+    align-items: center;
+    width: 50%;
 }
 
 .tarjeta-estadistica {
     background-color: var(--cardcolor);
     border-radius: 12px;
     padding: 20px;
-    flex: 1 1 calc(33.33% - 20px);
-    min-width: 250px;
+    flex: 1;
     color: var(--textcolor);
+   
 }
 
-.tarjeta-estadistica h3 {
+.tarjeta-estadistica h3{
     color: var(--subtextcolor);
     font-size: 16px;
     font-weight: 500;
 }
 
 .valor-estadistica {
-    font-size: 2rem; /* Adaptado para responsividad */
+    font-size: 36px;
     font-weight: 700;
     margin-top: 8px;
 }
+.contenedor-main{
+    width: 70%;
 
-/* Gráficos y tablas */
+    
+}
+
+/* Gráficos */
 .contenedor-graficos {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(1,1fr);
     gap: 20px;
     padding-top: 20px;
 }
 
-.grafico-pais,
-.grafico-estado,
+.grafico-pais , .grafico-estado {
+    background-color: var(--gaphscolor);
+    border-radius: 12px;
+    padding: 20px;
+    flex: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: -1;
+}
+
 .grafico-universidad {
     background-color: var(--gaphscolor);
     border-radius: 12px;
     padding: 20px;
+    flex: 1;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Contenedor para el canvas del gráfico */
 .contenedor-canvas {
     height: 300px;
     width: 100%;
     position: relative;
 }
 
-/* Estilos para la tabla de universidades */
+/* Tabla de universidades */
 .tabla-universidad {
     width: 100%;
     margin-top: 15px;
@@ -152,6 +171,7 @@ body {
     border-bottom: 1px solid var(--bordercolor);
     padding-bottom: 10px;
     font-weight: 500;
+    color: var(--subtextcolor);
 }
 
 .columna-universidad {
@@ -194,9 +214,10 @@ body {
 
 @media (max-width: 768px) {
     .title-container {
-        width: 95%;
+        /*width: 95%;
         padding: 15px;
-        margin-top: 10px;
+        margin-top: 10px;*/
+        position: relative;
     }
     
     .contenedor-main {
@@ -213,6 +234,15 @@ body {
     .tarjeta-estadistica {
         padding: 15px;
         font-size: 0.9rem;
+    }
+
+    .contenedor-side-bar {
+        width: 60px;
+    }
+    
+    .contenedor-barra-estadisticas,
+    .contenedor-graficos {
+        flex-direction: column;
     }
     
     .contenedor-canvas {
