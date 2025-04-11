@@ -145,10 +145,34 @@
             const paisId = paisSelect.value;
             const estadoId = estadoSelect.value;
 
-            // Validación básica
-            if (!nombreField.value.trim() || !apellidosField.value.trim() || !generoField.value || 
-                !emailField.value.trim() || !passwordField.value || passwordField.value.length < 8) {
-                alert("Por favor completa todos los campos correctamente");
+            const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+
+
+            if (!nameRegex.test(nombreField.value.trim())) {
+                alert("El nombre solo debe contener letras y espacios.");
+                return;
+            }
+            if (!nameRegex.test(apellidosField.value.trim())) {
+                alert("Los apellidos solo deben contener letras y espacios.");
+                return;
+            }
+            if (!generoField.value) {
+                alert("Por favor selecciona tu género.");
+                return;
+            }
+            if (!emailRegex.test(emailField.value.trim())) {
+                alert("Ingresa un correo electrónico válido.");
+                return;
+            }
+            if (!strongPasswordRegex.test(passwordField.value)) {
+                alert("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
+                return;
+            }
+            if (!universidadId || !paisId || !estadoId) {
+                alert("Por favor selecciona universidad, país y estado.");
                 return;
             }
 
