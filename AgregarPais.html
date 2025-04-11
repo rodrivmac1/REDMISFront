@@ -37,8 +37,8 @@
               const paisInput = document.getElementById('pais');
               const paisNombre = paisInput.value.trim();
               
-              if (!paisNombre) {
-                  alert('Por favor ingrese un nombre de país');
+              if (!paisNombre || paisNombre === '') {
+                  alert('Por favor, ingrese un nombre de pais válido.');
                   return;
               }
               

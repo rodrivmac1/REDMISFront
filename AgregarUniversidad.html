@@ -35,8 +35,8 @@
                 const nombreUniversidad = universidadInput.value.trim();
                 
                 // Validación básica
-                if (!nombreUniversidad) {
-                    alert('El nombre de la universidad no puede estar vacío');
+                if (!nombreUniversidad || nombreUniversidad === '') {
+                    alert('Por favor, ingrese un nombre de universidad válido.');
                     universidadInput.focus();
                     return;
                 }

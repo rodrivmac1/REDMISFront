@@ -84,7 +84,56 @@
               reader.onerror = error => reject(error);
           });
       }
+
+      function validateMembershipForm() {
+        const membershipId = document.getElementById('tipo-membresia').value;
+        const phone = document.getElementById('telefono').value.trim();
+        const comments = document.getElementById('comentarios').value.trim();
+        const cvFile = document.getElementById('cv-file').files[0];
+    
+        
+        if (!membershipId) {
+            alert('Seleccione un tipo de membresía válido.');
+            return false;
+        }
+    
+        
+        const phoneRegex = /^[0-9]{10}$/; // ajusta según país
+        if (!phoneRegex.test(phone)) {
+            alert('Ingrese un número de teléfono válido (solo números, 7-15 dígitos).');
+            return false;
+        }
+    
+        
+        if (comments.length > 500) {
+            alert('Los comentarios no deben exceder los 500 caracteres.');
+            return false;
+        }
+    
+        
+        if (!cvFile) {
+            alert('Debe seleccionar un archivo PDF.');
+            return false;
+        }
+    
+        const allowedTypes = ['application/pdf'];
+        const maxSizeMB = 2;
+    
+        if (!allowedTypes.includes(cvFile.type)) {
+            alert('El archivo debe ser un PDF.');
+            return false;
+        }
+    
+        if (cvFile.size > maxSizeMB * 1024 * 1024) {
+            alert(`El archivo no debe superar los ${maxSizeMB} MB.`);
+            return false;
+        }
+    
+        return true;
+    }
+
       async function submitMembership() {
+        if (!validateMembershipForm()) return;
           try {
               const membershipId = document.getElementById('tipo-membresia').value;
               const phone = document.getElementById('telefono').value;

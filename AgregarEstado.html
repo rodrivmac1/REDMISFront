@@ -35,8 +35,8 @@
                 const nombreEstado = estadoInput.value.trim();
                 
                 // Validación básica
-                if (!nombreEstado) {
-                    alert('El nombre del estado no puede estar vacío');
+                if (!nombreEstado || nombreEstado === '') {
+                    alert('Por favor, ingrese un nombre de estado válido.');
                     estadoInput.focus();
                     return;
                 }
@@ -72,4 +72,6 @@
     <script type="module" src="js/verification.js"></script>
     <script type="module" src="js/sidebar.js"></script>
 </body>
+<script type="module" src="js/verification.js"></script>
+<script type="module" src="js/sidebar.js"></script>
 </html>
