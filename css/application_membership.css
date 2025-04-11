@@ -21,10 +21,3 @@
   .custom-select:hover {
     background-color: #F1F5F9; 
   }
-
-  @media (max-width: 480px) {
-    .custom-select {
-      font-size: 14px;
-      padding: 8px;
-    }
-  }

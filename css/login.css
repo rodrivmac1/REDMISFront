@@ -1,114 +1,60 @@
-/* Estilos base para el login */
-.form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 50px;
-  padding: 20px;
-}
-
-.logo {
-  font-size: 28px;
-  font-weight: bold;
-  color: #1E293B;
-  text-align: center;
-  margin-bottom: 5px; 
-}
-
-/* Contenedor que agrupa la imagen y el form-box */
-.logo-form-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-/* Estilos para la caja del formulario */
-.form-box {
-  background-color: #2152d8;
-  color: #f7f7f7;
-  width: 400px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Otros estilos de la página */
-.footer {
-  text-align: center;
-  padding: 15px;
-  background-color: #1E293B; 
-  color: #ffffff;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
-.backgroundLogin {
-  width: 100%;
-  height: 600px;
-  background-color: #f7f7f7;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-.custom-button {
-  background-color: #1D4ED8; 
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  width: 100%;
-  text-align: center;
-}
-
-.custom-button:hover {
-  background-color: #2152d8; 
-  transform: scale(1.05); 
-}
-
-.custom-button:active {
-  background-color: #1940ac; 
-  transform: scale(0.98); 
-}
-
-/* Media Queries para pantallas medianas (tablets, etc.) */
-@media screen and (max-width: 768px) {
-  .form-box {
-    width: 90%;
-    padding: 15px;
-  }
-  .backgroundLogin {
-    /*position: relative;*/
-    height: auto;
-    min-height: 100vh;
-  }
-  .footer {
-    /*position: relative;*/
-    padding: 10px;
-    font-size: 14px;
-  }
-}
-
-/* Media Query para pantallas pequeñas (celulares) */
-@media screen and (max-width: 480px) {
-  /* Cambiar la dirección del flex para colocar el form-box debajo del logo */
-  .logo-form-wrapper {
-    flex-direction: column;
+  .form-box{
+    background-color: #2152d8;
+    color: #f7f7f7;
   }
   
   .logo {
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1E293B;
+    flex-grow: 1; 
+    text-align: center;
+    margin-bottom: 5px; 
   }
   
-  .custom-button {
-    font-size: 14px;
-    padding: 10px 15px;
+  .footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #1E293B; 
+    color: #ffffff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
   }
-}
+
+  .backgroundLogin {
+    width: 100%;
+    height: 600px;
+    background-color: #f7f7f7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  .custom-button {
+    background-color: #1D4ED8; 
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    text-align: center;
+  }
+  
+  .custom-button:hover {
+    background-color: #2152d8; 
+    transform: scale(1.05); 
+  }
+  
+  .custom-button:active {
+    background-color: #1940ac; 
+    transform: scale(0.98); 
+  }
+
+  

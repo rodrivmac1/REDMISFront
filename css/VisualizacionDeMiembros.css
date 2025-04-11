@@ -1,4 +1,4 @@
-/* Estilos Globales */
+/* Aplicar la tipografía a toda la página en negrita */
 * {
     font-family: 'Instrument Sans', sans-serif;
     font-weight: bold;
@@ -6,8 +6,10 @@
 
 body {
     margin: 0;
-    background-color: #f4f4f4;
+  font-family: 'Instrument Sans', sans-serif;
+  background-color: #f4f4f4;
 }
+
 
 .content {
     flex: 1;
@@ -19,7 +21,7 @@ body {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
 }
 
 .user-header {
@@ -66,10 +68,11 @@ body {
     padding: 7px 10px;
     border: none;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+    border-radius: 15px;
     font-weight: bold;
     transition: 0.1s;
     font-size: 16px;
@@ -85,70 +88,17 @@ body {
 }
 
 .btn a:visited {
+    text-decoration: none;
     color: #fff;
 }
 
-.btn-primary { 
-    background: #F59E0B; 
-    color: white; 
-}
-.btn-secondary { 
-    background: #10B981; 
-    color: white; 
-}
-.btn-warning { 
-    background: #EF4444; 
-    color: white; 
-}
-.btn-danger { 
-    background: #EF4444; 
-    color: white; 
-}
+.btn-primary { background: #F59E0B; color: white; }
+.btn-secondary { background: #10B981; color: white; }
+.btn-warning { background: #EF4444; color: white; }
+.btn-danger { background: #EF4444; color: white; }
 
 .btn:hover {
     opacity: 0.9;
     color: white;
     transform: scale(1.05);
-}
-
-/* Media Query para dispositivos con anchos menores a 768px */
-@media screen and (max-width: 768px) {
-    /* Reducir el margen lateral para el contenido */
-    .content {
-        margin-left: 0;
-        padding: 15px;
-    }
-
-    /* Ajustar la cuadrícula para que se muestre en una sola columna */
-    .user-details {
-        grid-template-columns: 1fr;
-    }
-
-    /* Reducir el tamaño de fuente en cabeceras y botones si es necesario */
-    .user-header {
-        font-size: 16px;
-    }
-    .btn {
-        font-size: 14px;
-        padding: 6px 8px;
-    }
-}
-
-/* Media Query para dispositivos con anchos menores a 480px */
-@media screen and (max-width: 480px) {
-    /* Ajustar el padding de la tarjeta para dispositivos muy pequeños */
-    .user-card {
-        padding: 15px;
-    }
-    
-    /* Opcional: ocultar el sidebar si no es crucial en pantallas reducidas */
-    #sidebar {
-        display: none;
-    }
-    
-    /* Asegurarse que los inputs se adapten al ancho completo del contenedor */
-    .info-group input {
-        width: 100%;
-        box-sizing: border-box;
-    }
 }
