@@ -96,6 +96,7 @@
             <p><strong>Nombre:</strong> <span id="applicator_name"></span> </p>
             <p><strong>Email:</strong> <span id="applicator_email"></span> </p>
             <p><strong>Estatus de la solicitud:</strong> <span id="application_status"> </span></p>
+            <p><strong>Comentarios:</strong> <span id="applicant-comments"> </span></p>
         </div>
 
         <div class="card cv-viewer">
@@ -157,6 +158,7 @@
         const applicatorName = document.getElementById('applicator_name');
         const applicatorEmail = document.getElementById('applicator_email');
         const applicationStatus = document.getElementById('application_status');
+        const applicantComments = document.getElementById('applicant-comments');
 
         const cvIframe = document.querySelector('.cv-viewer iframe');
         const downloadLink = document.getElementById('download-cv');
@@ -164,6 +166,7 @@
         applicatorName.innerHTML = `${application.nombre}`;
         applicatorEmail.innerHTML = `${application.email}`;
         applicationStatus.innerHTML = `${application.estado}`;
+        applicantComments.innerHTML = `${application.comentarios}`;
 
         cvIframe.src = "./pdfs/" + application.cv; // URL del CV
         downloadLink.href = "./pdfs/" + application.cv; // URL del CV para descargar

@@ -158,12 +158,18 @@
                   cv_base64: cvBase64 // Asumimos que el backend puede manejar base64
               };
 
+              
               // Enviar la solicitud
               const response = await membershipApplicationService.solicitar(requestData);
               
               if (response.status === 'success') {
-                  alert('Solicitud enviada exitosamente');
-                  // Puedes redirigir o limpiar el formulario aquí
+                alert('Solicitud enviada exitosamente');
+
+                document.getElementById('tipo-membresia').value = '';
+                document.getElementById('telefono').value = '';
+                document.getElementById('comentarios').value = '';
+                document.getElementById('cv-file').value = '';
+
               } else {
                   alert('Error al enviar la solicitud: ' + (response.message || 'Error desconocido'));
               }

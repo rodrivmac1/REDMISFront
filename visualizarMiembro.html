@@ -65,7 +65,7 @@
             </div>
             <div class="actions">
                 <button class="btn btn-primary"> <i class="fas fa-download"></i> <a id="download-cv" href="" download="">Descargar CV</a></button>
-                <button id="revoke-membership" class="btn btn-warning"> <i class="fas fa-times"></i> Revocar Membresía</button>
+                <button id="change-membership-status" class="btn"> <i class="fas fa-times"></i> </button>
                 <button id="delete-user" class="btn btn-danger"> <i class="fas fa-trash"></i> Eliminar Usuario</button>
             </div>
         </div>
@@ -85,6 +85,11 @@
         }
 
         const member = await membersService.getbyID(memberID);
+        const membership = await membresiaUsuarioService.getByUserId(memberID);
+        const membershipStatus = membership.data[0].estado;
+
+        const changeMembershipStatus = document.getElementById('change-membership-status');
+        
 
         const memberId = document.getElementById('member-id');
         const memberName = document.getElementById('member-name');
@@ -120,18 +125,33 @@
             }
         });
 
-        const revokeMembershipButton = document.getElementById('revoke-membership');
-        revokeMembershipButton.addEventListener('click', async () => {
-            const confirmation = confirm('¿Estás seguro de que deseas revocar la membresía de este usuario? Esta acción no se puede deshacer.');
-            if (confirmation) {
-                await membresiaUsuarioService.updateMembershipStatus(memberID, {estado: 2});
-                alert('Membresía revocada exitosamente.');
-                window.location.href = 'miembros.html';
-            }
-        });
 
         const downloadCVButton = document.getElementById('download-cv');
         downloadCVButton.href = "./pdfs/" + member.cv;
+
+        if (membershipStatus === 'ACTIVA') {
+            changeMembershipStatus.innerHTML = '<i class="fas fa-times"></i> Revocar Membresía';
+            changeMembershipStatus.classList.add('btn-danger');
+            changeMembershipStatus.addEventListener('click', async () => {
+                const confirmation = confirm('¿Estás seguro de que deseas revocar la membresía de este usuario?');
+                if (confirmation) {
+                    await membresiaUsuarioService.updateMembershipStatus(memberID, {estado: 2});
+                    alert('Membresía revocada exitosamente.');
+                    window.location.href = 'miembros.html';
+                }
+            });
+        } else {
+            changeMembershipStatus.innerHTML = '<i class="fas fa-check"></i> Reactivar Membresía';
+            changeMembershipStatus.classList.add('btn-secondary');
+            changeMembershipStatus.addEventListener('click', async () => {
+                const confirmation = confirm('¿Estás seguro de que deseas reactivar la membresía de este usuario?');
+                if (confirmation) {
+                    await membresiaUsuarioService.updateMembershipStatus(memberID, {estado: 1});
+                    alert('Membresía reactivada exitosamente.');
+                    window.location.href = 'miembros.html';
+                }
+            });
+        }
 
 
     </script>
