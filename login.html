@@ -76,9 +76,7 @@
     
               console.log('Respuesta del servidor:', response);
     
-              if (response && response.token) {
-                  alert('Inicio de sesión exitoso');
-    
+              if (response && response.token) {    
                   // Get user data to determine the role
                   const userData = loginService.getUserData();
     
