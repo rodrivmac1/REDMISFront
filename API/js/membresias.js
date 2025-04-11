@@ -88,81 +88,255 @@ async function generateMembershipPDF(membresia) {
         }
 
         // Crear documento PDF
-        const doc = new jsPDF();
+        const doc = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4'
+        });
+        
+        // Configuración general
         const pageWidth = doc.internal.pageSize.getWidth();
         const margin = 20;
+        let yPosition = 20;
         
-        // Título
-        doc.setFontSize(20);
-        doc.setTextColor(40, 40, 40);
-        doc.text('CERTIFICADO DE MEMBRESÍA', pageWidth / 2, 30, { align: 'center' });
+        // Establecer fuente
+        doc.setFont('helvetica');
         
-        // Línea decorativa
-        doc.setDrawColor(0, 100, 180);
-        doc.setLineWidth(0.8);
-        doc.line(margin, 40, pageWidth - margin, 40);
+        // Header Section
+        doc.setFillColor(255, 255, 255);
+        doc.rect(0, 0, pageWidth, 40, 'F');
         
-        // Información del miembro
+        try {
+            const logoData = await loadImageToDataURL('./img/logo_REDMIS.png');
+            if (logoData) {
+                doc.addImage(logoData, 'PNG', margin, yPosition, 50, 30);
+            }
+        } catch (e) {
+            console.log('No se pudo cargar el logo:', e);
+        }
+        
+        // Título al lado del logo
+        doc.setFontSize(18);
+        doc.setFont(undefined, 'bold');
+        doc.text('Red Mexicana de Ingeniería de Software', margin + 55, yPosition + 15);
+        
+        yPosition += 40;
+        
+        // Content Section
+        doc.setFontSize(14);
+        doc.setFont(undefined, 'bold');
+        doc.text('Gracias', pageWidth / 2, yPosition, { align: 'center' });
+        yPosition += 10;
+        
         doc.setFontSize(12);
-        let yPosition = 60;
-        
-        // Nombre del miembro (obtenido del servicio de miembros)
-        doc.setFont(undefined, 'bold');
-        doc.text('Miembro:', margin, yPosition);
         doc.setFont(undefined, 'normal');
-        doc.text(memberResponse.nombre_completo || memberResponse.nombre || 'Nombre no disponible', margin + 20, yPosition);
+        doc.text('Por adquirir su membresía', pageWidth / 2, yPosition, { align: 'center' });
+        yPosition += 7;
+        doc.text('Desde ahora Usted forma parte del nodo:', pageWidth / 2, yPosition, { align: 'center' });
         yPosition += 10;
         
-        // Separador
-        yPosition += 5;
-        doc.setDrawColor(200, 200, 200);
-        doc.setLineWidth(0.3);
-        doc.line(margin, yPosition, pageWidth - margin, yPosition);
-        yPosition += 10;
-        
-        // Detalles de la membresía
+        // Universidad
         doc.setFont(undefined, 'bold');
-        doc.text('Detalles de la Membresía:', margin, yPosition);
-        doc.setFont(undefined, 'normal');
-        yPosition += 10;
-        
-        // Formatear fechas
-        const fechaInicio = formatDate(membresia.fecha_inicio);
-        const fechaFin = formatDate(membresia.fecha_fin);
-        
-        // Datos de la membresía
-        doc.text(`• Código: ${membresia.id || 'N/A'}`, margin, yPosition);
-        yPosition += 8;
-        doc.text(`• Tipo: ${membresia.membresia_nombre || 'N/A'}`, margin, yPosition);
-        yPosition += 8;
-        doc.text(`• Fecha de inicio: ${fechaInicio}`, margin, yPosition);
-        yPosition += 8;
-        doc.text(`• Fecha de vencimiento: ${fechaFin}`, margin, yPosition);
-        yPosition += 8;
-        doc.text(`• Estado: ${membresia.estado || 'N/A'}`, margin, yPosition);
-        yPosition += 20;
-        
-        // Mensaje de validez
-        doc.setFontSize(10);
-        doc.setTextColor(100, 100, 100);
-        doc.text('Este documento certifica que el titular posee una membresía válida', pageWidth / 2, yPosition, { align: 'center' });
-        yPosition += 6;
-        doc.text('en nuestro sistema durante el período indicado.', pageWidth / 2, yPosition, { align: 'center' });
-        yPosition += 20;
-        
-        // Fecha de emisión
-        const today = new Date();
-        doc.text(`Emitido el: ${today.toLocaleDateString('es-ES')}`, margin, yPosition);
+        doc.text(memberResponse.universidad || 'Universidad no especificada', pageWidth / 2, yPosition, { align: 'center' });
         yPosition += 15;
         
-        // Firma (opcional)
+        // Lista de universidades
         doc.setFontSize(10);
-        doc.text('_________________________', pageWidth - margin - 50, yPosition);
-        yPosition += 5;
-        doc.text('Firma autorizada', pageWidth - margin - 50, yPosition);
+        doc.setFont(undefined, 'bold');
+        doc.text('Nodos pertenecientes a la red:', margin, yPosition);
+        yPosition += 7;
         
+        doc.setFontSize(8);
+        doc.setFont(undefined, 'normal');
+        
+        const universities1 = [
+            'Universidad Autónoma de Baja California',
+            'Universidad Nacional Autónoma de México',
+            'Universidad Autónoma de San Luis Potosí',
+            'Universidad Autónoma de Yucatán',
+            'Universidad Autónoma de Zacatecas',
+            'Universidad Tecnológica de la Mixteca',
+            'Universidad Popular Autónoma del Estado de Puebla',
+            'Universidad Veracruzana',
+            'Universidad Autónoma de Sinaloa',
+            'Universidad Autónoma Metropolitana'
+        ];
+        
+        const universities2 = [
+            'Universidad Autónoma de Ciudad Juárez',
+            'Instituto Tecnológico de Hermosillo',
+            'Centro Nacional de Investigación y Desarrollo Tecnológico',
+            'Instituto Tecnológico y de Estudios Superiores de Monterrey',
+            'CINVESTAV, Tamaulipas',
+            'Universidad Politécnica de Tapachula',
+            'Instituto Tecnológico de Sonora',
+            'Instituto Tecnológico de Tijuana',
+            'Instituto Tecnológico de León'
+        ];
+        
+        // Primera columna
+        let uniY = yPosition;
+        universities1.forEach(uni => {
+            doc.text('• ' + uni, margin, uniY);
+            uniY += 5;
+        });
+        
+        // Segunda columna
+        uniY = yPosition;
+        universities2.forEach(uni => {
+            doc.text('• ' + uni, margin + 100, uniY);
+            uniY += 5;
+        });
+        
+        // Ajustamos la posición Y para dejar espacio después de la lista
+        yPosition += Math.max(universities1.length, universities2.length) * 5 + 20;
+        
+        // Mensaje credencial (ahora aparece después de la lista de universidades)
+        doc.setFont(undefined, 'normal');
+        doc.text('En seguida se muestra la versión digital de su credencial de', pageWidth / 2, yPosition, { align: 'center' });
+        yPosition += 7;
+        doc.text('membresía para un acceso más rápido de la información.', pageWidth / 2, yPosition, { align: 'center' });
+        yPosition += 25; // Aumentamos este espacio para bajar las tarjetas
+        
+        // Cards Section (ahora aparece más abajo)
+        const cardWidth = 80;
+        const cardHeight = 50;
+        const cardMargin = (pageWidth - (cardWidth * 2)) / 3;
+        
+        // Función reusable para crear cards con gradiente
+        const createGradientCard = (doc, x, y, width, height) => {
+            try {
+                const scale = 3;
+                const canvas = document.createElement('canvas');
+                canvas.width = width * scale;
+                canvas.height = height * scale;
+                const ctx = canvas.getContext('2d');
+                ctx.scale(scale, scale);
+                
+                // Gradiente profesional
+                const gradient = ctx.createLinearGradient(0, 0, width, 0);
+                gradient.addColorStop(0, 'rgba(255, 255, 255, 0.51)');
+                gradient.addColorStop(0.4271, 'rgba(178, 132, 5, 0.2)');
+                gradient.addColorStop(0.6823, 'rgba(178, 132, 5, 0.29)');
+                gradient.addColorStop(0.775, 'rgba(239, 184, 16, 0.44)');
+                
+                // Bordes redondeados
+                const cornerRadius = 5;
+                ctx.beginPath();
+                ctx.moveTo(cornerRadius, 0);
+                ctx.lineTo(width - cornerRadius, 0);
+                ctx.quadraticCurveTo(width, 0, width, cornerRadius);
+                ctx.lineTo(width, height - cornerRadius);
+                ctx.quadraticCurveTo(width, height, width - cornerRadius, height);
+                ctx.lineTo(cornerRadius, height);
+                ctx.quadraticCurveTo(0, height, 0, height - cornerRadius);
+                ctx.lineTo(0, cornerRadius);
+                ctx.quadraticCurveTo(0, 0, cornerRadius, 0);
+                ctx.closePath();
+                
+                ctx.fillStyle = gradient;
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(178, 132, 5, 0.8)';
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+                
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                
+                return canvas.toDataURL('image/png', 1.0);
+            } catch (e) {
+                console.error('Error al crear gradiente:', e);
+                return null;
+            }
+        };
+        
+        // Front Card
+        const frontGradient = createGradientCard(doc, cardMargin, yPosition, cardWidth, cardHeight);
+        if (frontGradient) {
+            doc.addImage(frontGradient, 'PNG', cardMargin, yPosition, cardWidth, cardHeight, undefined, 'FAST');
+        } else {
+            doc.setFillColor(255, 255, 255);
+            doc.setDrawColor(178, 132, 5);
+            doc.setLineWidth(0.5);
+            doc.roundedRect(cardMargin, yPosition, cardWidth, cardHeight, 5, 5, 'FD');
+        }
+        
+        // Contenido Front Card (antes del logo para mejor layering)
+doc.setTextColor(40, 40, 40);
+doc.setFontSize(15);
+doc.setFont(undefined, 'bold');
+doc.text(membresia.membresia_nombre || 'ORO', cardMargin + cardWidth - 22, yPosition + 10);
+
+doc.setFontSize(8);
+doc.setFont(undefined, 'normal');
+doc.text(`Socio: ${memberResponse.nombre_completo || 'Nombre no disponible'}`, cardMargin + 5, yPosition + 20);
+doc.text(`No.: ${membresia.id || 'N/A'}`, cardMargin + 5, yPosition + 25);
+doc.text(`IES: ${memberResponse.universidad || 'No especificada'}`, cardMargin + 5, yPosition + 30);
+doc.text(`País: ${memberResponse.pais || 'No especificado'}`, cardMargin + 5, yPosition + 35);
+
+// Texto MEMBRESÍA (movido a la izquierda para balance)
+doc.setFontSize(15);
+doc.setFont(undefined, 'bold');
+doc.text('MEMBRESÍA', cardMargin + 5, yPosition + cardHeight - 5);
+
+// Agregar logo en la parte inferior derecha
+//try {
+//    const logoData = await loadImageToDataURL('./img/logo_REDMIS.png');
+//    if (logoData) {
+//        const logoWidth = 25;  // Ancho del logo en mm
+//        const logoHeight = 15; // Alto del logo en mm
+//        const logoRightMargin = 3; // Margen derecho en mm
+//        const logoBottomMargin = 5; // Margen inferior en mm
+        
+//        doc.addImage(logoData, 'PNG', 
+//            cardMargin + cardWidth - logoWidth - logoRightMargin, // Posición X (derecha)
+//            yPosition + cardHeight - logoHeight - logoBottomMargin, // Posición Y (abajo)
+//            logoWidth, 
+//            logoHeight
+//        );
+//    }
+//} catch (e) {
+//    console.log('No se pudo cargar el logo:', e);
+//}
+
+        // Back Card (mismo gradiente)
+        const backGradient = createGradientCard(doc, cardMargin * 2 + cardWidth, yPosition, cardWidth, cardHeight);
+        if (backGradient) {
+            doc.addImage(backGradient, 'PNG', cardMargin * 2 + cardWidth, yPosition, cardWidth, cardHeight, undefined, 'FAST');
+        } else {
+            doc.setFillColor(255, 255, 255);
+            doc.setDrawColor(178, 132, 5);
+            doc.setLineWidth(0.5);
+            doc.roundedRect(cardMargin * 2 + cardWidth, yPosition, cardWidth, cardHeight, 5, 5, 'FD');
+        }
+        
+        // Contenido Back Card (optimizado para legibilidad sobre gradiente)
+        const backCardX = cardMargin * 2 + cardWidth;
+        doc.setFontSize(8);
+        doc.setFont(undefined, 'bold');
+        doc.setTextColor(50, 50, 50); // Gris oscuro para mejor contraste
+        doc.text('Red Mexicana de Ingeniería de Software', backCardX + 5, yPosition + 10);
+        
+        doc.setFontSize(6);
+        doc.setFont(undefined, 'normal');
+        const textLines1 = doc.splitTextToSize(
+            'Esta membresía le identifica como miembro de la REDMIS, conformada por profesores, investigadores y profesionistas relacionados con la Ingeniería de Software.',
+            cardWidth - 12
+        );
+        doc.text(textLines1, backCardX + 6, yPosition + 16);
+        
+        const textLines2 = doc.splitTextToSize(
+            'Puede participar en actividades, eventos, proyectos de investigación e iniciativas educativas de la red.',
+            cardWidth - 12
+        );
+        doc.text(textLines2, backCardX + 6, yPosition + 30);
+        
+        // Footer con estilo consistente
+        doc.setFontSize(7);
+        doc.setTextColor(178, 132, 5); // Dorado para destacar
+        doc.text('conisoft.org/redmis', backCardX + cardWidth / 2, yPosition + cardHeight - 7, { align: 'center' });
         // Guardar el PDF
-        const nombreArchivo = `Membresía_${memberResponse.nombre_completo || memberResponse.nombre || 'usuario'}_${membresia.id || ''}.pdf`;
+        const nombreArchivo = `Membresía_${memberResponse.nombre_completo || memberResponse.nombre || 'usuario'}.pdf`;
         doc.save(nombreArchivo);
         
     } catch (error) {
@@ -171,6 +345,26 @@ async function generateMembershipPDF(membresia) {
     }
 }
 
+// Función auxiliar para cargar imágenes (necesaria para el logo)
+function loadImageToDataURL(url) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            // Rellenar con blanco primero si quieres fondo blanco
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+            resolve(canvas.toDataURL('image/png')); // Usar PNG
+        };
+        img.onerror = () => resolve(null);
+        img.src = url;
+    });
+}
 function formatDate(dateString) {
     if (!dateString) return 'N/A';
     try {
