@@ -125,8 +125,6 @@
             estadoSelect.appendChild(option);
         });
 
-
-
         // Función para hashear la contraseña usando MD5
         function hashPasswordMD5(password) {
             return CryptoJS.MD5(password).toString();
@@ -148,8 +146,6 @@
             const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-
-
 
             if (!nameRegex.test(nombreField.value.trim())) {
                 alert("El nombre solo debe contener letras y espacios.");
@@ -176,7 +172,6 @@
                 return;
             }
 
-
             try {
                 // Hashear la contraseña con MD5 antes de enviarla
                 const hashedPassword = hashPasswordMD5(passwordField.value);
@@ -202,12 +197,13 @@
                 // Limpiar el formulario
                 this.reset();
                 
+                // Redirigir a verificación con el email como parámetro
+                window.location.href = `verificacion_mail.html?email=${encodeURIComponent(memberData.email)}`;
             } catch (error) {
                 console.error('Error al crear la cuenta:', error);
                 alert('Ocurrió un error al crear la cuenta. Por favor intenta nuevamente.');
             }
         });
     </script>
-
 </body>
 </html>
