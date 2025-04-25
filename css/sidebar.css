@@ -19,6 +19,7 @@ body {
   border-radius: 10px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease;
+  z-index: 2;
 }
 
 /* Título y separadores */
