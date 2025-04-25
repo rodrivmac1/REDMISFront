@@ -217,6 +217,7 @@ input:checked+.slider::before {
       width: 95%;
       padding: 10px;
       font-size: 13px;
+      overflow-x: auto;
     }
   
     /* Asegura que la tabla se adapte al tamaño de la pantalla */
@@ -242,6 +243,7 @@ input:checked+.slider::before {
     
     .table-box {
       padding: 5px 10px;
+      overflow-x: auto;
     }
 
     .table-box table,
