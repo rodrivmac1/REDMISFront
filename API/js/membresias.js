@@ -5,6 +5,8 @@ import membersService from '../services/members.js';
 
 const { jsPDF } = window.jspdf;
 
+let tipoMembresia = ""
+
 document.addEventListener('DOMContentLoaded', async () => {
     if (!loginService.isAuthenticated()) {
         window.location.href = 'login.html';
@@ -22,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         if (response.success && response.data) {
             console.log('Datos de membresías a renderizar:', response.data);
+            tipoMembresia = response.data[0].membresia_nombre;
             renderMembresias(response.data);
         } else {
             console.error('Error al obtener membresías:', response.message);
@@ -86,7 +89,7 @@ async function generateMembershipPDF(membresia) {
         if (!memberResponse || !memberResponse.nombre_completo) {
             throw new Error('No se pudo obtener la información del perfil');
         }
-
+        console.log(memberResponse)
         // Crear documento PDF
         const doc = new jsPDF({
             orientation: 'portrait',
@@ -94,61 +97,87 @@ async function generateMembershipPDF(membresia) {
             format: 'a4'
         });
         
-        // Configuración general
+        // Configuración de página
         const pageWidth = doc.internal.pageSize.getWidth();
+        const pageHeight = doc.internal.pageSize.getHeight();
         const margin = 20;
-        let yPosition = 20;
+        let yPosition = 30;
         
-        // Establecer fuente
-        doc.setFont('helvetica');
-        
-        // Header Section
-        doc.setFillColor(255, 255, 255);
-        doc.rect(0, 0, pageWidth, 40, 'F');
-        
+        // Cargar logo REDMIS para usar en varias secciones
+        let logoREDMIS;
         try {
-            const logoData = await loadImageToDataURL('./img/logo_REDMIS.png');
-            if (logoData) {
-                doc.addImage(logoData, 'PNG', margin, yPosition, 50, 30);
-            }
+            logoREDMIS = await loadImageToDataURL('./img/logo_REDMIS.png');
         } catch (e) {
             console.log('No se pudo cargar el logo:', e);
         }
-        
-        // Título al lado del logo
-        doc.setFontSize(18);
-        doc.setFont(undefined, 'bold');
-        doc.text('Red Mexicana de Ingeniería de Software', margin + 55, yPosition + 15);
-        
-        yPosition += 40;
-        
-        // Content Section
+
+        // ------ HEADER SECTION ------
+        doc.setFillColor(255, 255, 255);
+        doc.setDrawColor(200, 200, 200);
+        doc.setLineWidth(0.5);
+        doc.roundedRect(margin, yPosition - 10, pageWidth - (margin * 2), 30, 5, 5, 'FD');
+
+        // Agregar logo en el header a la izquierda
+        let logoWidth = 0;
+        if (logoREDMIS) {
+            const maxHeight = 20;
+            const aspectRatio = logoREDMIS.width / logoREDMIS.height;
+            const logoHeight = Math.min(maxHeight, 30);
+            logoWidth = logoHeight * aspectRatio;
+            doc.addImage(logoREDMIS.dataUrl, 'PNG', margin + 10, yPosition - 5, logoWidth, logoHeight);
+        }
+
+        // Título del header: centrado respecto al espacio libre (tomando en cuenta el logo)
         doc.setFontSize(14);
-        doc.setFont(undefined, 'bold');
-        doc.text('Gracias', pageWidth / 2, yPosition, { align: 'center' });
+        doc.setFont('helvetica', 'bold');
+        const titleText = 'Red Mexicana de Ingeniería de Software';
+        const leftOffset = logoREDMIS ? (margin + 10 + logoWidth + 5) : margin;
+        const centerTextX = leftOffset + ((pageWidth - margin) - leftOffset) / 2;
+        doc.text(titleText, centerTextX, yPosition + 5, { align: 'center' });
+
+        yPosition += 40;
+
+        // ------ CONTENT SECTION ------
+        // Crear un rectángulo redondeado para el contenido
+        doc.setFillColor(255, 255, 255);
+        doc.roundedRect(margin, yPosition - 10, pageWidth - (margin * 2), 120, 5, 5, 'FD');
+
+        // Título "Gracias"
+        doc.setFontSize(16);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Gracias', margin + 10, yPosition);
+
         yPosition += 10;
-        
+
+        // Mensajes con wrap automático para mantenerlos dentro del recuadro
         doc.setFontSize(12);
-        doc.setFont(undefined, 'normal');
-        doc.text('Por adquirir su membresía', pageWidth / 2, yPosition, { align: 'center' });
-        yPosition += 7;
-        doc.text('Desde ahora Usted forma parte del nodo:', pageWidth / 2, yPosition, { align: 'center' });
-        yPosition += 10;
-        
-        // Universidad
-        doc.setFont(undefined, 'bold');
-        doc.text(memberResponse.universidad || 'Universidad no especificada', pageWidth / 2, yPosition, { align: 'center' });
-        yPosition += 15;
-        
-        // Lista de universidades
-        doc.setFontSize(10);
-        doc.setFont(undefined, 'bold');
-        doc.text('Nodos pertenecientes a la red:', margin, yPosition);
-        yPosition += 7;
-        
-        doc.setFontSize(8);
-        doc.setFont(undefined, 'normal');
-        
+        doc.setFont('helvetica', 'normal');
+        let contentWidth = pageWidth - margin * 2 - 20;
+
+        let msg1 = doc.splitTextToSize('Por adquirir su membresía', contentWidth);
+        doc.text(msg1, margin + 10, yPosition);
+        yPosition += msg1.length * 5;
+
+        let msg2 = doc.splitTextToSize('Desde ahora Usted forma parte del nodo:', contentWidth);
+        doc.text(msg2, margin + 10, yPosition);
+        yPosition += msg2.length * 5;
+
+        let msg3 = doc.splitTextToSize(memberResponse.universidad || 'Universidad', contentWidth);
+        doc.text(msg3, margin + 10, yPosition);
+        yPosition += msg3.length * 5;
+
+        yPosition += 12;
+
+        // Título "Nodos pertenecientes a la red"
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Nodos pertenecientes a la red', margin + 10, yPosition);
+
+        yPosition += 8;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+
+        // Primera columna de universidades
         const universities1 = [
             'Universidad Autónoma de Baja California',
             'Universidad Nacional Autónoma de México',
@@ -161,191 +190,179 @@ async function generateMembershipPDF(membresia) {
             'Universidad Autónoma de Sinaloa',
             'Universidad Autónoma Metropolitana'
         ];
-        
+
+        // Segunda columna de universidades
         const universities2 = [
             'Universidad Autónoma de Ciudad Juárez',
             'Instituto Tecnológico de Hermosillo',
-            'Centro Nacional de Investigación y Desarrollo Tecnológico',
-            'Instituto Tecnológico y de Estudios Superiores de Monterrey',
+            'Centro Nacional de Investigación y Desarrollo \nTecnológico (CENIDET)',
+            'Instituto Tecnológico y de Estudios Superiores de\n Monterrey',
             'CINVESTAV, Tamaulipas',
             'Universidad Politécnica de Tapachula',
             'Instituto Tecnológico de Sonora',
             'Instituto Tecnológico de Tijuana',
             'Instituto Tecnológico de León'
         ];
-        
-        // Primera columna
-        let uniY = yPosition;
+
+        // Se reemplaza el renderizado de universidades para hacer wrap al contenido
+        const wrapWidth = (pageWidth / 2) - 20;
+        let col1Y = yPosition;
         universities1.forEach(uni => {
-            doc.text('• ' + uni, margin, uniY);
-            uniY += 5;
+            const lines = doc.splitTextToSize(`• ${uni}`, wrapWidth);
+            doc.text(lines, margin + 10, col1Y);
+            col1Y += lines.length * 5;
         });
-        
-        // Segunda columna
-        uniY = yPosition;
+        let col2Y = yPosition;
         universities2.forEach(uni => {
-            doc.text('• ' + uni, margin + 100, uniY);
-            uniY += 5;
+            const lines = doc.splitTextToSize(`• ${uni}`, wrapWidth);
+            doc.text(lines, margin + (pageWidth / 2) - 10, col2Y);
+            col2Y += lines.length * 5;
         });
-        
-        // Ajustamos la posición Y para dejar espacio después de la lista
-        yPosition += Math.max(universities1.length, universities2.length) * 5 + 20;
-        
-        // Mensaje credencial (ahora aparece después de la lista de universidades)
-        doc.setFont(undefined, 'normal');
-        doc.text('En seguida se muestra la versión digital de su credencial de', pageWidth / 2, yPosition, { align: 'center' });
-        yPosition += 7;
-        doc.text('membresía para un acceso más rápido de la información.', pageWidth / 2, yPosition, { align: 'center' });
-        yPosition += 25; // Aumentamos este espacio para bajar las tarjetas
-        
-        // Cards Section (ahora aparece más abajo)
-        const cardWidth = 80;
-        const cardHeight = 50;
-        const cardMargin = (pageWidth - (cardWidth * 2)) / 3;
-        
-        // Función reusable para crear cards con gradiente
-        const createGradientCard = (doc, x, y, width, height) => {
-            try {
-                const scale = 3;
-                const canvas = document.createElement('canvas');
-                canvas.width = width * scale;
-                canvas.height = height * scale;
-                const ctx = canvas.getContext('2d');
-                ctx.scale(scale, scale);
-                
-                // Gradiente profesional
-                const gradient = ctx.createLinearGradient(0, 0, width, 0);
-                gradient.addColorStop(0, 'rgba(255, 255, 255, 0.51)');
-                gradient.addColorStop(0.4271, 'rgba(178, 132, 5, 0.2)');
-                gradient.addColorStop(0.6823, 'rgba(178, 132, 5, 0.29)');
-                gradient.addColorStop(0.775, 'rgba(239, 184, 16, 0.44)');
-                
-                // Bordes redondeados
-                const cornerRadius = 5;
-                ctx.beginPath();
-                ctx.moveTo(cornerRadius, 0);
-                ctx.lineTo(width - cornerRadius, 0);
-                ctx.quadraticCurveTo(width, 0, width, cornerRadius);
-                ctx.lineTo(width, height - cornerRadius);
-                ctx.quadraticCurveTo(width, height, width - cornerRadius, height);
-                ctx.lineTo(cornerRadius, height);
-                ctx.quadraticCurveTo(0, height, 0, height - cornerRadius);
-                ctx.lineTo(0, cornerRadius);
-                ctx.quadraticCurveTo(0, 0, cornerRadius, 0);
-                ctx.closePath();
-                
-                ctx.fillStyle = gradient;
-                ctx.fill();
-                ctx.strokeStyle = 'rgba(178, 132, 5, 0.8)';
-                ctx.lineWidth = 0.8;
-                ctx.stroke();
-                
-                ctx.imageSmoothingEnabled = true;
-                ctx.imageSmoothingQuality = 'high';
-                
-                return canvas.toDataURL('image/png', 1.0);
-            } catch (e) {
-                console.error('Error al crear gradiente:', e);
-                return null;
-            }
+        yPosition += Math.max(col1Y - yPosition, col2Y - yPosition) + 20;
+
+        // ------ MEMBERSHIP CARDS SECTION ------
+        // Configuración de tarjetas
+        const cardWidth = 70;
+        const cardHeight = 45;
+        const cardGap = 15;
+
+        // Crear fondo de gradiente dorado para tarjetas
+        const createGoldGradient = (width, height) => {
+            const scale = 4; // Factor de escala aumentado para mayor resolución
+            const canvas = document.createElement('canvas');
+            canvas.width = width * scale;
+            canvas.height = height * scale;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(scale, scale);
+
+            // Habilitar suavizado de imagen
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+
+            // Gradiente dorado
+            const gradient = ctx.createLinearGradient(0, 0, width, height/2);
+            gradient.addColorStop(0, 'rgba(255, 255, 255, 0.51)');
+            gradient.addColorStop(0.4, 'rgba(163, 163, 163, 0.2)');
+            gradient.addColorStop(0.7, 'rgba(163, 163, 163, 0.29)');
+            gradient.addColorStop(0.9, 'rgba(163, 163, 163, 0.44)');
+
+            // Dibujar rectángulo con bordes redondeados
+            const radius = 8;
+            ctx.beginPath();
+            ctx.moveTo(radius, 0);
+            ctx.arcTo(width, 0, width, height, radius);
+            ctx.arcTo(width, height, 0, height, radius);
+            ctx.arcTo(0, height, 0, 0, radius);
+            ctx.arcTo(0, 0, width, 0, radius);
+            ctx.closePath();
+
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            // Borde dorado más oscuro
+            // ctx.strokeStyle = 'rgba(178, 132, 5, 0.8)';
+            // ctx.lineWidth = 0.5;
+            // ctx.stroke();
+
+            return canvas.toDataURL('image/png');
         };
-        
-        // Front Card
-        const frontGradient = createGradientCard(doc, cardMargin, yPosition, cardWidth, cardHeight);
-        if (frontGradient) {
-            doc.addImage(frontGradient, 'PNG', cardMargin, yPosition, cardWidth, cardHeight, undefined, 'FAST');
-        } else {
-            doc.setFillColor(255, 255, 255);
-            doc.setDrawColor(178, 132, 5);
-            doc.setLineWidth(0.5);
-            doc.roundedRect(cardMargin, yPosition, cardWidth, cardHeight, 5, 5, 'FD');
-        }
-        
-        // Contenido Front Card (antes del logo para mejor layering)
-doc.setTextColor(40, 40, 40);
-doc.setFontSize(15);
-doc.setFont(undefined, 'bold');
-doc.text(membresia.membresia_nombre || 'ORO', cardMargin + cardWidth - 22, yPosition + 10);
 
-doc.setFontSize(8);
-doc.setFont(undefined, 'normal');
-doc.text(`Socio: ${memberResponse.nombre_completo || 'Nombre no disponible'}`, cardMargin + 5, yPosition + 20);
-doc.text(`No.: ${membresia.id || 'N/A'}`, cardMargin + 5, yPosition + 25);
-doc.text(`IES: ${memberResponse.universidad || 'No especificada'}`, cardMargin + 5, yPosition + 30);
-doc.text(`País: ${memberResponse.pais || 'No especificado'}`, cardMargin + 5, yPosition + 35);
+        // Calcular posición X para centrar las tarjetas
+        const cardsStartX = (pageWidth - (2 * cardWidth + cardGap)) / 2;
 
-// Texto MEMBRESÍA (movido a la izquierda para balance)
-doc.setFontSize(15);
-doc.setFont(undefined, 'bold');
-doc.text('MEMBRESÍA', cardMargin + 5, yPosition + cardHeight - 5);
+        // ------ TARJETA FRONTAL ------
+        const cardFrontImg = createGoldGradient(cardWidth, cardHeight);
+        doc.addImage(cardFrontImg, 'PNG', cardsStartX, yPosition, cardWidth, cardHeight);
 
-// Agregar logo en la parte inferior derecha
-//try {
-//    const logoData = await loadImageToDataURL('./img/logo_REDMIS.png');
-//    if (logoData) {
-//        const logoWidth = 25;  // Ancho del logo en mm
-//        const logoHeight = 15; // Alto del logo en mm
-//        const logoRightMargin = 3; // Margen derecho en mm
-//        const logoBottomMargin = 5; // Margen inferior en mm
-        
-//        doc.addImage(logoData, 'PNG', 
-//            cardMargin + cardWidth - logoWidth - logoRightMargin, // Posición X (derecha)
-//            yPosition + cardHeight - logoHeight - logoBottomMargin, // Posición Y (abajo)
-//            logoWidth, 
-//            logoHeight
-//        );
-//    }
-//} catch (e) {
-//    console.log('No se pudo cargar el logo:', e);
-//}
+        // Tipo de membresía
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(0, 0, 0);
+        // Se centra el texto dentro de la tarjeta
+        const centerX = cardsStartX + cardWidth / 2;
+        doc.text(tipoMembresia, centerX, yPosition + 8, { align: 'center' });
 
-        // Back Card (mismo gradiente)
-        const backGradient = createGradientCard(doc, cardMargin * 2 + cardWidth, yPosition, cardWidth, cardHeight);
-        if (backGradient) {
-            doc.addImage(backGradient, 'PNG', cardMargin * 2 + cardWidth, yPosition, cardWidth, cardHeight, undefined, 'FAST');
-        } else {
-            doc.setFillColor(255, 255, 255);
-            doc.setDrawColor(178, 132, 5);
-            doc.setLineWidth(0.5);
-            doc.roundedRect(cardMargin * 2 + cardWidth, yPosition, cardWidth, cardHeight, 5, 5, 'FD');
-        }
-        
-        // Contenido Back Card (optimizado para legibilidad sobre gradiente)
-        const backCardX = cardMargin * 2 + cardWidth;
+        // Detalles de la tarjeta frontal
         doc.setFontSize(8);
-        doc.setFont(undefined, 'bold');
-        doc.setTextColor(50, 50, 50); // Gris oscuro para mejor contraste
-        doc.text('Red Mexicana de Ingeniería de Software', backCardX + 5, yPosition + 10);
-        
-        doc.setFontSize(6);
-        doc.setFont(undefined, 'normal');
-        const textLines1 = doc.splitTextToSize(
-            'Esta membresía le identifica como miembro de la REDMIS, conformada por profesores, investigadores y profesionistas relacionados con la Ingeniería de Software.',
-            cardWidth - 12
-        );
-        doc.text(textLines1, backCardX + 6, yPosition + 16);
-        
-        const textLines2 = doc.splitTextToSize(
-            'Puede participar en actividades, eventos, proyectos de investigación e iniciativas educativas de la red.',
-            cardWidth - 12
-        );
-        doc.text(textLines2, backCardX + 6, yPosition + 30);
-        
-        // Footer con estilo consistente
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Socio: ${memberResponse.nombre_completo || 'Nombre del miembro'}`, cardsStartX + 5, yPosition + 16);
+        doc.text(`No.: ${membresia.id || '3'} Tipo: G País: ${memberResponse.pais || ''}`, cardsStartX + 5, yPosition + 21);
+        doc.text(`IES: ${memberResponse.universidad || 'Universidad...'}`, cardsStartX + 5, yPosition + 26);
+
+        // Texto MEMBRESÍA en parte inferior
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text('MEMBRESÍA', cardsStartX + 5, yPosition + cardHeight - 5);
+
+        // Logo en esquina inferior derecha (tarjeta frontal)
+        if (logoREDMIS) {
+            const logoHeight = 12; // Altura deseada en mm
+            const aspectRatio = logoREDMIS.width / logoREDMIS.height;
+            const logoWidth = logoHeight * aspectRatio;
+
+            doc.addImage(logoREDMIS.dataUrl, 'PNG', cardsStartX + cardWidth - logoWidth - 5,
+                yPosition + cardHeight - logoHeight - 3, logoWidth, logoHeight);
+        }
+
+        // ------ TARJETA TRASERA ------
+        const cardBackImg = createGoldGradient(cardWidth, cardHeight);
+        doc.addImage(cardBackImg, 'PNG', cardsStartX + cardWidth + cardGap, yPosition, cardWidth, cardHeight);
+
+        const backX = cardsStartX + cardWidth + cardGap;
+
+        // Título de la tarjeta trasera
         doc.setFontSize(7);
-        doc.setTextColor(178, 132, 5); // Dorado para destacar
-        doc.text('conisoft.org/redmis', backCardX + cardWidth / 2, yPosition + cardHeight - 7, { align: 'center' });
+        doc.setFont('helvetica', 'bold');
+        doc.text('Red Mexicana de Ingeniería de Software', backX + 5, yPosition + 6);
+
+        // Texto informativo en dos columnas
+        doc.setFontSize(5);
+        doc.setFont('helvetica', 'normal');
+
+        const backText1 = doc.splitTextToSize('Esta membresía le identifica a Usted como miembro de la REDMIS, conformada por profesores, investigadores, profesionistas y practicantes relacionados con la Ingeniería de Software, Desarrollo de Software y disciplinas afines.',
+            (cardWidth - 10) / 2);
+        doc.text(backText1, backX + 3, yPosition + 12);
+
+        const backText2 = doc.splitTextToSize('Puede participar en las actividades, reuniones, eventos, iniciativas de educación, proyectos de investigación, etc., así como participar en la organización de eventos: CONISOFT, pláticas, conferencias, cursos, etc.',
+            (cardWidth - 10) / 2);
+        doc.text(backText2, backX + (cardWidth/2) + 2, yPosition + 12);
+
+        // Imágenes de la parte inferior: Firma
+        let firmaImg;
+        try {
+            firmaImg = await loadImageToDataURL('./img/firma.png');
+        } catch(e) {
+            console.log('No se pudo cargar firma:', e);
+        }
+        if (firmaImg) {
+            const firmaHeight = 12;
+            const firmaWidth = firmaHeight * (firmaImg.width / firmaImg.height);
+            doc.addImage(firmaImg.dataUrl, 'PNG', backX + 10, yPosition + 25, firmaWidth, firmaHeight);
+        }
+
+        // Logo en la parte derecha (tarjeta trasera)
+        if (logoREDMIS) {
+            const logoHeight = 12; // Altura deseada en mm
+            const aspectRatio = logoREDMIS.width / logoREDMIS.height;
+            const logoWidth = logoHeight * aspectRatio;
+
+            doc.addImage(logoREDMIS.dataUrl, 'PNG', backX + cardWidth - logoWidth - 5,
+                yPosition + cardHeight - logoHeight - 3, logoWidth, logoHeight);
+        }
+
+        // Pie de página con sitio web
+        doc.setFontSize(7);
+        doc.setFont('helvetica', 'bold');
+
         // Guardar el PDF
         const nombreArchivo = `Membresía_${memberResponse.nombre_completo || memberResponse.nombre || 'usuario'}.pdf`;
         doc.save(nombreArchivo);
-        
     } catch (error) {
         console.error('Error generando PDF:', error);
         alert('Error al generar el certificado: ' + error.message);
     }
 }
 
-// Función auxiliar para cargar imágenes (necesaria para el logo)
 function loadImageToDataURL(url) {
     return new Promise((resolve) => {
         const img = new Image();
@@ -355,16 +372,18 @@ function loadImageToDataURL(url) {
             canvas.width = img.width;
             canvas.height = img.height;
             const ctx = canvas.getContext('2d');
-            // Rellenar con blanco primero si quieres fondo blanco
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0);
-            resolve(canvas.toDataURL('image/png')); // Usar PNG
+            resolve({
+                dataUrl: canvas.toDataURL('image/png'),
+                width: img.width,
+                height: img.height
+            });
         };
         img.onerror = () => resolve(null);
         img.src = url;
     });
 }
+
 function formatDate(dateString) {
     if (!dateString) return 'N/A';
     try {
@@ -377,13 +396,14 @@ function formatDate(dateString) {
 
 function getEstadoClass(estado) {
     const classMap = {
-        'activa': 'aceptada', 
-        'activo': 'aceptada',  
-        'inactivo': 'rechazada', 
-        'inactiva': 'rechazada', 
+        'activa': 'aceptada',
+        'activo': 'aceptada',
+        'inactivo': 'rechazada',
+        'inactiva': 'rechazada',
         'pendiente': 'pendiente',
         'vencido': 'rechazada',
-        'vencida': 'rechazada' 
+        'vencida': 'rechazada'
     };
     return classMap[estado] || '';
 }
+
