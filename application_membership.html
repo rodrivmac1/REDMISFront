@@ -26,7 +26,7 @@
         <input type="tel" id="telefono" class="custom-input" required>
 
         <label>Comentarios</label>
-        <textarea id="comentarios" class="custom-textarea"></textarea>
+        <textarea id="comentarios" class="custom-textarea" rows="4"></textarea>
 
 
         <label>CV (PDF)</label>
@@ -147,7 +147,11 @@
 
               // Convertir el archivo a base64
               const cvBase64 = await fileToBase64(cvFile);
-              const cvFileName = cvFile.name;
+
+              // Generar un nombre único para el archivo
+              const timestamp = new Date().getTime();
+              const uniqueName = `${timestamp}_${cvFile.name}`;
+              const cvFileName = `CV_${uniqueName}`; // Cambia el nombre del archivo a lo que necesites
 
               // Crear el objeto con la estructura requerida
               const requestData = {
@@ -176,7 +180,8 @@
 
           } catch (error) {
               console.error('Error al enviar solicitud:', error);
-              alert('Ocurrió un error al enviar la solicitud: ' + (error.message || 'Error desconocido'));
+              const error_message = JSON.parse(error.rawResponse)
+              alert('Ocurrió un error al enviar la solicitud: ' + (error_message.message || 'Error desconocido'));
           }
       }
 

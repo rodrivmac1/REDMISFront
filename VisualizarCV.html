@@ -143,6 +143,7 @@
     <script type="module">
         import membershipApplicationService from './API/services/membershipApplication.js';
         import loginService from './API/services/login.js';
+        import { getPDF } from './js/pdfProcessor.js';
 
         // Obtener el ID de la solicitud de membresía desde la URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -168,8 +169,11 @@
         applicationStatus.innerHTML = `${application.estado}`;
         applicantComments.innerHTML = `${application.comentarios}`;
 
-        cvIframe.src = "./pdfs/" + application.cv; // URL del CV
-        downloadLink.href = "./pdfs/" + application.cv; // URL del CV para descargar
+        const pdfURL = getPDF(application.cv_base64); // Obtener la URL del PDF
+        
+        cvIframe.src = pdfURL; // Establecer la fuente del iframe al PDF del CV
+        
+        downloadLink.href = pdfURL; // Establecer el enlace de descarga al blob creado
 
 
         const confirmAction = async (action) => {

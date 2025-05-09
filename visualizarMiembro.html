@@ -75,6 +75,7 @@
         import membersService from './API/services/members.js';
         import loginService from './API/services/login.js';
         import membresiaUsuarioService from './API/services/membresiaUsuario.js';
+        import { getPDF } from './js/pdfProcessor.js';
 
         const urlParams = new URLSearchParams(window.location.search);
         const memberID = urlParams.get('memberID');
@@ -86,7 +87,8 @@
 
         const member = await membersService.getbyID(memberID);
         const membership = await membresiaUsuarioService.getByUserId(memberID);
-        const membershipStatus = membership.data[0].estado;
+        // Verificar si existe el estado , si no existe, asignar un valor por defecto
+        const membershipStatus = membership && membership.estatus ? membership.estatus : 'NO REGISTRADO';
 
         const changeMembershipStatus = document.getElementById('change-membership-status');
         
@@ -104,7 +106,7 @@
         const memberLastUpdate = document.getElementById('member-last-update');
 
         memberId.value = member.id;
-        memberName.value = member.nombre_completo;
+        memberName.value = member.nombre + ' ' + member.apellidos;
         memberGender.value = member.genero;
         memberUserType.value = member.tipo_usuario;
         memberStatus.value = member.estatus;
@@ -125,9 +127,9 @@
             }
         });
 
-
+        const pdfURL = getPDF(member.cv_base64); // Obtener la URL del PDF
         const downloadCVButton = document.getElementById('download-cv');
-        downloadCVButton.href = "./pdfs/" + member.cv;
+        downloadCVButton.href = pdfURL; // Establecer el enlace de descarga al blob creado
 
         if (membershipStatus === 'ACTIVA') {
             changeMembershipStatus.innerHTML = '<i class="fas fa-times"></i> Revocar Membresía';
@@ -140,7 +142,7 @@
                     window.location.href = 'miembros.html';
                 }
             });
-        } else {
+        } else if (membershipStatus === 'INACTIVA') {
             changeMembershipStatus.innerHTML = '<i class="fas fa-check"></i> Reactivar Membresía';
             changeMembershipStatus.classList.add('btn-secondary');
             changeMembershipStatus.addEventListener('click', async () => {
@@ -151,6 +153,11 @@
                     window.location.href = 'miembros.html';
                 }
             });
+        } else {
+            changeMembershipStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Estado Desconocido';
+            changeMembershipStatus.classList.add('btn-warning');
+            changeMembershipStatus.disabled = true;
+
         }
 
 

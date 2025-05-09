@@ -59,9 +59,13 @@ function renderMembresias(membresiasData) {
         const actionCell = row.querySelector('.action-cell');
         if (esActiva) {  
             const downloadBtn = document.createElement('button');
+            const downloadIcon = document.createElement('i');
+            downloadIcon.className = "fa-solid fa-download";
             downloadBtn.className = 'download-btn';
+
             downloadBtn.textContent = 'Descargar';
             downloadBtn.addEventListener('click', () => generateMembershipPDF(membresia));
+            downloadBtn.appendChild(downloadIcon);
             actionCell.appendChild(downloadBtn);
         } else {
             actionCell.textContent = 'No disponible';
@@ -83,7 +87,7 @@ async function generateMembershipPDF(membresia) {
 
         // Obtener información completa del miembro
         const memberResponse = await membersService.getbyID(userId);
-        if (!memberResponse || !memberResponse.nombre_completo) {
+        if (!memberResponse || (!memberResponse.nombre && !memberResponse.apellidos)) {
             throw new Error('No se pudo obtener la información del perfil');
         }
 
@@ -269,7 +273,7 @@ doc.text(membresia.membresia_nombre || 'ORO', cardMargin + cardWidth - 22, yPosi
 
 doc.setFontSize(8);
 doc.setFont(undefined, 'normal');
-doc.text(`Socio: ${memberResponse.nombre_completo || 'Nombre no disponible'}`, cardMargin + 5, yPosition + 20);
+doc.text(`Socio: ${(memberResponse.nombre + ' ' + memberResponse.apellidos) || 'Nombre no disponible'}`, cardMargin + 5, yPosition + 20);
 doc.text(`No.: ${membresia.id || 'N/A'}`, cardMargin + 5, yPosition + 25);
 doc.text(`IES: ${memberResponse.universidad || 'No especificada'}`, cardMargin + 5, yPosition + 30);
 doc.text(`País: ${memberResponse.pais || 'No especificado'}`, cardMargin + 5, yPosition + 35);
