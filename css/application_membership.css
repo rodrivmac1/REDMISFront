@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+* {
+  font-family: "Instrument Sans", sans-serif;
+}
+
 .custom-select {
     width: 100%;
     padding: 10px;
@@ -20,4 +26,32 @@
   
   .custom-select:hover {
     background-color: #F1F5F9; 
+  }
+
+  label {
+    font-weight: 700;
+  }
+
+  input, textarea {
+    width: 100%;
+  }
+
+  textarea{
+    resize: none;
+    border-radius: 5px;
+    border: none;
+    background-color: #E2E8F0;
+  }
+
+  textarea#comentarios {
+    margin-bottom: 15px;
+  }
+
+  #submit-membership {
+    background-color: #F1F5F9;
+    color: #2D3748;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
   }

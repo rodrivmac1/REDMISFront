@@ -13,20 +13,22 @@
 
   <div class="form-container">
     <div class="form-box">
-      <label>Nombre completo</label>
+      <label>Nombre</label>
       <input id="nombre" type="text" placeholder="Nombre" disabled>
+      <label>Apellido(s)</label>
+      <input id="apellidos" type="text" placeholder="Apellido(s)" disabled>
       <label>Género</label>
       <input id="genero" type="text" placeholder="Género" disabled>
       <label>Universidad</label>
       <div id="universidad-container">
         <input id="universidad" type="text" placeholder="Universidad" disabled>
       </div>
+    </div>
+    <div class="form-box">
       <label>Estado</label>
       <div id="estado-container">
         <input id="estado" type="text" placeholder="Estado" disabled>
       </div>
-    </div>
-    <div class="form-box">
       <label>País</label>
       <div id="pais-container">
         <input id="pais" type="text" placeholder="País" disabled>
@@ -56,7 +58,7 @@
     const userId = userData?.userId;
     const token = loginService.getToken();
 
-    const fields = ['nombre', 'genero', 'universidad', 'estado', 'pais', 'email', 'password'];
+    const fields = ['nombre', 'apellidos', 'genero', 'universidad', 'estado', 'pais', 'email', 'password'];
     let currentUniversidadId = null;
     let currentEstadoId = null;
     let currentPaisId = null;
@@ -148,7 +150,8 @@
     if (userId && token) {
       membersService.getbyID(userId)
         .then(user => {
-          document.getElementById('nombre').value = user.nombre_completo || '';
+          document.getElementById('nombre').value = user.nombre || '';
+          document.getElementById('apellidos').value = user.apellidos || '';
           document.getElementById('genero').value = user.genero || '';
           document.getElementById('universidad').value = user.universidad || '';
           document.getElementById('estado').value = user.estado || '';
@@ -188,7 +191,8 @@
       convertBackToInput('pais-container', 'pais', 'pais-select', currentPaisId);
       
       const updatedUser = {
-        nombre_completo: document.getElementById('nombre').value,
+        nombre: document.getElementById('nombre').value,
+        apellidos : document.getElementById('apellidos').value,
         genero: document.getElementById('genero').value,
         universidad: currentUniversidadId, // Usar el ID numérico
         estado: currentEstadoId, // Usar el ID numérico

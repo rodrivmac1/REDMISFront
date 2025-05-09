@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+* {
+    font-family: "Instrument Sans", sans-serif;
+}
+
 /* Estilos generales */
 body {
     background: #f0ebeb;
@@ -46,6 +52,7 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 
 .full-width {
     grid-column: span 2;

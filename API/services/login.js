@@ -74,6 +74,23 @@ const loginService = {
             return true;
         }
         return false;
+    }, 
+
+    validateToken : () => {
+        const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+        if (!token) {
+            return false;
+        }
+        
+        const parts = token.split('.');
+        if (parts.length !== 3) {
+            return false;
+        }
+        const payload = parts[1];
+        const decodedPayload = JSON.parse(atob(payload));
+        const expirationTime = decodedPayload.exp * 1000; // Convert to milliseconds
+        const currentTime = Date.now();
+        return expirationTime > currentTime;
     }
 }
 

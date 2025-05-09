@@ -209,10 +209,11 @@ h1
   background-color:  #10b981;  /* Color del fondo */
   color: #fff;                /* Color del texto */
   padding: 5px 10px;          /* Espaciado interno */
-  border-radius: 5px;         /* Bordes redondeados */
+  border-radius: 15px;         /* Bordes redondeados */
   display: inline-block;      /* Para que el fondo se ajuste al contenido */
   font-size: 14px;
   text-decoration: none;      /* Opcional: quitar subrayado si es un enlace */
+  font-weight: bold;
 }
 
 .pendiente
@@ -233,10 +234,20 @@ h1
   background-color:  #475569;
   color: #fff;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  transition: 0.1s;
+}
+
+.download-btn i
+{
+  margin-left: 5px;
 }
 
 .download-btn:hover
 {
   background-color: #293546;
+  transform: scale(1.1);
+  transition: 0.1s;
 }

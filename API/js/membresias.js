@@ -62,9 +62,13 @@ function renderMembresias(membresiasData) {
         const actionCell = row.querySelector('.action-cell');
         if (esActiva) {  
             const downloadBtn = document.createElement('button');
+            const downloadIcon = document.createElement('i');
+            downloadIcon.className = "fa-solid fa-download";
             downloadBtn.className = 'download-btn';
+
             downloadBtn.textContent = 'Descargar';
             downloadBtn.addEventListener('click', () => generateMembershipPDF(membresia));
+            downloadBtn.appendChild(downloadIcon);
             actionCell.appendChild(downloadBtn);
         } else {
             actionCell.textContent = 'No disponible';
@@ -86,7 +90,7 @@ async function generateMembershipPDF(membresia) {
 
         // Obtener información completa del miembro
         const memberResponse = await membersService.getbyID(userId);
-        if (!memberResponse || !memberResponse.nombre_completo) {
+        if (!memberResponse || (!memberResponse.nombre && !memberResponse.apellidos)) {
             throw new Error('No se pudo obtener la información del perfil');
         }
         console.log(memberResponse)
