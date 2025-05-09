@@ -3,6 +3,13 @@ import loginService from '../API/services/login.js';
 document.addEventListener('DOMContentLoaded', () => {
     const userRole = loginService.getUserRole(); 
 
+    const tokenIsValid = loginService.validateToken();
+
+    if (!tokenIsValid) {
+        // Si el token no es válido, redirigir a la página de inicio de sesión
+        window.location.href = 'login.html';
+    }
+
     const adminRoutes = [
         'perfil_admin.html',
         'membresia.html',

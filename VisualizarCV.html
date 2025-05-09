@@ -88,7 +88,7 @@
     <div id="sidebar"></div>
 
     <div class="container">
-        <button id="back-button" onclick="history.back();">&#8592; Regresar</button>
+        <button id="back-button">&#8592; Regresar</button>
         <div class="header">Revisión de CV</div>
 
         <div class="card">
@@ -144,6 +144,12 @@
         import membershipApplicationService from './API/services/membershipApplication.js';
         import loginService from './API/services/login.js';
         import { getPDF } from './js/pdfProcessor.js';
+
+
+        const getBackButton = document.getElementById('back-button');
+        getBackButton.addEventListener('click', () => {
+            window.location.href = 'solicitudes_membresias.html';
+        });
 
         // Obtener el ID de la solicitud de membresía desde la URL
         const urlParams = new URLSearchParams(window.location.search);

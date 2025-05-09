@@ -46,3 +46,12 @@
   textarea#comentarios {
     margin-bottom: 15px;
   }
+
+  #submit-membership {
+    background-color: #F1F5F9;
+    color: #2D3748;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
