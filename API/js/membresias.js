@@ -289,7 +289,7 @@ async function generateMembershipPDF(membresia) {
         // Detalles de la tarjeta frontal
         doc.setFontSize(8);
         doc.setFont('helvetica', 'normal');
-        doc.text(`Socio: ${memberResponse.nombre_completo || 'Nombre del miembro'}`, cardsStartX + 5, yPosition + 16);
+        doc.text(`Socio: ${(memberResponse.nombre + ' ' + memberResponse.apellidos) || 'Nombre del miembro'}`, cardsStartX + 5, yPosition + 16);
         doc.text(`No.: ${membresia.id || '3'} Tipo: G País: ${memberResponse.pais || ''}`, cardsStartX + 5, yPosition + 21);
         doc.text(`IES: ${memberResponse.universidad || 'Universidad...'}`, cardsStartX + 5, yPosition + 26);
 
