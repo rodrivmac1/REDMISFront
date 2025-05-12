@@ -69,15 +69,16 @@
       border: none;
       border-radius: 8px;
       font-size: 15px;
+      font-weight: bold;
       color: #ffffff;
       height: 36px;
       width: 102px;
-      font-weight: 500;
       cursor: pointer;
       box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
     }
     
     .acceptBtn:hover {
       background-color: #2563EB;
-      transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+    transform: scale(1.05);
     }

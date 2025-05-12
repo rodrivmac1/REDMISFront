@@ -47,9 +47,22 @@ body {
     margin-bottom: 5px;
 }
   
-.form-box input,
-.form-box select { /* Aplicamos los mismos estilos a inputs y selects */
+.form-box input { /* Aplicamos los mismos estilos a inputs y selects */
     width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #E2E8F0;
+    color: #475569;
+    margin-right: 10px;
+    appearance: none; /* Elimina el estilo por defecto del navegador */
+    -webkit-appearance: none; /* Para compatibilidad con Safari */
+    -moz-appearance: none; /* Para compatibilidad con Firefox */
+}
+
+.form-box select {
+    width: calc(100%);
     padding: 10px;
     margin-bottom: 15px;
     border: none;

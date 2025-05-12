@@ -100,18 +100,21 @@ select {
 .button {
     width: 50%;
     padding: 10px;
-    background: #5a8cb8;
+    background: white;
     border: none;
     border-radius: 8px;
-    color: white;
-    font-size: 14px;
+    color: black;
+    font-size: 16px;
+      font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 .button:hover {
-    background: #71abcc;
-}
+    transition: background-color 0.3s ease;
+    transform: scale(1.05);
+  }
+
+
 
 /* Enlace para iniciar sesión */
 .login-link {
