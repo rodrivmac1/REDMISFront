@@ -27,4 +27,9 @@
       font-size: 14px;
       padding: 8px;
     }
+
+    .form-box
+    {
+      max-width: 250px;
+    }
   }

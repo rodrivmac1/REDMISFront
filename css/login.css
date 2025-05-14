@@ -101,6 +101,7 @@
   /* Cambiar la dirección del flex para colocar el form-box debajo del logo */
   .logo-form-wrapper {
     flex-direction: column;
+    max-width: 300px;
   }
   
   .logo {
@@ -110,5 +111,9 @@
   .custom-button {
     font-size: 14px;
     padding: 10px 15px;
+  }
+  img[alt="Logo"]
+  {
+    max-width: 300px;
   }
 }

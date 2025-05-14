@@ -271,4 +271,9 @@ h3 {
     .valor-estadistica {
         font-size: 1.5rem;
     }
+
+    .grafico-pais , .grafico-estado , .grafico-universidad
+    {
+        max-width: 90vw;
+    }
 }
