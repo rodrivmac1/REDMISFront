@@ -71,3 +71,66 @@
     transition: background-color 0.3s ease;
     transform: scale(1.05);
   }
+
+@media (max-width: 1024px) {
+  .form-box {
+    width: 100% !important; /* Reduce el ancho para que se ajuste mejor */
+    margin-left: 0px;           /* Quitamos margen lateral que rompe el layout */
+    flex-direction: column;   /* Por si en algún futuro hay más bloques */
+  }
+
+  textarea {
+    width: 100% !important; /* Que el textarea no se desborde */
+  }
+
+  #submit-membership {
+    margin-left: auto !important; /* Centra el botón */
+    margin-right: auto !important;
+    display: block;
+    
+  }
+}
+
+@media (max-width: 768px) {
+  .title-container {
+    font-size: 30px !important; /* Reduce tamaño del título */
+    left: 200px !important; /* Mueve el título más al centro */
+    top: 20px !important;
+  }
+
+  .form-container {
+    margin-top: 100px !important; /* Reduce separación del título */
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-box {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-container {
+    font-size: 22px !important; /* Más chico para móviles */
+    left: 60px !important;
+    top: 20px !important;
+  }
+
+  .form-box {
+    position: absolute;
+    left: 10px;
+    width: 80% !important; /* Casi todo el ancho disponible */
+  }
+
+  .custom-select,
+  input,
+  textarea {
+    font-size: 14px !important;
+    padding: 10px !important;
+  }
+
+  #submit-membership {
+    width: 100% !important; /* Botón de ancho completo */
+    margin: 20px 0 0 0 !important;
+  }
+}

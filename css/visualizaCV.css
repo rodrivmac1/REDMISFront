@@ -193,3 +193,77 @@ iframe {
 .modal-content textarea{
     resize: none;
 }
+
+/* Responsividad para tablets y pantallas medianas */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .container {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .modal-content {
+        width: 80%;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    iframe {
+        height: 300px;
+    }
+
+    .card, .card.cv-viewer
+    {
+        width: 85%;
+    }
+}
+
+/* Responsividad para móviles pequeños */
+@media (max-width: 480px) {
+    .header {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .card h2 {
+        font-size: 18px;
+    }
+
+    .card p,
+    .modal-content label,
+    .modal-content textarea {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+    iframe {
+        height: 250px;
+    }
+
+    .btn-primary {
+        font-size: 14px;
+        padding: 10px;
+        text-align: center;
+    }
+}

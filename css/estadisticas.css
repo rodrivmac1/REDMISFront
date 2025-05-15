@@ -193,18 +193,88 @@ h3 {
     border-bottom: none;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-    .contenedor-side-bar {
-        width: 60px;
-    }
-    
-    .contenedor-barra-estadisticas,
-    .contenedor-graficos {
-        flex-direction: column;
-    }
-    
-    .contenedor-canvas {
-        height: 250px;
-    }
+  .title-container {
+    font-size: 28px;
+    padding-left: 40px;
+    width: 90%;
+  }
+
+  .selector-estadisticas {
+    width: 100%;
+  }
+
+  .contenedor-main {
+    width: 90%;
+    padding-left: 20px;
+  }
+
+  .contenedor-header {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tarjeta-estadistica {
+    min-width: 45%;
+    margin: 10px 0;
+  }
+
+  .grafico-pais,
+  .grafico-estado,
+  .grafico-universidad {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-container {
+    font-size: 24px;
+    padding-left: 20px;
+    width: 100%;
+  }
+
+  .selector-estadisticas {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .contenedor-main {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .contenedor-header {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .tarjeta-estadistica {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .contenedor-graficos {
+    grid-template-columns: 1fr;
+  }
+
+  .cabecera-tabla, .fila-tabla {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .columna-numero {
+    text-align: left;
+    margin-top: 5px;
+  }
+
+  .contenedor-canvas {
+    height: 200px;
+  }
+
+  .grafico-pais,
+  .grafico-estado,
+  .grafico-universidad {
+    width: 300px;
+  }
 }

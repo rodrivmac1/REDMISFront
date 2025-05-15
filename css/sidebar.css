@@ -178,3 +178,37 @@ body {
   transform: scale(1.01);
   border-radius: 5px;
 }
+
+/* Botón hamburguesa oculto por defecto en dispositivos grandes */
+.hamburger-button {
+  display: none;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  /* Se oculta la sidebar fuera de la pantalla en la parte izquierda */
+  .sidebar {
+    left: -270px;
+  }
+
+  /* Al agregar la clase "active" la sidebar se muestra */
+  .sidebar.active {
+    left: 10px;
+  }
+
+  /* Mostrar el botón hamburguesa */
+  .hamburger-button {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #1D4ED8;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    z-index: 1000;
+    cursor: pointer;
+  }
+}

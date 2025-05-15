@@ -82,3 +82,36 @@
     transition: background-color 0.3s ease;
     transform: scale(1.05);
     }
+
+@media (max-width: 768px) {
+  .title-container {
+    font-size: 28px;           /* Reducimos el tamaño del título */
+    left: 20px;                /* Lo movemos hacia la izquierda */
+    top: 100px;                /* Bajamos un poco su posición */
+    text-align: center;        /* Centramos texto */
+    width: calc(100% - 40px);  /* Que no se desborde */
+  }
+
+  .form-box {
+    width: 90%;                /* Hacemos que el formulario use el 90% del ancho de pantalla */
+    padding: 15px;             /* Un poco menos de padding */
+  }
+
+  .accept-button-container {
+    width: 90%;                /* Que coincida con el form */
+    margin-top: 15px;          /* Un poco menos de margen */
+  }
+}
+
+@media (max-width: 480px) {
+  .title-container {
+    font-size: 24px;           /* Más pequeño aún para que no se rompa */
+    top: 80px;                 /* Más cerca del borde superior */
+  }
+
+  .acceptBtn {
+    width: 100%;               /* Botón a ancho completo */
+    height: 42px;              /* Más alto para que sea más fácil de tocar */
+    font-size: 16px;
+  }
+}

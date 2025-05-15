@@ -102,3 +102,57 @@ body {
     color: white;
     transform: scale(1.05);
 }
+
+/* Para tablets y pantallas menores a 768px */
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .user-details {
+    grid-template-columns: 1fr; /* Coloca todos los campos en una sola columna */
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .btn {
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .user-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+/* Para celulares y pantallas menores a 480px */
+@media (max-width: 480px) {
+  .user-card {
+    padding: 15px;
+  }
+
+  .info-group label {
+    font-size: 12px;
+  }
+
+  .info-group input {
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .btn i {
+    margin-right: 3px;
+  }
+}

@@ -251,3 +251,59 @@ h1
   transform: scale(1.1);
   transition: 0.1s;
 }
+
+@media (max-width: 768px) {
+
+  /* El sidebar se oculta */
+  .sidebar {
+    display: none;
+  }
+
+  /* El contenido toma todo el ancho disponible */
+  .content {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 80px;
+  }
+
+  /* La tabla tendrá scroll si no cabe */
+  .membership-table {
+    position: absolute !important;
+    overflow-x: auto;
+    width: 100% !important;
+  }
+
+  .membership-table table {
+    min-width: 600px; /* Fuerza la tabla a no achicarse demasiado */
+  }
+}
+
+@media (max-width: 480px) {
+
+  .content {
+    padding: 10px;
+    margin-top: 70px;
+  }
+
+  .membership-table table {
+    min-width: 700px; /* Asegura que las columnas no se junten demasiado */
+  }
+
+  /* Hacemos que las celdas tengan texto más pequeño si es necesario */
+  .membership-table th,
+  .membership-table td {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  /* Botón de descarga en tabla más compacto */
+  .download-btn {
+    padding: 4px 8px;
+    font-size: 13px;
+  }
+
+  /* Scroll horizontal visible */
+  .membership-table {
+    overflow-x: auto;
+  }
+}

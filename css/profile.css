@@ -141,3 +141,59 @@ body {
     transition: background-color 0.3s ease;
     transform: scale(1.05); 
 }
+
+/* Tablets y pantallas menores a 768px */
+@media (max-width: 768px) {
+  .title-container {
+    position: static; /* Elimina posición absoluta */
+    text-align: center;
+    margin-top: 30px;
+    margin-left: 0;
+    font-size: 28px;
+  }
+
+  .form-container {
+    flex-direction: column; /* Apila los formularios */
+    align-items: center;
+    margin-left: 0;
+    margin-top: 80px;
+    gap: 30px; /* Reduce espacio entre cajas */
+  }
+
+  .edit-button-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .edit-button,
+  .cancel-Btn {
+    margin-left: 0;
+  }
+}
+
+/* Celulares y pantallas menores a 480px */
+@media (max-width: 480px) {
+  .form-box {
+    width: 90%; /* Hace el form más angosto y adaptable */
+    padding: 15px;
+  }
+
+  .title-container {
+    font-size: 22px;
+  }
+
+  .form-box input,
+  .form-box select {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .edit-button,
+  .cancel-Btn {
+    width: 90%;
+    height: 40px;
+    font-size: 14px;
+  }
+}
