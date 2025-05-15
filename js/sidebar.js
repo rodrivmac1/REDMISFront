@@ -54,6 +54,15 @@ const loadSidebar = (sidebarPath) => {
                   }
               });
           }
+
+          // Script para el botón hamburguesa (modo responsivo)
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const sidebar = document.querySelector('.sidebar');
+            if (hamburgerBtn && sidebar) {
+                hamburgerBtn.addEventListener('click', () => {
+                    sidebar.classList.toggle('active');
+                });
+            }
       })
       .catch(error => {
           console.error('Error loading sidebar:', error);
