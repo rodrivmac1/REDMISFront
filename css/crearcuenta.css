@@ -19,7 +19,7 @@ body {
     background: #1D4ED8;
     padding: 30px;
     border-radius: 15px;
-    width: 50%;
+    width: 450px;
     text-align: center;
     box-shadow: 0px 0px 10px rgb(255, 255, 255);
 }
@@ -43,7 +43,7 @@ body {
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 15px;
+    column-gap: 70px;
     row-gap: 15px;
     text-align: left;
 }
@@ -54,9 +54,6 @@ body {
 }
 
 
-.full-width {
-    grid-column: span 2;
-}
 
 /* Estilos de las etiquetas */
 #register-form label {
@@ -98,7 +95,7 @@ select {
 }
 
 .button {
-    width: 50%;
+    width: 60%;
     padding: 10px;
     background: white;
     border: none;
@@ -135,4 +132,29 @@ select {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 600px){
+
+    .form-grid{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .form-container {
+        background: #1D4ED8;
+        padding: 10px;
+        border-radius: 15px;
+        width: 450;
+        text-align: center;
+        box-shadow: 0px 0px 10px rgb(255, 255, 255);   
+        margin: 20px;
+        margin-top: 100px;
+    }
+
+    .input-field {
+        width: 250px;
+    }
 }

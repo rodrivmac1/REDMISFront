@@ -8,20 +8,17 @@
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-  <style>
-    
-  </style>
 </head>
 <body>
     
     <div class="backgroundLogin"></div>
     
-    <div class="form-container" style ="flex-direction: column; align-items: center; justify-content: center; margin-top: 50px">
+    <div class="form-container">
       
-      <div style="display: flex; align-items: center; gap: 20px;">
-        <img src="img/logo_REDMIS.png" alt="Logo" style="height: 100%; max-height: 250px; width: auto;">
+      <div class="main-container">
+        <img src="img/logo_REDMIS.png"  id="redmis-logo" alt="Logo" >
         <div class="form-box">
-          <h2 style="text-align: center; width: 100%;">Iniciar Sesión</h2>
+          <h2 id="login-title">Iniciar Sesión</h2>
 
           <form id="login-form">
             <div class="input-container">
@@ -33,12 +30,12 @@
               <input type="password" id="password" required>
               <i class="fa-solid fa-eye" id="toggle-password"></i>
             </div>
-            <div style="display: flex; justify-content: center; width: 100%; margin-top: 10px;"> 
-              <button class="custom-button" type="submit" style="color: #000000; background-color: #ffffff; width: 50%;">Iniciar sesión</button>
+            <div id="btn-container"> 
+              <button class="custom-button" type="submit" id="submit-btn">Iniciar sesión</button>
             </div>
           </form>
 
-          <p>¿No tienes una cuenta? <a href="crearcuenta.html" style="color: white; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Regístrate</a></p>
+          <p>¿No tienes una cuenta? <a href="crearcuenta.html" id="sign-in-btn">Regístrate</a></p>
         </div>
       </div>
     </div>
