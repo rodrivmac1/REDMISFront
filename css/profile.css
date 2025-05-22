@@ -12,8 +12,18 @@ body {
     flex-direction: column;
     align-items: center;
 }
+
+.main-container{
+    margin-bottom: 100px;
+}
   
 .title-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.title-container h2{
     font-size: 36px;
     font-weight: bold;
     color: #1D4ED8;
@@ -36,7 +46,7 @@ body {
     border-radius: 10px;
     width: 400px;
     color: #2D3748;
-    font-weight: 530;
+    font-weight: 600;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
     border: 2px solid #0202021c;
 }
@@ -96,7 +106,7 @@ body {
 .edit-button-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 30px;
     width: 100%;
 }
 
@@ -140,4 +150,48 @@ body {
     background-color: #df1111;
     transition: background-color 0.3s ease;
     transform: scale(1.05); 
+}
+
+@media only screen and (max-width: 600px){
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    .title-container h2 {
+        top: 0px;
+        left: 100px;
+    }
+    
+    .form-container {
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 50px;
+        margin-left: 0px;
+    }
+    
+    .form-box {
+        width: 270px;
+    }
+
+    .edit-button {
+        margin-left: 0px;
+    }
+    
+    .edit-button:active {
+        background-color: #2563EB;
+        transition: background-color 0.3s ease;
+        transform: scale(1.05);
+    }
+    
+    .cancel-Btn {
+        margin-left: 50px;
+    }
+    
+    .cancel-Btn:active {
+        background-color: #df1111;
+        transition: background-color 0.3s ease;
+        transform: scale(1.05);
+    }
 }

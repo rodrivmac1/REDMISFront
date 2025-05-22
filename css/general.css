@@ -1,0 +1,42 @@
+.display-sidebar-container {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    #sidebar {
+        display: none;
+    }
+
+    .display-sidebar-container {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    #display-sidebar {
+        margin-left: 25px;
+        margin-top: 25px;
+        background-color: #1D4ED8;
+        border: none;
+        border-radius: 10px;
+        width: 40px;
+        height: 40px;
+        color: #fff;
+        font-weight: bold;
+        font-size: x-large;
+        transition: 0.1s;
+    }
+
+    #display-sidebar:hover,
+    #display-sidebar:active {
+        transition: 0.1s;
+        background-color: #13348f;
+    }
+
+    #display-sidebar:active {
+        transform: scale(0.8);
+    }
+
+
+}

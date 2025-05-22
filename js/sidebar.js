@@ -14,11 +14,27 @@ document.addEventListener("DOMContentLoaded", function() {
     } 
 });
 
+
+const displaySidebar = () => {
+    const sidebarDiv = document.getElementById("sidebar");
+    sidebarDiv.style.display = "flex";
+}
+
+const displaySidebarBtn = document.getElementById("display-sidebar");
+displaySidebarBtn.addEventListener("click", displaySidebar);
+
+
+
+
+
 const loadSidebar = (sidebarPath) => {
+
+  const sidebarDiv = document.getElementById('sidebar');
+
   fetch(sidebarPath)
       .then(res => res.text())
       .then(html => {
-          document.getElementById('sidebar').innerHTML = html;
+          sidebarDiv.innerHTML = html;
           const path = window.location.pathname.split('/').pop();
           const links = document.querySelectorAll('.sidebar-menu-item');
           
@@ -54,6 +70,14 @@ const loadSidebar = (sidebarPath) => {
                   }
               });
           }
+
+          const hideSidebar = () => {
+            const sidebarDiv = document.getElementById("sidebar");
+            sidebarDiv.style.display = "none";
+          };
+
+          const hideSidebarBtn = document.getElementById("hide-sidebar");
+          hideSidebarBtn.addEventListener("click", hideSidebar);
       })
       .catch(error => {
           console.error('Error loading sidebar:', error);
